@@ -7224,6 +7224,7 @@
     <Content Include="Views\Shipper\Index.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Supplier\Input.cshtml" />
+    <Content Include="Views\Customer\Input.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

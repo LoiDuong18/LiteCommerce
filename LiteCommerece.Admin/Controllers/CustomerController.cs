@@ -13,5 +13,19 @@ namespace LiteCommerece.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Input(String id = "")
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+
+                ViewBag.Tittle = "Add New Customers";
+            }
+            else
+            {
+                ViewBag.Title = " Edit Customers";
+            }
+            return View();
+
+        }
     }
 }
