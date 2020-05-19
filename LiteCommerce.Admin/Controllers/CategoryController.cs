@@ -20,5 +20,24 @@ namespace LiteCommerce.Admin.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Hiển thị form thêm/sửa category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Input(string id = "")
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                ViewBag.Title = "Add New Category";
+                ViewBag.ConfirmButton = "Add";
+            }
+            else
+            {
+                ViewBag.Title = "Edit Category";
+                ViewBag.ConfirmButton = "Save";
+            }
+            return View();
+        }
     }
 }

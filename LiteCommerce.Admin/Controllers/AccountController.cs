@@ -76,5 +76,13 @@ namespace LiteCommerce.Admin.Controllers
         {
             return null;
         }
+        /// <summary>
+        /// Hiển thị form chỉnh sửa thông tin người dùng
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Edit()
+        {
+            return View();
+        }
     }
 }

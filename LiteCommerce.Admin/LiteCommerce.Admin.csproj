@@ -7225,6 +7225,12 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Supplier\Input.cshtml" />
+    <Content Include="Views\Customer\Input.cshtml" />
+    <Content Include="Views\Shipper\Input.cshtml" />
+    <Content Include="Views\Category\Input.cshtml" />
+    <Content Include="Views\Product\Input.cshtml" />
+    <Content Include="Views\Employee\Input.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7243,6 +7249,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiteCommerce.BusinessLayers\LiteCommerce.BusinessLayers.csproj">
+      <Project>{d58a112f-7676-41cb-a8ea-9cad14758e3f}</Project>
+      <Name>LiteCommerce.BusinessLayers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiteCommerce.DataLayers\LiteCommerce.DataLayers.csproj">
+      <Project>{2142cba4-11cd-45f9-a020-23999da0fa4c}</Project>
+      <Name>LiteCommerce.DataLayers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiteCommerce.DomainModels\LiteCommerce.DomainModels.csproj">
+      <Project>{e156f734-6f3a-4d22-87d3-0eb6eb39b367}</Project>
+      <Name>LiteCommerce.DomainModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

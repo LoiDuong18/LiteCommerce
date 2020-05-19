@@ -38,3 +38,9 @@ F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\Newtonsoft.
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.csprojResolveAssemblyReference.cache
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.dll
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.BusinessLayers.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.DataLayers.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.DomainModels.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.BusinessLayers.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.DataLayers.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.Admin\bin\LiteCommerce.DomainModels.pdb

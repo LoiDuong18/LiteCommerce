@@ -1,7 +1,89 @@
 ﻿
 @{
-    ViewBag.Title = "Products";
+    ViewBag.Title = "Manage Products";
+
 }
-
-<h2>Index</h2>
-
+<!-- Search box -->
+<div class="box box-primary">
+    <!-- form start -->
+    <form role="form">
+        <div class="box-body">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Type anything">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+<!-- /.box -->
+<div class="row">
+    <div class="col-sm-8">
+        <span>There are <b>1,000</b> Products. Page <b>1/100</b></span>
+    </div>
+    <div class="col-sm-4">
+        <div class="pull-right">
+            <a href="~/Product/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+            <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+        </div>
+    </div>
+</div>
+<br />
+<!-- Table box -->
+<div class="box box-success">
+    <div class="box-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" /></th>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" />
+                        </td>
+                        <td>@i</td>
+                        <td>
+                            <img src=""/>
+                        </td>
+                        <td>
+                            <span style="display:block">Sữa tươi</span>
+                            <span>(Vinamilk)</span>
+                        </td>
+                        <td>
+                            <span style="display:block">Thức uống</span>
+                        </td>
+                        <td><span>30</span></td>
+                        <td><span>25,000đ</span></td>
+                        <td><span>Sữa tươi tiệt trùng có đường Vinamilk</span></td>
+                        <td><a href="~/Product/Input/@i" class="btn btn-primary"><i class="fa fa-pencil"></i> Sửa</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
