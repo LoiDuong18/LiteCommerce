@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,9 +17,10 @@ namespace LiteCommerce.Admin.Controllers
         /// Trang hiển thị : danh sách suppliers, các "liên kết đến" các chức năng liên quan
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
-            return View();
+            var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
+            return View(listOfSuppliers);
         }
         /// <summary>
         /// Add or Edit

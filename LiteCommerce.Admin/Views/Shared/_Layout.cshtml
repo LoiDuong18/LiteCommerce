@@ -162,32 +162,37 @@
                 autoclose: true
             })
 
-            //iCheck for checkbox and radio inputs
-            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-              checkboxClass: 'icheckbox_minimal-blue',
-              radioClass   : 'iradio_minimal-blue'
-            })
-            //Red color scheme for iCheck
-            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-              checkboxClass: 'icheckbox_minimal-red',
-              radioClass   : 'iradio_minimal-red'
-            })
-            //Flat red color scheme for iCheck
-            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-              checkboxClass: 'icheckbox_flat-green',
-              radioClass   : 'iradio_flat-green'
-            })
-
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-
-            //Timepicker
-            $('.timepicker').timepicker({
-              showInputs: false
-            })
           })
+    </script>
+    <script>
+        let count = 1;
+        //multi_upload(count);
+        function multi_upload(x) {
+            html = `<div class="input-group control-group increment" >
+                            <label>Key</label>
+                                <div class ="input-group">
+                                    <input type="text" name="key[]" id="key" class ="form-control" required>
+                                </div>
+                            <label>Value</label>
+                                <div class ="input-group">
+                                    <input type="text" name="value[]" id="value" class ="form-control" required>
+                                </div>`;
+            if (x > 1) {
+                html += `<button type="button" id="remove_field" class="btn btn-danger btn-sm">Xóa</button></div>`;
+                $('#input_fields').append(html);
+            } else {
+                html += `<button type="button" name="add" id="add_field" class="btn btn-success btn-sm">Thêm</button></div>`;
+                $('#input_fields').html(html);
+            }
+        }
+        $(document).on('click', '#add_field', function () {
+            count++;
+            multi_upload(count);
+        });
+        $(document).on('click', '#remove_field', function () {
+            count--;
+            $(this).closest(".increment").remove();
+        });
     </script>
 </body>
 </html>

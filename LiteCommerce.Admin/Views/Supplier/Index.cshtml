@@ -1,7 +1,7 @@
-﻿
+﻿@model IEnumerable<LiteCommerce.DomainModels.Supplier>
 @{
     ViewBag.Title = "Manage Suppliers";
-
+    int i = 0;
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -46,21 +46,21 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 4; i++)
+                @foreach(var item in Model)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@i</td>
+                        <td>@(++i)</td>
                         <td>
-                            <span class="text-bold text-blue">ABC Company</span>
+                            <span class="text-bold text-blue">@item.CompanyName</span>
                             <br />
-                            <span class="text-bold text-black">Nguyễn Văn A</span>
-                            <span>(Administrator)</span>
+                            <span class="text-bold text-black">@item.ContactName</span>
+                            <span>(@item.ContactTitle)</span>
                         </td>
                         <td>
-                            <span style="display:block">Phạm Văn Đồng</span>
+                            <span style="display:block">@item.Address</span>
                             <span> Huế -  Việt Nam</span>
                         </td>
                         <td>
