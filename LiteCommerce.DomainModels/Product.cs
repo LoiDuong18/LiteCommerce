@@ -22,11 +22,11 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
-        public int SupplierID { get; set; }
+        public string CompanyName { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +38,7 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
-        public double Descriptions { get; set; }
+        public string Descriptions { get; set; }
         /// <summary>
         /// 
         /// </summary>

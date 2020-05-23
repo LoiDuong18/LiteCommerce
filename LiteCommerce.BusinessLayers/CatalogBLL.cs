@@ -123,10 +123,23 @@ namespace LiteCommerce.BusinessLayers
                 pageSize = 1;
             return ProductDB.List(page, pageSize, searchValue);
         }
-
+        /// <summary>
+        /// Đếm số Supplier
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static int Supplier_Count(string searchValue)
         {
             return SupplierDB.Count(searchValue);
+        }
+        /// <summary>
+        /// Đếm số products
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Product_Count(string searchValue)
+        {
+            return ProductDB.Count(searchValue);
         }
     }
 }

@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
+    <Compile Include="Models\ProductPaginationResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

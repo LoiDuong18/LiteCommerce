@@ -1,7 +1,8 @@
-﻿
+﻿@model LiteCommerce.Admin.Models.ProductPaginationResult
 @{
     ViewBag.Title = "Manage Products";
-
+    int i = 0;
+    string paramSearch = string.IsNullOrEmpty(@Request.Params["searchValue"]) ? "" : "&searchValue=" + @Request.Params["searchValue"];
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -63,7 +64,7 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
-        <span>There are <b>1,000</b> Products. Page <b>1/100</b></span>
+        <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span> 
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
@@ -86,32 +87,33 @@
                     <th>Category</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 4; i++)
+                @foreach (var item in Model.Data)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@i</td>
+                        <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                         <td>
-                            <img src=""/>
+                            @{ 
+                                string urlImage = string.IsNullOrEmpty(item.PhotoPath) ? "/Images/no-image.png" : item.PhotoPath;
+                            }
+                            <img src="@urlImage" width="50px" />
                         </td>
                         <td>
-                            <span style="display:block">Sữa tươi</span>
-                            <span>(Vinamilk)</span>
+                            <span style="display:block">@item.ProductName</span>
+                            <span>(@item.CompanyName)</span>
                         </td>
                         <td>
-                            <span style="display:block">Thức uống</span>
+                            <span style="display:block">@item.CategoryName</span>
                         </td>
-                        <td><span>30</span></td>
-                        <td><span>25,000đ</span></td>
-                        <td><span>Sữa tươi tiệt trùng có đường Vinamilk</span></td>
-                        <td><a href="~/Product/Input/@i" class="btn btn-primary"><i class="fa fa-pencil"></i> Sửa</a></td>
+                        <td><span>@item.QuantityPerUnit</span></td>
+                        <td><span>@item.UnitPrice</span></td>
+                        <td><a href="~/Product/Input/@item.ProductID" class="btn btn-primary"><i class="fa fa-pencil"></i> Sửa</a></td>
                     </tr>
                 }
             </tbody>
@@ -119,11 +121,26 @@
     </div>
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if (Model.Page != 1)
+            {
+                <li><a href="~/Product?page=1@paramSearch">First</a></li>
+            }
+            @for (int page = 1; page <= Model.PageCount; page++)
+            {
+                if (Model.Page == page)
+                {
+                    <li class="active"><a href="~/Product?page=@page@paramSearch">@page</a></li>
+                }
+                else
+                {
+                    <li><a href="~/Product?page=@page@paramSearch">@page</a></li>
+                }
+
+            }
+            @if (Model.Page != Model.PageCount)
+            {
+                <li><a href="~/Product?page=@Model.PageCount@paramSearch">Last</a></li>
+            }
         </ul>
     </div>
     <!-- /.box-body -->
