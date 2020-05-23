@@ -89,7 +89,14 @@ namespace LiteCommerce.DataLayers.SqlServer
                             data.Add(new Customer()
                             {
                                 CustomerID = Convert.ToString(dbReader["CustomerID"]),
-                                //TODO : Làm các trường còn lại                            
+                                CompanyName = Convert.ToString(dbReader["CompanyName"]),
+                                ContactName = Convert.ToString(dbReader["ContactName"]),
+                                ContactTitle = Convert.ToString(dbReader["ContactTitle"]),
+                                Address = Convert.ToString(dbReader["Address"]),
+                                City = Convert.ToString(dbReader["City"]),
+                                Country = Convert.ToString(dbReader["Country"]),
+                                Phone = Convert.ToString(dbReader["Phone"]),
+                                Fax = Convert.ToString(dbReader["Fax"]),                         
                             });
                         }
                     }

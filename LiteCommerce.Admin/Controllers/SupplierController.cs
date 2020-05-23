@@ -29,7 +29,6 @@ namespace LiteCommerce.Admin.Controllers
             //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
             //int rowCount = CatalogBLL.Supplier_Count(searchValue);
             //ViewBag.rc = rowCount;
-            //ViewBag.searchValue = searchValue;
             return View(model);
 
         }
