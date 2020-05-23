@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,9 +17,16 @@ namespace LiteCommerce.Admin.Controllers
         /// Hiển thị danh sách khách hàng
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int page = 1,string searchValue = "")
         {
-            return View();
+            var model = new Models.CustomerPaginationResult()
+            {
+                Page = page,
+                PageSize = AppSettings.DefaultPageSize,
+                RowCount = CatalogBLL.Customer_Count(searchValue),
+                Data = CatalogBLL.Customer_List(page,AppSettings.DefaultPageSize,searchValue),
+            };
+            return View(model);
         }
         /// <summary>
         /// Hiển thị form thêm/sửa thông tin Khách hàng
@@ -40,6 +48,6 @@ namespace LiteCommerce.Admin.Controllers
             return View();
         }
 
-        
+
     }
 }

@@ -1,0 +1,9 @@
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.BusinessLayers.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.BusinessLayers.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.DataLayers.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.DomainModels.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.DataLayers.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\bin\Debug\LiteCommerce.DomainModels.pdb
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\obj\Debug\LiteCommerce.BusinessLayers.csprojResolveAssemblyReference.cache
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\obj\Debug\LiteCommerce.BusinessLayers.dll
+F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.BusinessLayers\obj\Debug\LiteCommerce.BusinessLayers.pdb

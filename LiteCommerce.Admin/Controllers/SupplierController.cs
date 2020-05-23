@@ -18,9 +18,20 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "")
-        {
-            var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
-            return View(listOfSuppliers);
+        {          
+            var model = new Models.SupplierPaginationResult()
+            {
+                Page = page,
+                PageSize = AppSettings.DefaultPageSize,
+                RowCount = CatalogBLL.Supplier_Count(searchValue),
+                Data = CatalogBLL.Supplier_List(page, AppSettings.DefaultPageSize, searchValue),
+            };
+            //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
+            //int rowCount = CatalogBLL.Supplier_Count(searchValue);
+            //ViewBag.rc = rowCount;
+            //ViewBag.searchValue = searchValue;
+            return View(model);
+
         }
         /// <summary>
         /// Add or Edit
@@ -39,6 +50,7 @@ namespace LiteCommerce.Admin.Controllers
                 ViewBag.Title = "Edit Supplier";
                 ViewBag.ConfirmButton = "Save";
             }
+
             return View();
         }
 

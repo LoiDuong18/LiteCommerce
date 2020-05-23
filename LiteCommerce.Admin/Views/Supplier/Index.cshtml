@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LiteCommerce.DomainModels.Supplier>
+﻿@model LiteCommerce.Admin.Models.SupplierPaginationResult
 @{
     ViewBag.Title = "Manage Suppliers";
     int i = 0;
@@ -6,12 +6,12 @@
 <!-- Search box -->
 <div class="box box-primary">
     <!-- form start -->
-    <form role="form">
+    <form role="form" action="~/Supplier" method="get">
         <div class="box-body">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Type anything">
+                <input type="text" name="searchValue" class="form-control" placeholder="Type anything" value="@ViewBag.searchValue">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>        
@@ -21,7 +21,7 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
-        <span>There are <b>1,000</b> Suppliers. Page <b>1/100</b></span>        
+        <span>There are <b>@Model.RowCount</b> Suppliers. Page <b>@Model.Page/@Model.PageCount</b></span>        
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
@@ -46,13 +46,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach(var item in Model.Data)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@(++i)</td>
+                        <td>@((Model.Page - 1)*Model.PageSize + (++i))</td>
                         <td>
                             <span class="text-bold text-blue">@item.CompanyName</span>
                             <br />
@@ -61,14 +61,14 @@
                         </td>
                         <td>
                             <span style="display:block">@item.Address</span>
-                            <span> Huế -  Việt Nam</span>
+                            <span> @item.City -  @item.Country</span>
                         </td>
                         <td>
-                            <span style="display:block"><i class="fa fa-phone"></i> (+84) 123 123 123</span>
-                            <span style="display:block"><i class="fa fa-fax"></i> (+84) 456 456 456</span>
-                            <span style="display:block"><i class="fa fa-globe"></i> https://abc-company.com</span>
+                            <span style="display:block"><i class="fa fa-phone"></i> @item.Phone</span>
+                            <span style="display:block"><i class="fa fa-fax"></i> @item.Fax</span>
+                            <span style="display:block"><i class="fa fa-globe"></i> @item.HomePage</span>
                         </td>
-                        <td><a href="~/Supplier/Input/@i" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        <td><a href="~/Supplier/Input/@item.SupplierID" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
                     </tr>
                 }                
             </tbody>
@@ -76,11 +76,12 @@
     </div>
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            <li><a href="~/Supplier?page=1">«</a></li>
+            @for (int page = 1; page <= Model.PageCount; page++)
+            {
+                <li><a href="~/Supplier?page=@page">@page</a></li>
+            }
+            <li><a href="~/Supplier?page=@Model.PageCount">»</a></li>
         </ul>
     </div>
     <!-- /.box-body -->
