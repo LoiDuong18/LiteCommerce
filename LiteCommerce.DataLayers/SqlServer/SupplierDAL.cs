@@ -90,6 +90,11 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 ContactName = Convert.ToString(dbReader["ContactName"]),
                                 ContactTitle = Convert.ToString(dbReader["ContactTitle"]),
                                 Address = Convert.ToString(dbReader["Address"]),
+                                City = Convert.ToString(dbReader["City"]),
+                                Country = Convert.ToString(dbReader["Country"]),
+                                Phone = Convert.ToString(dbReader["Phone"]),
+                                Fax = Convert.ToString(dbReader["Fax"]),
+                                HomePage = Convert.ToString(dbReader["HomePage"]),
                                 //TODO: Làm các trường còn lại
                             });
                         }

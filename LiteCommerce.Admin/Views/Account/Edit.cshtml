@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Edit User Information";
+}
+<div class="row">
+    <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="~/Images/my.jpg" alt="User profile picture">
+                <span class="hidden-xs">@User.Identity.Name</span>
+
+                <p class="text-muted text-center">Developer</p>
+                <button class="btn btn-primary btn-block">Upload Profile Picture</button>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Information</h3>
+                <div class="box-tools pull-right">
+                    <a href="~/Account" class="btn btn-default btn-sm"><i class="fa fa-long-arrow-left"></i> Back</a>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFistName" class="col-sm-4 control-label">Fist Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputFirstName" placeholder="Fist Name" value="A">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="col-sm-4 control-label">Last Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" value="Nguyễn Văn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputTitle" class="col-sm-4 control-label">Title:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputTitle" placeholder="Title" value="Developer">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputTitle" class="col-sm-4 control-label">Birthday:</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control pull-right" id="datepicker_birthday">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-4 control-label">Email:</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="user@example.com" value="admin@abc.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputPhone" class="col-sm-4 control-label">Phone:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="(+84) 123 123 123">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCity" class="col-sm-2 control-label">Address:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCity" placeholder="Address" value="Pham Van Dong">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-4 control-label">Country:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control">
+                                        <option>--Select Country--</option>
+                                        <option selected>Việt Nam</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputCity" class="col-sm-4 control-label">City:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputCity" placeholder="City" value="Huế">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNotes" class="col-sm-2 control-label">Notes:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>

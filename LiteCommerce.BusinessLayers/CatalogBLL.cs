@@ -122,6 +122,17 @@ namespace LiteCommerce.BusinessLayers
         {
             return SupplierDB.Count(searchValue);
         }
-       
+        public static int Customer_Count(string searchValue)
+        {
+            return CustomerDB.Count(searchValue);
+        }
+        public static int Shipper_Count(string searchValue)
+        {
+            return ShipperDB.Count(searchValue);
+        }
+        public static int Category_Count(string searchValue)
+        {
+            return CategoryDB.Count(searchValue);
+        }
     }
 }

@@ -19,7 +19,18 @@ namespace LiteCommerce.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "")
         {
-            return View();
+            var model = new Models.CustomerPaginationResult()
+            {
+                Page = page,
+                PageSize = AppSettings.DefaultPageSize,
+                RowCount = CatalogBLL.Customer_Count(searchValue),
+                Data = CatalogBLL.Customer_List(page, AppSettings.DefaultPageSize, searchValue),
+            };
+            //var listOfCustomers = CatalogBLL.Customer_List(page, 10, searchValue);
+            //int rowCount = CatalogBLL.Customer_Count(searchValue);
+            //ViewBag.rc = rowCount;
+            //ViewBag.searchValue = searchValue;
+            return View(model);
         }
         /// <summary>
         /// Hiển thị form thêm/sửa thông tin Khách hàng
