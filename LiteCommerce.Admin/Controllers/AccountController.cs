@@ -54,7 +54,7 @@ namespace LiteCommerce.Admin.Controllers
             else
             {
                 //TODO : Kiểm tra thông tin đăng nhập thông qua CSDL
-                if(email == "admin@lite.vn" && password == "admin")
+                if(email == "admin@abc.com" && password == "admin")
                 {
                     FormsAuthentication.SetAuthCookie(email,false);
                     return RedirectToAction("Index", "Dashboard");
