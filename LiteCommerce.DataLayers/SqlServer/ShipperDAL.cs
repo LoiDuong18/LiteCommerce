@@ -70,9 +70,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
-                                            FROM Categories
-                                            WHERE(@searchValue = N'') OR (CategoryName like @searchValue)
+                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY ShipperID) AS RowNumber
+                                            FROM Shippers
+                                            WHERE(@searchValue = N'') OR (CompanyName like @searchValue)
                                             ORDER BY RowNumber";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
