@@ -1,7 +1,7 @@
-﻿
+﻿@model LiteCommerce.Admin.Models.CategoryResult
 @{
     ViewBag.Title = "Manage Categories";
-
+    int i = 0;
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -21,7 +21,7 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
-        <span>There are <b>1,000</b> Categories. Page <b>1/100</b></span>
+        <span>There are <b>@Model.RowCount</b> Categories</span>
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
@@ -45,33 +45,24 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 4; i++)
+                @foreach (var item in Model.Data)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@i</td>
+                        <td>@(++i)</td>
                         <td>
-                            <span class="text-bold text-blue">Category @i</span>
+                            <span class="text-bold text-blue">@item.CategoryName</span>
                         </td>
                         <td>
-                            <span style="display:block">Description Category @i</span>
+                            <span style="display:block">@item.Description</span>
                         </td>
-                        <td><a href="~/Category/Input/@i" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        <td><a href="~/Category/Input/@item.CategoryID" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
-    <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
     </div>
     <!-- /.box-body -->
 </div>

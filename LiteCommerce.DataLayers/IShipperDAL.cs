@@ -40,6 +40,12 @@ namespace LiteCommerce.DataLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        List<Shipper> List(int page, int pageSize, string searchValue);
+        List<Shipper> List(string searchValue);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        int Count(string searchValue);
     }
 }

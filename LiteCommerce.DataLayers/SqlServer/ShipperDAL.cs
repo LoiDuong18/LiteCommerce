@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiteCommerce.DomainModels;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
@@ -58,9 +60,39 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Shipper> List(int page, int pageSize, string searchValue)
+        public List<Shipper> List(string searchValue)
         {
-            throw new NotImplementedException();
+            List<Shipper> data = new List<Shipper>();
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
+                                            FROM Categories
+                                            WHERE(@searchValue = N'') OR (CategoryName like @searchValue)
+                                            ORDER BY RowNumber";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                    using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (dbReader.Read())
+                        {
+                            data.Add(new Shipper()
+                            {
+                                ShipperID = Convert.ToInt32(dbReader["ShipperID"]),
+                                CompanyName = Convert.ToString(dbReader["CompanyName"]),
+                                Phone = Convert.ToString(dbReader["Phone"]),
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return data;
         }
         /// <summary>
         /// 
@@ -70,6 +102,28 @@ namespace LiteCommerce.DataLayers.SqlServer
         public bool Update(Shipper data)
         {
             throw new NotImplementedException();
+        }
+        public int Count(string searchValue)
+        {
+            int dem;
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT count(*)
+                                        FROM Shippers
+                                        WHERE(@searchValue = N'') OR (CompanyName like @searchValue)";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                    dem = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                connection.Close();
+            }
+            return dem;
         }
     }
 }

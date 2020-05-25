@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,9 +17,17 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(string searchValue = "")
         {
-            return View();
+            var model = new Models.CategoryResult
+            {
+                RowCount = CatalogBLL.Category_Count(searchValue),
+                Data = CatalogBLL.Category_List(searchValue),
+            };
+            //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
+            //int rowCount = CatalogBLL.Supplier_Count(searchValue);
+            //ViewBag.rc = rowCount;
+            return View(model);
         }
         /// <summary>
         /// Hiển thị form thêm/sửa category

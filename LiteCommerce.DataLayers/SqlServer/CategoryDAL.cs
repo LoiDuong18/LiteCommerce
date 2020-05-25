@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiteCommerce.DomainModels;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
@@ -58,9 +60,39 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Category> List(int page, int pageSize, string searchValue)
+        public List<Category> List(string searchValue)
         {
-            throw new NotImplementedException();
+            List<Category> data = new List<Category>();
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
+                                            FROM Categories
+                                            WHERE(@searchValue = N'') OR (CategoryName like @searchValue)
+                                            ORDER BY RowNumber";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                    using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (dbReader.Read())
+                        {
+                            data.Add(new Category()
+                            {
+                                CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
+                                CategoryName = Convert.ToString(dbReader["CategoryName"]),
+                                Description = Convert.ToString(dbReader["Description"]),                                
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return data;
         }
         /// <summary>
         /// 
@@ -70,6 +102,33 @@ namespace LiteCommerce.DataLayers.SqlServer
         public bool Update(Category data)
         {
             throw new NotImplementedException();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public int Count(string searchValue)
+        {
+            int dem;
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT count(*)
+                                        FROM Categories
+                                        WHERE(@searchValue = N'') OR (CategoryName like @searchValue)";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                    dem = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                connection.Close();
+            }
+            return dem;
         }
     }
 }

@@ -85,13 +85,9 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Shipper> Shipper_List(int page, int pageSize, string searchValue)
+        public static List<Shipper> Shipper_List(string searchValue)
         {
-            if (page < 1)
-                page = 1;
-            if (pageSize < 1)
-                pageSize = 1;
-            return ShipperDB.List(page, pageSize, searchValue);
+            return ShipperDB.List(searchValue);
         }
         /// <summary>
         /// 
@@ -100,13 +96,9 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Category> Category_List(int page, int pageSize, string searchValue)
-        {
-            if (page < 1)
-                page = 1;
-            if (pageSize < 1)
-                pageSize = 1;
-            return CategoryDB.List(page, pageSize, searchValue);
+        public static List<Category> Category_List(string searchValue)
+        {            
+            return CategoryDB.List(searchValue);
         }
         /// <summary>
         /// 
@@ -140,6 +132,19 @@ namespace LiteCommerce.BusinessLayers
         public static int Product_Count(string searchValue)
         {
             return ProductDB.Count(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Category_Count(string searchValue)
+        {
+            return CategoryDB.Count(searchValue);
+        }
+        public static int Shipper_Count(string searchValue)
+        {
+            return ShipperDB.Count(searchValue);
         }
     }
 }
