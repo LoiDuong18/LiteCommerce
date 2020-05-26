@@ -35,5 +35,7 @@ namespace LiteCommerce.Admin.Models
                 return pageCount;
             }
         }
+        public string SearchValue { get; set; }
+
     }
 }

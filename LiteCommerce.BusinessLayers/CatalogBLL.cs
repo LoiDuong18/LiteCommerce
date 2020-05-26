@@ -117,7 +117,6 @@ namespace LiteCommerce.BusinessLayers
                 pageSize = 1;
             return ProductDB.List(page, pageSize, searchValue);
         }
-
         public static int Supplier_Count(string searchValue)
         {
             return SupplierDB.Count(searchValue);

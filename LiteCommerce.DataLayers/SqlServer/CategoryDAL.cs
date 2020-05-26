@@ -73,8 +73,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                     cmd.CommandText = @"SELECT *
                                         FROM(
                                             SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
-                                            FROM Categorys
-                                            WHERE(@searchValue = N'') OR (CompanyName like @searchValue)
+                                            FROM Categories
+                                            WHERE(@searchValue = N'') OR (CategoryName like @searchValue)
                                         ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
                                         ORDER BY t.RowNumber";
                     cmd.CommandType = CommandType.Text;
@@ -90,7 +90,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                             {
                                 CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
                                 CategoryName = Convert.ToString(dbReader["CategoryName"]),
-                                Description = Convert.ToString(dbReader["Descrption"]),
+                                Description = Convert.ToString(dbReader["Description"]),
                                 //TODO: Làm các trường còn lại
                             });
                         }
@@ -120,8 +120,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandText = @"SELECT count(*)
-                                        FROM Categorys
-                                        WHERE(@searchValue = N'') OR (CompanyName like @searchValue)";
+                                        FROM Categories
+                                        WHERE(@searchValue = N'') OR (CategoryName like @searchValue)";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);

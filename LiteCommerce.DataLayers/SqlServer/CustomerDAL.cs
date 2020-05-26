@@ -126,7 +126,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandText = @"SELECT count(*)
-                                        FROM Customer
+                                        FROM Customers
                                         WHERE(@searchValue = N'') OR (CompanyName like @searchValue)";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;

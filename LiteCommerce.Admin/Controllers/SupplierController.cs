@@ -25,6 +25,7 @@ namespace LiteCommerce.Admin.Controllers
                 PageSize = AppSettings.DefaultPageSize,
                 RowCount = CatalogBLL.Supplier_Count(searchValue),
                 Data = CatalogBLL.Supplier_List(page, AppSettings.DefaultPageSize, searchValue),
+                SearchValue = searchValue,
             };
             //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
             //int rowCount = CatalogBLL.Supplier_Count(searchValue);
