@@ -6,12 +6,12 @@
 <!-- Search box -->
 <div class="box box-primary">
     <!-- form start -->
-    <form role="form">
+    <form role="form" action="~/Shipper">
         <div class="box-body">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Type anything">
+                <input type="text" name="searchValue" class="form-control" placeholder="Type anything" value="@Request.Params["searchValue"]">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
