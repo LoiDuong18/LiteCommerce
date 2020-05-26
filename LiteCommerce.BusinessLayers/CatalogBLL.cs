@@ -64,6 +64,11 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        public static Supplier Supplier_Get(int supplierID)
+        {
+            return SupplierDB.Get(supplierID);
+        }
+        
         public static List<Customer> Customer_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)

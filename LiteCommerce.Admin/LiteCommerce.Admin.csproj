@@ -124,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Codes\AppSettings.cs" />
+    <Compile Include="Codes\SelectListHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="Models\CategoryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
+    <Compile Include="Models\EmployeePaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Models\ShipperPaginationResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />

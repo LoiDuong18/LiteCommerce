@@ -21,6 +21,10 @@ namespace LiteCommerce.BusinessLayers
         /// Hàm này phải được gọi để khởi tạo các chức năng tác nghiệp
         /// </summary>
         /// <param name="connectionString"></param>
+        public static int Employee_Count(string searchValue)
+        {
+            return EmployeeDB.Count(searchValue);
+        }
         public static void Initialize(string connectionString)
         {
             EmployeeDB = new DataLayers.SqlServer.EmployeeDAL(connectionString);

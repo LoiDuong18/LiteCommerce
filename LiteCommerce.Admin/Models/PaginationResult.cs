@@ -10,6 +10,10 @@ namespace LiteCommerce.Admin.Models
         /// <summary>
         /// 
         /// </summary>
+        public string SearchValue { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int Page { get; set; }
         /// <summary>
         /// 
@@ -35,7 +39,5 @@ namespace LiteCommerce.Admin.Models
                 return pageCount;
             }
         }
-        public string SearchValue { get; set; }
-
     }
 }
