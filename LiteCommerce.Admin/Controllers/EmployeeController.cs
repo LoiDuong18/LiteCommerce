@@ -41,13 +41,30 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Employee";
                 ViewBag.ConfirmButton = "Add";
+
+                Employee newEmployee = new Employee();
+                newEmployee.EmployeeID = 0;
+                return View(newEmployee);
             }
             else
             {
                 ViewBag.Title = "Edit Employee";
                 ViewBag.ConfirmButton = "Save";
+                try
+                {
+                    Employee editEmployee = HumanResourceBLL.Employee_Get(Convert.ToInt32(id));
+                    if (editEmployee == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    return View(editEmployee);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return RedirectToAction("Index");
+                }
             }
-            return View();
         }
     }
 }

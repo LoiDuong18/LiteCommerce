@@ -49,7 +49,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="employeeID"></param>
         /// <returns></returns>
-        public Employee Get(string employeeID)
+        public Employee Get(int employeeID)
         {
             Employee data = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -60,7 +60,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.CommandText = @"SELECT * FROM Employees WHERE EmployeeID = @employeeID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@customerID", employeeID);
+                cmd.Parameters.AddWithValue("@employeeID", employeeID);
 
                 using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {

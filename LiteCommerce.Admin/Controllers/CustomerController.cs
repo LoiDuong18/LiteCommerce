@@ -60,11 +60,10 @@ namespace LiteCommerce.Admin.Controllers
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
             }
-            return View();
         }
 
 

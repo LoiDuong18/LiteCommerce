@@ -32,7 +32,7 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="EmployeeID"></param>
         /// <returns></returns>
-        Employee Get(string employeeID);
+        Employee Get(int employeeID);
         /// <summary>
         /// Danh sách kết quả tìm kiếm có phân trang
         /// </summary>

@@ -64,7 +64,7 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         /// <param name="employeeID"></param>
         /// <returns></returns>
-        public static Employee Employee_Get(string employeeID)
+        public static Employee Employee_Get(int employeeID)
         {
             return EmployeeDB.Get(employeeID);
         }
