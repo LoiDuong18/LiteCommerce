@@ -32,7 +32,7 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="supplierID"></param>
         /// <returns></returns>
-        Supplier Get(string supplierID);
+        Supplier Get(int supplierID);
         /// <summary>
         /// Danh sách kết quả tìm kiếm có phân trang
         /// </summary>

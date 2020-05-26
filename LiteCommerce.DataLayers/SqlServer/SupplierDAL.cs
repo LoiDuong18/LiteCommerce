@@ -112,7 +112,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="supplierID"></param>
         /// <returns></returns>
-        public Supplier Get(string supplierID)
+        public Supplier Get(int supplierID)
         {
             Supplier data = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -228,15 +228,16 @@ namespace LiteCommerce.DataLayers.SqlServer
                                     WHERE SupplierID = @SupplierID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.Add("@CompanyName", data.CompanyName);
-                cmd.Parameters.Add("@ContactName", data.ContactName);
-                cmd.Parameters.Add("@ContactTitle", data.ContactTitle);
-                cmd.Parameters.Add("@Address", data.Address);
-                cmd.Parameters.Add("@City", data.City);
-                cmd.Parameters.Add("@Country", data.Country);
-                cmd.Parameters.Add("@Phone", data.Phone);
-                cmd.Parameters.Add("@Fax", data.Fax);
-                cmd.Parameters.Add("@HomePage", data.HomePage);
+                cmd.Parameters.AddWithValue("@SupplierID", data.SupplierID);
+                cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
+                cmd.Parameters.AddWithValue("@ContactName", data.ContactName);
+                cmd.Parameters.AddWithValue("@ContactTitle", data.ContactTitle);
+                cmd.Parameters.AddWithValue("@Address", data.Address);
+                cmd.Parameters.AddWithValue("@City", data.City);
+                cmd.Parameters.AddWithValue("@Country", data.Country);
+                cmd.Parameters.AddWithValue("@Phone", data.Phone);
+                cmd.Parameters.AddWithValue("@Fax", data.Fax);
+                cmd.Parameters.AddWithValue("@HomePage", data.HomePage);
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
                 connection.Close();

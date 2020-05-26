@@ -22,12 +22,6 @@ namespace LiteCommerce.BusinessLayers
         /// ShipperDB
         /// </summary>
         private static IShipperDAL ShipperDB { get; set; }
-
-        public static int Customer_Count(string searchValue)
-        {
-            return CustomerDB.Count(searchValue);
-        }
-
         /// <summary>
         /// CategoryDB
         /// </summary>
@@ -66,6 +60,37 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Supplier_Add(Supplier data)
+        {
+            return SupplierDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="supplierIDs"></param>
+        /// <returns></returns>
+        public static bool Supplier_Delete(int[] supplierIDs)
+        {
+            return SupplierDB.Delete(supplierIDs);
+        }
+        public static Supplier Supplier_Get(int supplierID)
+        {
+            return SupplierDB.Get(supplierID);
+        }
+        /// <summary>
+        /// Đếm số Supplier
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Supplier_Count(string searchValue)
+        {
+            return SupplierDB.Count(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -81,6 +106,42 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Customer_Add(Customer data)
+        {
+            return CustomerDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
+        public static bool Customer_Delete(string[] customerID)
+        {
+            return CustomerDB.Delete(customerID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
+        public static Customer Customer_Get(string customerID)
+        {
+            return CustomerDB.Get(customerID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Customer_Count(string searchValue)
+        {
+            return CustomerDB.Count(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -88,6 +149,42 @@ namespace LiteCommerce.BusinessLayers
         public static List<Shipper> Shipper_List(string searchValue)
         {
             return ShipperDB.List(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Shipper_Add(Shipper data)
+        {
+            return ShipperDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
+        public static bool Shipper_Delete(int[] shipperID)
+        {
+            return ShipperDB.Delete(shipperID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
+        public static Shipper Shipper_Get(int shipperID)
+        {
+            return ShipperDB.Get(shipperID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Shipper_Count(string searchValue)
+        {
+            return ShipperDB.Count(searchValue);
         }
         /// <summary>
         /// 
@@ -103,6 +200,42 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Category_Add(Category data)
+        {
+            return CategoryDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
+        public static bool Category_Delete(int[] categoryID)
+        {
+            return CategoryDB.Delete(categoryID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
+        public static Category Category_Get(int categoryID)
+        {
+            return CategoryDB.Get(categoryID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Category_Count(string searchValue)
+        {
+            return CategoryDB.Count(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -114,16 +247,7 @@ namespace LiteCommerce.BusinessLayers
             if (pageSize < 1)
                 pageSize = 1;
             return ProductDB.List(page, pageSize, searchValue);
-        }
-        /// <summary>
-        /// Đếm số Supplier
-        /// </summary>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static int Supplier_Count(string searchValue)
-        {
-            return SupplierDB.Count(searchValue);
-        }
+        }        
         /// <summary>
         /// Đếm số products
         /// </summary>
@@ -132,19 +256,6 @@ namespace LiteCommerce.BusinessLayers
         public static int Product_Count(string searchValue)
         {
             return ProductDB.Count(searchValue);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static int Category_Count(string searchValue)
-        {
-            return CategoryDB.Count(searchValue);
-        }
-        public static int Shipper_Count(string searchValue)
-        {
-            return ShipperDB.Count(searchValue);
-        }
+        }       
     }
 }
