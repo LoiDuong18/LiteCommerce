@@ -1,4 +1,5 @@
 ﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,11 +41,32 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Category";
                 ViewBag.ConfirmButton = "Add";
+
+                Category newCategory = new Category();
+                newCategory.CategoryID = 0;
+                return View(newCategory);
             }
             else
             {
                 ViewBag.Title = "Edit Category";
                 ViewBag.ConfirmButton = "Save";
+                try
+                {
+                    Category editCategory = CatalogBLL.Category_Get(Convert.ToInt32(id));
+                    if (editCategory == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(editCategory);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return RedirectToAction("Index");
+                }
             }
             return View();
         }

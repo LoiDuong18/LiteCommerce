@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,9 +18,17 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
-            return View();
+            var model = new Models.EmployeePaginationResult()
+            {
+                Page = page,
+                PageSize = AppSettings.DefaultPageSize,
+                RowCount = HumanResourceBLL.Employee_Count(searchValue),
+                Data = HumanResourceBLL.Employee_List(page, AppSettings.DefaultPageSize, searchValue),
+                SearchValue = searchValue,
+            };
+            return View(model);
         }
         /// <summary>
         /// Hiển thị form thêm/sửa Employee

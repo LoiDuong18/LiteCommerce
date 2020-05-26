@@ -54,12 +54,20 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Edit Supplier";
                 ViewBag.ConfirmButton = "Save";
-
-                Supplier editSupplier = CatalogBLL.Supplier_Get(Convert.ToInt32(id));
-                if(editSupplier == null) {
+                try
+                {
+                    Supplier editSupplier = CatalogBLL.Supplier_Get(Convert.ToInt32(id));
+                    if (editSupplier == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    return View(editSupplier);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
-                return View(editSupplier);
             }
         }
 

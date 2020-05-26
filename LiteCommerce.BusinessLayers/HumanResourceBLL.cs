@@ -11,7 +11,7 @@ namespace LiteCommerce.BusinessLayers
     /// <summary>
     /// 
     /// </summary>
-    public class HumanResourceBLL
+    public static class HumanResourceBLL
     {
         /// <summary>
         /// 
@@ -28,6 +28,16 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Employee_Count(string searchValue)
+        {
+            return EmployeeDB.Count(searchValue);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -39,6 +49,33 @@ namespace LiteCommerce.BusinessLayers
             if (pageSize < 1)
                 pageSize = 1;
             return EmployeeDB.List(page, pageSize, searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Employee_Add(Employee data)
+        {
+            return EmployeeDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
+        public static Employee Employee_Get(string employeeID)
+        {
+            return EmployeeDB.Get(employeeID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Employee_Update(Employee data)
+        {
+            return EmployeeDB.Update(data);
         }
     }
 }

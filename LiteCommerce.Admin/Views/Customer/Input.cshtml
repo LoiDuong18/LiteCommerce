@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LiteCommerce.DomainModels.Customer
+@{
 
 }
 
@@ -12,21 +13,22 @@
             </div>
         </div>
         <div class="box-body">
+            <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
             <div class="form-group">
                 <label>Company Name:</label>
-                <input type="text" class="form-control" placeholder="ABC Company">
+                <input type="text" name="CompanyName" class="form-control" placeholder="ABC Company" value="@Model.CompanyName">
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Contact Name:</label>
-                        <input type="text" class="form-control" placeholder="Nguyen Van A">
+                        <input type="text" name="ContactName" class="form-control" placeholder="Nguyen Van A" value="@Model.ContactName">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Contact Title:</label>
-                        <input type="text" class="form-control" placeholder="Sale Manager">
+                        <input type="text" name="ContactTitle" class="form-control" placeholder="Sale Manager" value="@Model.ContactTitle">
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
 
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" class="form-control" placeholder="123 Pham Van Dong St">
+                <input type="text" name="Address" class="form-control" placeholder="123 Pham Van Dong St" value="@Model.Address">
             </div>
             <div class="row">
                 <div class="col-sm-6">
@@ -42,17 +44,24 @@
                         <label>Country:</label>
                         <select class="form-control">
                             <option>--Select Country--</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
+                            @foreach (var item in SelectListHelper.ListOfCountries())
+                            {
+                                if (item.Value == Model.Country)
+                                {
+                                    <option value="@item.Value" checked>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>City:</label>
-                        <input type="text" class="form-control" placeholder="Hue">
+                        <input type="text" name="City" class="form-control" placeholder="Hue" value="@Model.City">
                     </div>
                 </div>
             </div>
@@ -62,7 +71,7 @@
                         <label>Phone:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" class="form-control" placeholder="(+84) 123 123 123">
+                            <input type="text" name="Phone" class="form-control" placeholder="(+84) 123 123 123" value="@Model.Phone">
                         </div>
                     </div>
                 </div>
@@ -71,7 +80,7 @@
                         <label>Fax:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-fax"></i></span>
-                            <input type="text" class="form-control" placeholder="(+84) 456 456 456">
+                            <input type="text" name="Fax" class="form-control" placeholder="(+84) 456 456 456" value="@Model.Fax">
                         </div>
                     </div>
                 </div>
@@ -80,7 +89,7 @@
         <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>
-            <a href="~/Supplier" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>
+            <a href="~/Customer" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>
         </div>
     </form>
 </div>
