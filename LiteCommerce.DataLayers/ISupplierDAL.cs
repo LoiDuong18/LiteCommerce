@@ -26,7 +26,7 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="supplierIDs"></param>
         /// <returns></returns>
-        bool Delete(string[] supplierIDs);
+        bool Delete(int[] supplierIDs);
         /// <summary>
         /// Lấy thông tin của một Supplier
         /// </summary>
