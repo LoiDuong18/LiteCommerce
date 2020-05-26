@@ -1,4 +1,5 @@
 ﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,7 @@ namespace LiteCommerce.Admin.Controllers
         {
            var model = new Models.ShipperPaginationResult()
             {
-                Page = page,
-                PageSize = AppSettings.DefaultPageSize,
+                
                 RowCount = CatalogBLL.Shipper_Count(searchValue),
                 Data = CatalogBLL.Shipper_List(page, AppSettings.DefaultPageSize, searchValue),
             };
@@ -43,13 +43,30 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Shipper";
                 ViewBag.ConfirmButton = "Add";
+
+                Shipper newShipper = new Shipper();
+                newShipper.ShipperID = 0;
+                return View(newShipper);
             }
             else
             {
                 ViewBag.Title = "Edit Shipper";
                 ViewBag.ConfirmButton = "Save";
+                try
+                {
+                    Shipper editShipper = CatalogBLL.Shipper_Get(Convert.ToInt32(id));
+                    if (editShipper == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    return View(editShipper);
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return View();
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,7 @@ namespace LiteCommerce.Admin.Controllers
         public ActionResult Index(int page = 1, string searchValue = "")
         {
             var model = new Models.CategoryPaginationResult()
-            {
-                Page = page,
-                PageSize = AppSettings.DefaultPageSize,
+            { 
                 RowCount = CatalogBLL.Category_Count(searchValue),
                 Data = CatalogBLL.Category_List(page, AppSettings.DefaultPageSize, searchValue),
             };
@@ -43,11 +42,33 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Category";
                 ViewBag.ConfirmButton = "Add";
+
+                Category newCategory = new Category();
+                newCategory.CategoryID = 0;
+                return View(newCategory);
             }
             else
             {
                 ViewBag.Title = "Edit Category";
                 ViewBag.ConfirmButton = "Save";
+
+                try
+                {
+                    Category editCategory = CatalogBLL.Category_Get(Convert.ToInt32(id));
+                    if (editCategory == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(editCategory);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return RedirectToAction("Index");
+                }
             }
             return View();
         }

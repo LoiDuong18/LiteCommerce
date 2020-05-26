@@ -40,7 +40,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="employeeIDs"></param>
         /// <returns></returns>
-        public bool Delete(string[] employeeIDs)
+        public bool Delete(int[] employeeIDs)
         {
             throw new NotImplementedException();
         }
@@ -49,9 +49,44 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="employeeID"></param>
         /// <returns></returns>
-        public Employee Get(string employeeID)
+        public Employee Get(int employeeID)
         {
-            throw new NotImplementedException();
+            Employee data = null;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"SELECT * FROM Employees WHERE EmployeeID = @employeeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@employeeID", employeeID);
+
+                using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    if (dbReader.Read())
+                    {
+                        data = new Employee()
+                        {
+                            EmployeeID = Convert.ToInt32(dbReader["EmployeeID"]),
+                            FirstName = Convert.ToString(dbReader["FirstName"]),
+                            LastName = Convert.ToString(dbReader["LastName"]),
+                            Title = Convert.ToString(dbReader["Title"]),
+                            BirthDate = Convert.ToString(dbReader["BirthDate"]),
+                            HireDate = Convert.ToString(dbReader["HireDate"]),
+                            Email = Convert.ToString(dbReader["Email"]),
+                            Address = Convert.ToString(dbReader["Address"]),
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            HomePhone = Convert.ToString(dbReader["HomePhone"]),
+                            Notes = Convert.ToString(dbReader["Notes"]),
+                            PhotoPath = Convert.ToString(dbReader["PhotoPath"]),
+                        };
+                    }
+                }
+                connection.Close();
+            }
+            return data;
         }
         /// <summary>
         /// 
@@ -74,7 +109,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                                         FROM(
                                             SELECT *, ROW_NUMBER() OVER(ORDER BY EmployeeID) AS RowNumber
                                             FROM Employees
-                                            WHERE(@searchValue = N'') OR (LastName like @searchValue)
+                                            WHERE(@searchValue = N'')
+                                                OR (FirstName like @searchValue)
+                                                OR (LastName like @searchValue)
                                         ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
                                         ORDER BY t.RowNumber";
                     cmd.CommandType = CommandType.Text;
@@ -90,16 +127,17 @@ namespace LiteCommerce.DataLayers.SqlServer
                             {
                                 EmployeeID = Convert.ToInt32(dbReader["EmployeeID"]),
                                 FirstName = Convert.ToString(dbReader["FirstName"]),
+                                LastName = Convert.ToString(dbReader["LastName"]),
                                 Title = Convert.ToString(dbReader["Title"]),
                                 BirthDate = Convert.ToString(dbReader["BirthDate"]),
                                 HireDate = Convert.ToString(dbReader["HireDate"]),
+                                Email = Convert.ToString(dbReader["Email"]),
                                 Address = Convert.ToString(dbReader["Address"]),
                                 City = Convert.ToString(dbReader["City"]),
                                 Country = Convert.ToString(dbReader["Country"]),
                                 HomePhone = Convert.ToString(dbReader["HomePhone"]),
                                 Notes = Convert.ToString(dbReader["Notes"]),
                                 PhotoPath = Convert.ToString(dbReader["PhotoPath"]),
-                                //TODO: Làm các trường còn lại
                             });
                         }
                     }
@@ -115,7 +153,46 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public bool Update(Employee data)
         {
-            throw new NotImplementedException();
+            int rowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"UPDATE Employees
+                                    SET                                    
+                                        FirstName = @FirstName,
+                                        LastName = @LastName,
+                                        Title = @Title,
+                                        BirthDate = @BirthDate,
+                                        HireDate = @HireDate,
+                                        Email = @Email,
+                                        Address = @Address,
+                                        City = @City,
+                                        Country = @Country,
+                                        HomePhone = @HomePhone,
+                                        Notes = @Notes,
+                                        PhotoPath = @PhotoPath,
+                                    WHERE EmployeeID = @EmployeeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@EmployeeID", data.EmployeeID);
+                cmd.Parameters.AddWithValue("@FirstName", data.FirstName);
+                cmd.Parameters.AddWithValue("@LastName", data.LastName);
+                cmd.Parameters.AddWithValue("@Title", data.Title);
+                cmd.Parameters.AddWithValue("@BirthDate", data.BirthDate);
+                cmd.Parameters.AddWithValue("@HireDate", data.HireDate);
+                cmd.Parameters.AddWithValue("@Email", data.Email);
+                cmd.Parameters.AddWithValue("@Address", data.Address);
+                cmd.Parameters.AddWithValue("@City", data.City);
+                cmd.Parameters.AddWithValue("@Country", data.Country);
+                cmd.Parameters.AddWithValue("@HomePhone", data.HomePhone);
+                cmd.Parameters.AddWithValue("@Notes", data.Notes);
+                cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
+
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return rowsAffected > 0;
         }
         public int Count(string searchValue)
         {
@@ -129,7 +206,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                 {
                     cmd.CommandText = @"SELECT count(*)
                                         FROM Employees
-                                        WHERE(@searchValue = N'') OR (CompanyName like @searchValue)";
+                                        WHERE(@searchValue = N'')
+                                            OR (FirstName like @searchValue)
+                                            OR (LastName like @searchValue)";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);

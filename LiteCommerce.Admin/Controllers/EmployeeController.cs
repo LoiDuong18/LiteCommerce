@@ -1,4 +1,5 @@
 ﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,13 +44,24 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Employee";
                 ViewBag.ConfirmButton = "Add";
+
+                Employee newSupplier = new Employee();
+                newSupplier.EmployeeID = 0;
+                return View(newSupplier);
             }
             else
             {
                 ViewBag.Title = "Edit Employee";
                 ViewBag.ConfirmButton = "Save";
+
+                Employee editEmployee = HumanResourceBLL.Employee_Get(Convert.ToInt32(id));
+                if (editEmployee == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(editEmployee);
             }
-            return View();
+            
         }
     }
 }

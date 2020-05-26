@@ -68,7 +68,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return SupplierDB.Get(supplierID);
         }
-        
+        public static int Supplier_Count(string searchValue)
+        {
+            return SupplierDB.Count(searchValue);
+        }
         public static List<Customer> Customer_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -84,6 +87,14 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        public static Customer Customer_Get(int customerID)
+        {
+            return CustomerDB.Get(customerID);
+        }
+        public static int Customer_Count(string searchValue)
+        {
+            return CustomerDB.Count(searchValue);
+        }
         public static List<Shipper> Shipper_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -99,6 +110,14 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        public static Shipper Shipper_Get(int shipperID)
+        {
+            return ShipperDB.Get(shipperID);
+        }
+        public static int Shipper_Count(string searchValue)
+        {
+            return ShipperDB.Count(searchValue);
+        }
         public static List<Category> Category_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -114,6 +133,14 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        public static Category Category_Get(int categoryID)
+        {
+            return CategoryDB.Get(categoryID);
+        }
+        public static int Category_Count(string searchValue)
+        {
+            return CategoryDB.Count(searchValue);
+        }
         public static List<Product> Product_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -121,22 +148,6 @@ namespace LiteCommerce.BusinessLayers
             if (pageSize < 1)
                 pageSize = 1;
             return ProductDB.List(page, pageSize, searchValue);
-        }
-        public static int Supplier_Count(string searchValue)
-        {
-            return SupplierDB.Count(searchValue);
-        }
-        public static int Customer_Count(string searchValue)
-        {
-            return CustomerDB.Count(searchValue);
-        }
-        public static int Shipper_Count(string searchValue)
-        {
-            return ShipperDB.Count(searchValue);
-        }
-        public static int Category_Count(string searchValue)
-        {
-            return CategoryDB.Count(searchValue);
         }
     }
 }

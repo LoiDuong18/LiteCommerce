@@ -25,6 +25,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return EmployeeDB.Count(searchValue);
         }
+        public static Employee Employee_Get(int employeeID)
+        {
+            return EmployeeDB.Get(employeeID);
+        }
         public static void Initialize(string connectionString)
         {
             EmployeeDB = new DataLayers.SqlServer.EmployeeDAL(connectionString);

@@ -47,11 +47,17 @@
                         <label>Country:</label>
                         <input type="text" class="form-control" placeholder="Address ..." value="@Model.Country">
                         <select class="form-control">
-                            <option>--Select Country--</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
+                            @foreach (var item in SelectListHelper.ListOfCountries())
+                            {
+                                if (item.Value == Model.Country)
+                                {
+                                    <option value="@item.Value" checked>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>

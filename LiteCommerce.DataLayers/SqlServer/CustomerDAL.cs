@@ -97,7 +97,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Customers
                                             WHERE(CustomerID = @customerId)
-                                              AND(CustomerrID NOT IN(SELECT CustomerID FROM Products))";
+                                              AND(CustomerrID NOT IN(SELECT CustomerID FROM Orders))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.Add("@customerId", SqlDbType.Int);
@@ -141,6 +141,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                             ContactName = Convert.ToString(dbReader["ContactName"]),
                             ContactTitle = Convert.ToString(dbReader["ContactTitle"]),
                             Address = Convert.ToString(dbReader["Address"]),
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            Phone = Convert.ToString(dbReader["Phone"]),
+                            Fax = Convert.ToString(dbReader["Fax"]),
                             //TODO: Làm nốt các trường còn lại...
                         };
                     }
