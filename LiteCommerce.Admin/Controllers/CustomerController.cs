@@ -71,7 +71,7 @@ namespace LiteCommerce.Admin.Controllers
                     //Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
-                return View();
+               
             }
         }
 

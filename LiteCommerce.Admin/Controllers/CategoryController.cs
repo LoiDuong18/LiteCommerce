@@ -70,7 +70,7 @@ namespace LiteCommerce.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            
         }
     }
 }
