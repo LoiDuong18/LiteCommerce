@@ -58,18 +58,19 @@
                         <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                         <td>
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     @*@if (string.IsNullOrEmpty(item.PhotoPath))
                                     {
-                                        <img src="~/Images/avt-facebook.jpg" width="50px" class="img-circle" />
+                                        <img src="~/Images/avt-facebook.jpg" width="fit-content" class="img-circle" />
                                     }
-                                    else{ 
+                                    else
+                                    {
                                         <img src="@item.PhotoPath" width="50px" class="img-circle" />
-                                    }*@    
+                                    }*@
                                     <!--Tạm thời do không có ảnh nên mình để ảnh mặc định như ri cho dễ nhìn :3*-->
                                     <img src="~/Images/avt-facebook.jpg" style="width:50px" class="img-circle" />                               
                                 </div>
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <span class="text-bold text-black">@item.FirstName @item.LastName</span>
                                     <br />
                                     <span>(@item.Title)</span>

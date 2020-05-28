@@ -91,6 +91,15 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Supplier_Update(Supplier data)
+        {
+            return SupplierDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
