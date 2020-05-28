@@ -71,7 +71,8 @@ namespace LiteCommerce.Admin.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="method"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult Input(Supplier model)
@@ -147,6 +148,21 @@ namespace LiteCommerce.Admin.Controllers
                 //ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
                 return View(model);
             }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="supplierIDs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(string method = "", int[] supplierIDs = null)
+        {
+            if (supplierIDs!=null)
+            {
+                CatalogBLL.Supplier_Delete(supplierIDs);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

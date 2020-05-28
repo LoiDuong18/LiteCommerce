@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label>Country:</label>
                         <select class="form-control" name="Country">
-                            <option>--Select Country--</option>
+                            <option value="">--Select Country--</option>
                             @foreach (var item in SelectListHelper.ListOfCountries())
                             {
                                 if (item.Value == Model.Country)
