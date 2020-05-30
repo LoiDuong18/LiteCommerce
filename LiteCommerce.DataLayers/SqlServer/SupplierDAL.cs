@@ -36,30 +36,30 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Suppliers
-                                          (
-	                                          CompanyName,
-	                                          ContactName,
-	                                          ContactTitle,
-	                                          Address,
-	                                          City,
-	                                          Country,
-	                                          Phone,
-	                                          Fax,
-	                                          HomePage
-                                          )
-                                          VALUES
-                                          (
-	                                          @CompanyName,
-	                                          @ContactName,
-	                                          @ContactTitle,
-	                                          @Address,
-	                                          @City,
-	                                          @Country,
-	                                          @Phone,
-	                                          @Fax,
-	                                          @HomePage
-                                          );
-                                          SELECT @@IDENTITY;";
+                                    (
+	                                    CompanyName,
+	                                    ContactName,
+	                                    ContactTitle,
+	                                    Address,
+	                                    City,
+	                                    Country,
+	                                    Phone,
+	                                    Fax,
+	                                    HomePage
+                                    )
+                                    VALUES
+                                    (
+	                                    @CompanyName,
+	                                    @ContactName,
+	                                    @ContactTitle,
+	                                    @Address,
+	                                    @City,
+	                                    @Country,
+	                                    @Phone,
+	                                    @Fax,
+	                                    @HomePage
+                                    );
+                                    SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
@@ -73,9 +73,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@HomePage", data.HomePage);
 
                 supplierId = Convert.ToInt32(cmd.ExecuteScalar());
+
                 connection.Close();
             }
-                return supplierId;
+            return supplierId;
         }
         /// <summary>
         /// 
@@ -84,7 +85,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public bool Delete(int[] supplierIDs)
         {
-            bool result = true;
+            int result = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -99,12 +100,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 foreach (int supplierId in supplierIDs)
                 {
                     cmd.Parameters["@supplierId"].Value = supplierId;
-                    cmd.ExecuteNonQuery();
+                    result += cmd.ExecuteNonQuery();
                 }
 
                 connection.Close();
             }
-            return result;
+            return result > 0;
         }
         /// <summary>
         /// 
@@ -135,17 +136,20 @@ namespace LiteCommerce.DataLayers.SqlServer
                             ContactName = Convert.ToString(dbReader["ContactName"]),
                             ContactTitle = Convert.ToString(dbReader["ContactTitle"]),
                             Address = Convert.ToString(dbReader["Address"]),
-                            //TODO: Làm nốt các trường còn lại...
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            Phone = Convert.ToString(dbReader["Phone"]),
+                            Fax = Convert.ToString(dbReader["Fax"]),
+                            HomePage = Convert.ToString(dbReader["HomePage"]),
                         };
                     }
                 }
-
                 connection.Close();
             }
             return data;
         }
         /// <summary>
-        /// 
+        /// Lấy tất cả Suppliers
         /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
@@ -189,7 +193,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 Phone = Convert.ToString(dbReader["Phone"]),
                                 Fax = Convert.ToString(dbReader["Fax"]),
                                 HomePage = Convert.ToString(dbReader["HomePage"]),
-                                //TODO: Làm các trường còn lại
                             });
                         }
                     }
@@ -212,20 +215,19 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Suppliers
-                                       SET CompanyName ='@CompanyName',
-		                                    ContactName ='@ContactName',
-		                                    ContactTitle ='@ContactTitle',
-		                                    Address ='@Address',
-		                                    City ='@City',
-		                                    Country ='@Country',
-		                                    Phone ='@Phone',
-		                                    Fax ='@Fax',
-		                                    HomePage ='@HomePage'
-
-                                     WHERE SupplierID = ''";
+                                    SET                                    
+                                        CompanyName = @CompanyName,
+                                        ContactName = @ContactName,
+                                        ContactTitle = @ContactTitle,
+                                        Address = @Address,
+                                        City = @City,
+                                        Country = @Country,
+                                        Phone = @Phone,
+                                        Fax = @Fax,
+                                        HomePage = @HomePage
+                                    WHERE SupplierID = @SupplierID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                //TODO: Bổ sung tham số cho lệnh cập nhật
                 cmd.Parameters.AddWithValue("@SupplierID", data.SupplierID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@ContactName", data.ContactName);
@@ -238,18 +240,16 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@HomePage", data.HomePage);
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
-
                 connection.Close();
             }
 
-            return rowsAffected > 0; ;
+            return rowsAffected > 0;
         }
         /// <summary>
-        /// 
+        /// Đếm số dòng dữ liệu get được
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-
         public int Count(string searchValue)
         {
             int dem;

@@ -68,10 +68,49 @@ namespace LiteCommerce.BusinessLayers
         {
             return SupplierDB.Get(supplierID);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Supplier_Add(Supplier data)
+        {
+            return SupplierDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Supplier_Update(Supplier data)
+        {
+            return SupplierDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="supplierIDs"></param>
+        /// <returns></returns>
+        public static bool Supplier_Delete(int[] supplierIDs)
+        {
+            return SupplierDB.Delete(supplierIDs);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static int Supplier_Count(string searchValue)
         {
             return SupplierDB.Count(searchValue);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static List<Customer> Customer_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -83,14 +122,30 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        public static Customer Customer_Get(int customerID)
+        public static Customer Customer_Get(string customerID)
         {
             return CustomerDB.Get(customerID);
         }
+        public static int Customer_Add(Customer data)
+        {
+            return CustomerDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
+        public static bool Customer_Update(Customer data)
+        {
+            return CustomerDB.Update(data);
+        }
+        public static bool Customer_Delete(string[] customerID)
+        {
+            return CustomerDB.Delete(customerID);
+        }
+
         public static int Customer_Count(string searchValue)
         {
             return CustomerDB.Count(searchValue);
