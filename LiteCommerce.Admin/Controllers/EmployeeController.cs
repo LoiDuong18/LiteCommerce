@@ -125,7 +125,10 @@ namespace LiteCommerce.Admin.Controllers
                     uploadPhoto.SaveAs(filePath);
                     model.PhotoPath = "Images/"+uploadPhoto.FileName;
                 }
-
+                else if(model.PhotoPath == null)
+                {
+                    model.PhotoPath = "";
+                }
                 if (!ModelState.IsValid)
                 {
                     if (model.EmployeeID == 0)

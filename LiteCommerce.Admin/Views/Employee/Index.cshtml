@@ -61,11 +61,11 @@
                                 <div class="col-sm-3">
                                     @if (string.IsNullOrEmpty(item.PhotoPath))
                                     {
-                                        <img src="~/Images/avt-facebook.jpg" width="50px"/>
+                                        <img src="~/Images/avt-facebook.jpg" width="50px" class="img-circle" />
                                     }
                                     else
                                     {
-                                        <img src="@item.PhotoPath" width="50px"/>
+                                        <img src="@item.PhotoPath" width="50px" class="img-circle" />
                                     }
                                 </div>
                                 <div class="col-sm-9">
@@ -77,10 +77,10 @@
                             
                         </td>
                         <td>
-                            <span> @item.BirthDate</span>
+                            <span>@string.Format("{0:dd/MM/yyyy}", item.BirthDate)</span>
                         </td>
                         <td>
-                            <span> @item.HireDate</span>
+                            <span> @string.Format("{0:dd/MM/yyyy}", item.HireDate)</span>
                         </td>
                         <td>
                             <span style="display:block"><i class="fa fa-phone"></i> @item.HomePhone</span>
