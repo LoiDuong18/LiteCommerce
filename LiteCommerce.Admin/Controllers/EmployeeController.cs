@@ -86,14 +86,14 @@ namespace LiteCommerce.Admin.Controllers
                 {
                     ModelState.AddModelError("Title", "Title is required");
                 }
-                if (string.IsNullOrEmpty(model.BirthDate))
-                {
-                    ModelState.AddModelError("BirthDate", "BirthDate is required");
-                }
-                if (string.IsNullOrEmpty(model.HireDate))
-                {
-                    ModelState.AddModelError("HireDate", "HireDate is required");
-                }
+                //if (string.IsNullOrEmpty(model.BirthDate))
+                //{
+                //    ModelState.AddModelError("BirthDate", "BirthDate is required");
+                //}
+                //if (string.IsNullOrEmpty(model.HireDate))
+                //{
+                //    ModelState.AddModelError("HireDate", "HireDate is required");
+                //}
                 if (string.IsNullOrEmpty(model.HomePhone))
                 {
                     ModelState.AddModelError("HomePhone", "HomePhone is required");

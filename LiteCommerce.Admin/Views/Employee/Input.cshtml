@@ -45,7 +45,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="BirthDate" class="form-control pull-right" id="datepicker_birthday" value="@Model.BirthDate">
+                            <input type="text" name="BirthDate" class="form-control pull-right" id="datepicker_birthday" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)">
                         </div>
                         @Html.ValidationMessage("BirthDate", new { @style = "color: red" })
                     </div>
@@ -58,7 +58,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="HireDate" class="form-control pull-right" id="datepicker_hireday" value="@Model.HireDate">
+                            <input type="text" name="HireDate" class="form-control pull-right" id="datepicker_hireday" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)">
                         </div>
                         @Html.ValidationMessage("HireDate", new { @style = "color: red" })
                     </div>

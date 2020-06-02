@@ -30,11 +30,11 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string HireDate { get; set; }
+        public DateTime HireDate { get; set; }
         /// <summary>
         /// 
         /// </summary>
