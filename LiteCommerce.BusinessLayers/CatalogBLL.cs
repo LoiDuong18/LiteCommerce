@@ -151,6 +151,15 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Customer_Update(Customer data)
+        {
+            return CustomerDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -198,6 +207,15 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Shipper_Update(Shipper data)
+        {
+            return ShipperDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -241,6 +259,15 @@ namespace LiteCommerce.BusinessLayers
         public static int Category_Count(string searchValue)
         {
             return CategoryDB.Count(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Category_Update(Category data)
+        {
+            return CategoryDB.Update(data);
         }
         /// <summary>
         /// 

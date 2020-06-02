@@ -20,86 +20,87 @@
         <!-- /.box-body -->
     </form>
 </div>
-<!-- /.box -->
-<div class="row">
-    <div class="col-sm-8">
-        <span>There are <b>@Model.RowCount</b> Customers. Page <b>@Model.Page/@Model.PageCount</b></span> 
-    </div>
-    <div class="col-sm-4">
-        <div class="pull-right">
-            <a href="~/Customer/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
-            <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+<form action="~/Customer/Delete" method="post">
+    <!-- /.box -->
+    <div class="row">
+        <div class="col-sm-8">
+            <span>There are <b>@Model.RowCount</b> Customers. Page <b>@Model.Page/@Model.PageCount</b></span> 
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <a href="~/Customer/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+                <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+            </div>
         </div>
     </div>
-</div>
-<br />
-<!-- Table box -->
-<div class="box box-success">
-    <div class="box-body">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" /></th>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Contact Info</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Data)
-                {
+    <br />
+    <!-- Table box -->
+    <div class="box box-success">
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        <td>
-                            <input type="checkbox" />
-                        </td>
-                        <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
-                        <td>
-                            <span class="text-bold text-blue">@item.CompanyName</span>
-                            <br />
-                            <span class="text-bold text-black">@item.ContactName</span>
-                            <span>(@item.ContactTitle)</span>
-                        </td>
-                        <td>
-                            <span style="display:block">@item.Address</span>
-                            <span> @item.City -  @item.Country</span>
-                        </td>
-                        <td>
-                            <span style="display:block"><i class="fa fa-phone"></i> @item.Phone</span>
-                            <span style="display:block"><i class="fa fa-fax"></i> @item.Fax</span>
-                        </td>
-                        <td><a href="~/Customer/Input/@item.CustomerID" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        <th><input type="checkbox" /></th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact Info</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            @if (Model.Page != 1)
-            {
-                <li><a href="~/Customer?page=1@paramSearch">First</a></li>
-            }                
-            @for (int page = 1; page <= Model.PageCount; page++)
-            {
-                if (Model.Page == page)
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="customerIDs" value="@item.CustomerID" />
+                            </td>
+                            <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
+                            <td>
+                                <span class="text-bold text-blue">@item.CompanyName</span>
+                                <br />
+                                <span class="text-bold text-black">@item.ContactName</span>
+                                <span>(@item.ContactTitle)</span>
+                            </td>
+                            <td>
+                                <span style="display:block">@item.Address</span>
+                                <span> @item.City -  @item.Country</span>
+                            </td>
+                            <td>
+                                <span style="display:block"><i class="fa fa-phone"></i> @item.Phone</span>
+                                <span style="display:block"><i class="fa fa-fax"></i> @item.Fax</span>
+                            </td>
+                            <td><a href="~/Customer/Input/@item.CustomerID" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                @if (Model.Page != 1)
                 {
-                    <li class="active"><a href="~/Customer?page=@page@paramSearch">@page</a></li>
-                }
-                else
+                    <li><a href="~/Customer?page=1@paramSearch">First</a></li>
+                }                
+                @for (int page = 1; page <= Model.PageCount; page++)
                 {
-                    <li><a href="~/Customer?page=@page@paramSearch">@page</a></li>
+                    if (Model.Page == page)
+                    {
+                        <li class="active"><a href="~/Customer?page=@page@paramSearch">@page</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Customer?page=@page@paramSearch">@page</a></li>
+                    }
+
                 }
-
-            }
-            @if (Model.Page != Model.PageCount)
-            {
-                <li><a href="~/Customer?page=@Model.PageCount@paramSearch">Last</a></li>
-            }            
-        </ul>
+                @if (Model.Page != Model.PageCount)
+                {
+                    <li><a href="~/Customer?page=@Model.PageCount@paramSearch">Last</a></li>
+                }            
+            </ul>
+        </div>
+        <!-- /.box-body -->
     </div>
-    <!-- /.box-body -->
-</div>
-<!-- /.box -->
-
+    <!-- /.box -->
+</form>

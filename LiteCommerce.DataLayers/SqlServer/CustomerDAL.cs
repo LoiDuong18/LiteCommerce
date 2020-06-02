@@ -41,6 +41,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Customers
 									  (
+                                          CustomerID,
 										  CompanyName,
 										  ContactName,
 										  ContactTitle,
@@ -48,10 +49,11 @@ namespace LiteCommerce.DataLayers.SqlServer
 										  City,
 										  Country,
 										  Phone,
-										  Fax,
+										  Fax
 									  )
 									  VALUES
 									  (
+                                          @CustomerID,
 										  @CompanyName,
 										  @ContactName,
 										  @ContactTitle,
@@ -59,11 +61,12 @@ namespace LiteCommerce.DataLayers.SqlServer
 										  @City,
 										  @Country,
 										  @Phone,
-										  @Fax,
+										  @Fax
 									  );
 									  SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@CustomerID", data.CustomerID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@ContactName", data.ContactName);
                 cmd.Parameters.AddWithValue("@ContactTitle", data.ContactTitle);
@@ -221,7 +224,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                                         City = @City,
                                         Country = @Country,
                                         Phone = @Phone,
-                                        Fax = @Fax,
+                                        Fax = @Fax
                                     WHERE CustomerID = @CustomerID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;

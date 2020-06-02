@@ -35,6 +35,7 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
             if (string.IsNullOrEmpty(id))
@@ -65,6 +66,71 @@ namespace LiteCommerce.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Input(Shipper model)
+        {
+            try
+            {
+                //Validate dữ liệu
+                if (string.IsNullOrEmpty(model.CompanyName))
+                {
+                    ModelState.AddModelError("CompanyName", "CompanyName is required");
+                }
+                if (string.IsNullOrEmpty(model.Phone))
+                {
+                    ModelState.AddModelError("Phone", "Phone is required");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    if(model.ShipperID == 0)
+                    {
+                        ViewBag.Title = "Add New Shipper";
+                        ViewBag.ConfirmButton = "Add";
+                    }
+                    else
+                    {
+                        ViewBag.Title = "Edit New Shipper";
+                        ViewBag.ConfirmButton = "Save";
+                    }
+                    return View(model);
+                }
+                //Đưa dữ liệu vào CSDL
+                if (model.ShipperID == 0)
+                {
+                    int shipperID = CatalogBLL.Shipper_Add(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    bool rs = CatalogBLL.Shipper_Update(model);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                return View(model);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shipperIDs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(int[] shipperIDs)
+        {
+            if (shipperIDs != null)
+            {
+                CatalogBLL.Shipper_Delete(shipperIDs);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

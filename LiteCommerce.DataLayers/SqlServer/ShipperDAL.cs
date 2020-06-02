@@ -41,12 +41,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.CommandText = @"INSERT INTO Shippers
                                     (
 	                                    CompanyName,	                                    
-	                                    Phone,
+	                                    Phone
                                     )
                                     VALUES
                                     (
 	                                    @CompanyName,
-	                                    @Phone,
+	                                    @Phone
                                     );
                                     SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
@@ -178,17 +178,17 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Shippers
-                                    SET                                    
-                                        CompanyName = @CompanyName,                                        
-                                        Phone = @Phone,
-                                    WHERE ShipperID = @ShipperID";
+                                           SET CompanyName = @CompanyName 
+                                              ,Phone = @Phone
+                                          WHERE ShipperID = @ShipperID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@ShipperID", data.ShipperID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
-                cmd.Parameters.AddWithValue("@ShipperID", data.ShipperID);
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+
                 connection.Close();
             }
 
