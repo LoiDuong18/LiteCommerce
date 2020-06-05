@@ -43,6 +43,7 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Add New Employee";
                 ViewBag.ConfirmButton = "Add";
+                ViewBag.Method = "add";
 
                 Employee newEmployee = new Employee();
                 newEmployee.EmployeeID = 0;
@@ -52,6 +53,7 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Edit Employee";
                 ViewBag.ConfirmButton = "Save";
+                ViewBag.Method = "update";
                 try
                 {
                     Employee editEmployee = HumanResourceBLL.Employee_Get(Convert.ToInt32(id));
@@ -69,7 +71,7 @@ namespace LiteCommerce.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Input(Employee model,HttpPostedFileBase uploadPhoto)
+        public ActionResult Input(Employee model,HttpPostedFileBase uploadPhoto,string method)
         {
             try
             {
@@ -86,14 +88,6 @@ namespace LiteCommerce.Admin.Controllers
                 {
                     ModelState.AddModelError("Title", "Title is required");
                 }
-                //if (string.IsNullOrEmpty(model.BirthDate))
-                //{
-                //    ModelState.AddModelError("BirthDate", "BirthDate is required");
-                //}
-                //if (string.IsNullOrEmpty(model.HireDate))
-                //{
-                //    ModelState.AddModelError("HireDate", "HireDate is required");
-                //}
                 if (string.IsNullOrEmpty(model.HomePhone))
                 {
                     ModelState.AddModelError("HomePhone", "HomePhone is required");
@@ -118,14 +112,26 @@ namespace LiteCommerce.Admin.Controllers
                 {
                     model.Notes = "";
                 }
+                //Check email
+                try
+                {
+                    if (!HumanResourceBLL.Employee_CheckEmail(model.EmployeeID, model.Email, method))
+                    {
+                        ModelState.AddModelError("Email", "Email already exists");
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
+                }
                 //Upload ảnh
-                if(uploadPhoto != null && uploadPhoto.ContentLength > 0)
+                if (uploadPhoto != null && uploadPhoto.ContentLength > 0)
                 {
                     string filePath = Path.Combine(Server.MapPath("~/Images"), uploadPhoto.FileName);
                     uploadPhoto.SaveAs(filePath);
-                    model.PhotoPath = "Images/"+uploadPhoto.FileName;
+                    model.PhotoPath = "Images/" + uploadPhoto.FileName;
                 }
-                else if(model.PhotoPath == null)
+                else if (model.PhotoPath == null)
                 {
                     model.PhotoPath = "";
                 }
@@ -135,14 +141,17 @@ namespace LiteCommerce.Admin.Controllers
                     {
                         ViewBag.Title = "Add New Employee";
                         ViewBag.ConfirmButton = "Add";
+                        ViewBag.Method = "add";
+                        return View(model);
                     }
                     else
                     {
-                        ViewBag.Title = "Edit New Employee";
+                        ViewBag.Title = "Edit Employee";
                         ViewBag.ConfirmButton = "Save";
-                    }
-                    return View(model);
-                }
+                        ViewBag.Method = "update";
+                        return View(model);
+                    }                    
+                }                
                 //Đưa dữ liệu vào CSDL
                 if (model.EmployeeID == 0)
                 {
@@ -157,6 +166,7 @@ namespace LiteCommerce.Admin.Controllers
             }
             catch (Exception e)
             {
+                ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
                 return View(model);
             }
         }

@@ -77,5 +77,16 @@ namespace LiteCommerce.BusinessLayers
         {
             return EmployeeDB.Update(data);
         }
+        /// <summary>
+        /// Check email khi add hoặc update
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="email"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public static bool Employee_CheckEmail(int employeeId,string email,string method)
+        {
+            return EmployeeDB.CheckEmail(employeeId, email, method);
+        }
     }
 }

@@ -14,6 +14,7 @@
         </div>
         <div class="box-body">
             <input type="hidden" name="EmployeeID" value="@Model.EmployeeID" />
+            <input type="hidden" name="method" value="@ViewBag.Method"/>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -41,26 +42,36 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Birthday:</label>
-                        <div class="input-group date">
+                        @*<div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="BirthDate" class="form-control pull-right" id="datepicker_birthday" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)">
+                            <input type="text" class="form-control" name="BirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)">
+                        </div>*@
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="datetime" class="form-control" placeholder="Birth Date" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)" name="BirthDate">
                         </div>
-                        @Html.ValidationMessage("BirthDate", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Hireday:</label>
 
-                        <div class="input-group date">
+                        @*<div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="HireDate" class="form-control pull-right" id="datepicker_hireday" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)">
+                            <input type="text" class="form-control" name="BirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)">
+                        </div>*@
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="datetime" class="form-control" placeholder="Hire Date" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)" name="HireDate">
                         </div>
-                        @Html.ValidationMessage("HireDate", new { @style = "color: red" })
                     </div>
                 </div>
             </div>
@@ -96,7 +107,7 @@
                     <div class="form-group">
                         <label>Country:</label>
                         <select class="form-control" name="Country">
-                            <option>--Select Country--</option>
+                            <option value="">--Select Country--</option>
                             @foreach (var item in SelectListHelper.ListOfCountries())
                             {
                                 if (item.Value == Model.Country)
@@ -109,8 +120,9 @@
                                 }
                             }
                         </select>
+                        @Html.ValidationMessage("Country", new { @style = "color: red" })
                     </div>
-                    @Html.ValidationMessage("Country", new { @style = "color: red" })
+                    
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -130,6 +142,9 @@
                 <input type="hidden" name="PhotoPath" value="@Model.PhotoPath" />
             </div>
         </div>
+        <div class="text-danger">
+            @Html.ValidationSummary("");
+        </div>      
         <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>

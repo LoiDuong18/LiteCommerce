@@ -33,49 +33,50 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Add(Employee data)
         {
-            int employId = 0;
+            int employeeId = 0;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Employees
-                                    (
-	                                    FirstName,
-                                        LastName,
-                                        Title,
-                                        BirthDate,
-                                        HireDate,
-                                        Email,
-                                        Address,
-                                        City,
-                                        Country,
-                                        HomePhone,
-                                        Notes,
-                                        PhotoPath
-                                    )
-                                    VALUES
-                                    (
-	                                    @FirstName,
-                                        @LastName,
-                                        @Title,
-                                        @BirthDate,
-                                        @HireDate,
-                                        @Email,
-                                        @Address,
-                                        @City,
-                                        @Country,
-                                        @HomePhone,
-                                        @Notes,
-                                        @PhotoPath
-                                    );
-                                    SELECT @@IDENTITY;";
+                                          (
+	                                          LastName,
+	                                          FirstName,
+	                                          Title,
+                                              BirthDate,
+                                              HireDate,
+                                              Email,       
+	                                          Address,
+	                                          City,
+	                                          Country,
+	                                          HomePhone,
+                                              Notes,
+                                              PhotoPath
+                                          )
+                                          VALUES
+                                          (
+	                                          @LastName,
+	                                          @FirstName,
+	                                          @Title,
+                                              @BirthDate,
+                                              @HireDate,
+                                              @Email,
+	                                          @Address,
+	                                          @City,
+	                                          @Country,
+	                                          @HomePhone,
+                                              @Notes,
+                                              @PhotoPath
+                                          );
+                                          SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@FirstName", data.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", data.LastName);
+                cmd.Parameters.AddWithValue("@FirstName", data.FirstName);
                 cmd.Parameters.AddWithValue("@Title", data.Title);
-                cmd.Parameters.AddWithValue("@BirthDate", data.BirthDate);
-                cmd.Parameters.AddWithValue("@HireDate", data.HireDate);
+                cmd.Parameters.Add("@BirthDate", SqlDbType.DateTime).Value = data.BirthDate;
+                cmd.Parameters.Add("@HireDate", SqlDbType.DateTime).Value = data.HireDate;
                 cmd.Parameters.AddWithValue("@Email", data.Email);
                 cmd.Parameters.AddWithValue("@Address", data.Address);
                 cmd.Parameters.AddWithValue("@City", data.City);
@@ -84,11 +85,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Notes", data.Notes);
                 cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
 
-                employId = Convert.ToInt32(cmd.ExecuteScalar());
+                employeeId = Convert.ToInt32(cmd.ExecuteScalar());
 
                 connection.Close();
             }
-            return employId;
+
+            return employeeId;
         }
         /// <summary>
         /// 
@@ -269,6 +271,11 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
             return rowsAffected > 0;
         }
+        /// <summary>
+        /// Đếm nhân viên
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public int Count(string searchValue)
         {
             int dem;
@@ -294,5 +301,44 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
             return dem;
         }
+        /// <summary>
+        /// Check email khi add hoặc update nhân viên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="email"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public bool CheckEmail(int employeeId, string email, string method)
+        {
+            int dem;
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using(SqlCommand cmd = new SqlCommand())
+                {
+                    if (method == "add")
+                    {
+                        cmd.CommandText = @"SELECT COUNT(*) FROM Employees WHERE (Email = @email)";
+                    }
+                    else if (method=="update")
+                    {
+                        cmd.CommandText = @"SELECT COUNT(*) FROM Employees WHERE (Email = @email) AND (EmployeeID <> @employeeId)";
+                    }
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@employeeId", employeeId);
+
+                    dem = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                connection.Close();
+            }
+            if (dem > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

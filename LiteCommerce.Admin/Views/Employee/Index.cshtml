@@ -2,17 +2,17 @@
 @{
     ViewBag.Title = "Manage Employees";
     int i = 0;
-    string paramSearch = "&searchValue=" + Model.SearchValue;
+    string paramSearch = string.IsNullOrEmpty(Model.SearchValue)?"":"searchValue=" + Model.SearchValue;
 }
 <!-- Search box -->
 <div class="box box-primary">
     <!-- form start -->
-    <form role="form">
+    <form role="form" action="~/Employee" method="get">
         <div class="box-body">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Type anything">
+                <input type="text" class="form-control" placeholder="Type anything" name="searchValue">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
@@ -100,23 +100,23 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)
             {
-                <li><a href="~/Employee?page=1@paramSearch">First</a></li>
+                <li><a href="~/Employee?@paramSearch&page=1">First</a></li>
             }
             @for (int page = 1; page <= Model.PageCount; page++)
             {
                 if (Model.Page == page)
                 {
-                    <li class="active"><a href="~/Employee?page=@page@paramSearch">@page</a></li>
+                    <li class="active"><a href="~/Employee?@paramSearch&page=@page">@page</a></li>
                 }
                 else
                 {
-                    <li><a href="~/Employee?page=@page@paramSearch">@page</a></li>
+                    <li><a href="~/Employee?@paramSearch&page=@page">@page</a></li>
                 }
 
             }
             @if (Model.Page != Model.PageCount)
             {
-                <li><a href="~/Employee?page=@Model.PageCount@paramSearch">Last</a></li>
+                <li><a href="~/Employee?@paramSearch&page=@Model.PageCount">Last</a></li>
             }     
         </ul>
     </div>
