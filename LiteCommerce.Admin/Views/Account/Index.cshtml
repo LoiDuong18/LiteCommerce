@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model LiteCommerce.DomainModels.Employee
+@{ 
     ViewBag.Title = "User Profile";
 }
 <div class="row">
@@ -7,11 +8,11 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src="https://graph.facebook.com/4/picture" alt="User profile picture">
+                <img class="profile-user-img img-responsive img-circle" src="@Model.PhotoPath" alt="User profile picture">
 
-                <h3 class="profile-username text-center">Võ Văn Cường</h3>
+                <h3 class="profile-username text-center">@Model.LastName @Model.FirstName</h3>
 
-                <p class="text-muted text-center">Developer</p>
+                <p class="text-muted text-center">@Model.Title</p>
             </div>
             <!-- /.box-body -->
         </div>
@@ -35,7 +36,7 @@
                             <div class="form-group">
                                 <label for="inputFullName" class="col-sm-4 text-right">Full Name:</label>
                                 <div class="col-sm-8">
-                                    <span>Võ Văn Cường</span>
+                                    <span>@Model.LastName @Model.FirstName</span>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
                             <div class="form-group">
                                 <label for="inputTitle" class="col-sm-4 text-right">Title:</label>
                                 <div class="col-sm-8">
-                                    <span>Developer</span>
+                                    <span>@Model.Title</span>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                             <div class="form-group">
                                 <label for="inputBirthday" class="col-sm-4 text-right">Birthday:</label>
                                 <div class="col-sm-8">
-                                    <span>12/10/1997</span>
+                                    <span>@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)</span>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +62,7 @@
                             <div class="form-group">
                                 <label for="inputHireDay" class="col-sm-4 text-right">HireDay:</label>
                                 <div class="col-sm-8">
-                                    <span>19/05/2020</span>
+                                    <span>@string.Format("{0:dd/MM/yyyy}", Model.HireDate)</span>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-4 text-right">Email:</label>
                                 <div class="col-sm-8">
-                                    <span>cuonghusc@gmail.com</span>
+                                    <span>@Model.Email</span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                             <div class="form-group">
                                 <label for="inputPhone" class="col-sm-4 text-right">Phone:</label>
                                 <div class="col-sm-8">
-                                    <span>(+84) 123 123 123</span>
+                                    <span>@Model.HomePhone</span>
                                 </div>
                             </div>
                         </div>
@@ -87,13 +88,13 @@
                     <div class="form-group">
                         <label for="inputCity" class="col-sm-2 text-right">Address:</label>
                         <div class="col-sm-10">
-                            <span>Pham Van Dong, Hue, Viet Nam</span>
+                            <span>@Model.Address, @Model.City - @Model.Country</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputNotes" class="col-sm-2 text-right">Notes:</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="7" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.</textarea>
+                            <textarea class="form-control" rows="7" readonly>@Model.Notes</textarea>
                         </div>
                     </div>
                 </form>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LiteCommerce.DomainModels;
 using System.Data.SqlClient;
 using System.Data;
+using System.Globalization;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
@@ -237,34 +238,25 @@ namespace LiteCommerce.DataLayers.SqlServer
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Employees
                                     SET                                    
-                                        FirstName = @FirstName,
-                                        LastName = @LastName,
-                                        Title = @Title,
                                         BirthDate = @BirthDate,
-                                        HireDate = @HireDate,
                                         Email = @Email,
                                         Address = @Address,
                                         City = @City,
                                         Country = @Country,
                                         HomePhone = @HomePhone,
-                                        Notes = @Notes,
-                                        PhotoPath = @PhotoPath
+                                        Notes = @Notes
                                     WHERE EmployeeID = @EmployeeID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@EmployeeID", data.EmployeeID);
-                cmd.Parameters.AddWithValue("@FirstName", data.FirstName);
-                cmd.Parameters.AddWithValue("@LastName", data.LastName);
-                cmd.Parameters.AddWithValue("@Title", data.Title);
-                cmd.Parameters.AddWithValue("@BirthDate", data.BirthDate);
-                cmd.Parameters.AddWithValue("@HireDate", data.HireDate);
+                DateTime birthDate = DateTime.Parse(Convert.ToString(data.BirthDate), CultureInfo.CreateSpecificCulture("fr-FR"));
+                cmd.Parameters.AddWithValue("@BirthDate", birthDate);
                 cmd.Parameters.AddWithValue("@Email", data.Email);
                 cmd.Parameters.AddWithValue("@Address", data.Address);
                 cmd.Parameters.AddWithValue("@City", data.City);
                 cmd.Parameters.AddWithValue("@Country", data.Country);
                 cmd.Parameters.AddWithValue("@HomePhone", data.HomePhone);
                 cmd.Parameters.AddWithValue("@Notes", data.Notes);
-                cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
                 connection.Close();

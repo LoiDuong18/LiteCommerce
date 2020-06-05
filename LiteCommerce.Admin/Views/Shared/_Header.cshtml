@@ -1,4 +1,14 @@
-﻿<header class="main-header">
+﻿@{
+    string fullName = string.Empty;
+    string photoPath = string.Empty;
+    HttpCookie requestCookies = Request.Cookies["userInfo"];
+    if (requestCookies != null)
+    {
+        fullName = Server.UrlDecode(requestCookies["FullName"].ToString());
+        photoPath = requestCookies["PhotoPath"].ToString();
+    }
+}
+<header class="main-header">
     <!-- Logo -->
     <a href="~/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -19,16 +29,15 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="~/Images/avt.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">@User.Identity.Name</span>
+                        <img src="@photoPath" class="user-image" alt="User Image">
+                        <span class="hidden-xs">@fullName</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="~/Images/avt.jpg" class="img-circle" alt="User Image">
                             <p>
-                                @User.Identity.Name
-                                <small>Member since Nov. 2012</small>
+                                @fullName
                             </p>                        
                         </li>
 

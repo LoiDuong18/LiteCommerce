@@ -1,0 +1,34 @@
+﻿using LiteCommerce.DomainModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LiteCommerce.DataLayers
+{
+    public interface IAccountDAL
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Account Login(string email, string password);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="reNewPassword"></param>
+        /// <returns></returns>
+        bool ChangePw(string oldPassword, string newPassword, string reNewPassword);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        Employee Get(string email);
+    }
+}

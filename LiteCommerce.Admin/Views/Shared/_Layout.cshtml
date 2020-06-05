@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title | LiteCommerce</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -120,15 +120,12 @@
         }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active menu-open').end().addClass('active menu-open');
     });
     </script>
-    @*<script>
+    <script>
         $(document).ready(function () {
-            //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd-mm-yyyy', { 'placeholder': 'dd-mm-yyyy' })
-            //Money Euro
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
             $('[data-mask]').inputmask()
-            
-          })
-    </script>*@
+        })
+    </script>
     <script>
         let count = 1;
         //multi_upload(count);
