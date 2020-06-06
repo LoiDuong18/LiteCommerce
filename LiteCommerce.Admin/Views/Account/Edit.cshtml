@@ -1,21 +1,11 @@
 ﻿@model LiteCommerce.DomainModels.Employee
 @{
+    HttpCookie reqCookie = Request.Cookies["userInfo"];
+    string photoPath = reqCookie["PhotoPath"].ToString();
     ViewBag.Title = "Edit User Information";
 }
 <div class="row">
-    <div class="col-md-3">
-        <!-- Profile Image -->
-        <div class="box box-primary">
-            <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src="@Model.PhotoPath" alt="User profile picture">
-                <input type="file" name="PhotoPath" class="form-control" />
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="box box-info">
             <div class="box-header with-border">
                 <h3 class="box-title">Information</h3>
@@ -25,7 +15,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <form action="~/Account/Edit" method="post" class="form-horizontal">
+                <form action="~/Account/Edit" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Photo:</label>
+                        <div class="col-sm-10">
+                            <img src="@photoPath" class="profile-user-img img-responsive img-circle" />
+                            <input type="file" name="uploadPhoto" class="form-control" accept="image/*" />
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">

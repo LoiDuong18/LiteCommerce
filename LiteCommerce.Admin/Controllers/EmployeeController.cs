@@ -21,12 +21,14 @@ namespace LiteCommerce.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "")
         {
+            HttpCookie requestCookie = Request.Cookies["userInfo"];
+            int idCookie = Convert.ToInt32(requestCookie["AccountID"]);
             var model = new Models.EmployeePaginationResult()
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
-                RowCount = HumanResourceBLL.Employee_Count(searchValue),
-                Data = HumanResourceBLL.Employee_List(page, AppSettings.DefaultPageSize, searchValue),
+                RowCount = HumanResourceBLL.Employee_Count(searchValue,idCookie),
+                Data = HumanResourceBLL.Employee_List(page, AppSettings.DefaultPageSize, searchValue,idCookie),
                 SearchValue = searchValue,
             };
             return View(model);
@@ -51,23 +53,32 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
-                ViewBag.Title = "Edit Employee";
-                ViewBag.ConfirmButton = "Save";
-                ViewBag.Method = "update";
-                try
+                HttpCookie requestCookie = Request.Cookies["userInfo"];
+                string idCookie = requestCookie["AccountID"];
+                if (id.Equals(idCookie))
                 {
-                    Employee editEmployee = HumanResourceBLL.Employee_Get(Convert.ToInt32(id));
-                    if (editEmployee == null)
+                    return Redirect("~/Account");
+                }
+                else
+                {
+                    ViewBag.Title = "Edit Employee";
+                    ViewBag.ConfirmButton = "Save";
+                    ViewBag.Method = "update";
+                    try
                     {
+                        Employee editEmployee = HumanResourceBLL.Employee_Get(Convert.ToInt32(id));
+                        if (editEmployee == null)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        return View(editEmployee);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                         return RedirectToAction("Index");
                     }
-                    return View(editEmployee);
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return RedirectToAction("Index");
-                }
+                }                
             }
         }
         [HttpPost]
@@ -134,6 +145,11 @@ namespace LiteCommerce.Admin.Controllers
                 else if (model.PhotoPath == null)
                 {
                     model.PhotoPath = "";
+                }
+                DateTime hireDate = DateTime.Today;
+                if ((hireDate.Year - (model.BirthDate).Year) < 18)
+                {
+                    ModelState.AddModelError("BirthDate", "You must be over 18 years old");
                 }
                 if (!ModelState.IsValid)
                 {

@@ -30,9 +30,9 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static int Employee_Count(string searchValue)
+        public static int Employee_Count(string searchValue,int idCookie)
         {
-            return EmployeeDB.Count(searchValue);
+            return EmployeeDB.Count(searchValue,idCookie);
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Employee> Employee_List(int page, int pageSize, string searchValue)
-        {
+        public static List<Employee> Employee_List(int page, int pageSize, string searchValue,int idCookie)
+        {            
             if (page < 1)
                 page = 1;
             if (pageSize < 1)
                 pageSize = 1;
-            return EmployeeDB.List(page, pageSize, searchValue);
+            return EmployeeDB.List(page, pageSize, searchValue, idCookie);
         }
         /// <summary>
         /// 

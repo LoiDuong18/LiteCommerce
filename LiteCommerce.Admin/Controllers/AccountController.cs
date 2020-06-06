@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,8 +33,38 @@ namespace LiteCommerce.Admin.Controllers
         /// Thay đổi mật khẩu
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ChangePwd()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePwd(string oldPassword,string newPassword,string reNewPassword)
+        {
+            if (string.IsNullOrEmpty(oldPassword))
+            {
+                ModelState.AddModelError("OldPassword", "OldPassword is required");
+            }
+            else
+            {
+                ViewBag.OldPassword = oldPassword;
+            }
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                ModelState.AddModelError("NewPassword", "NewPassword is required");
+            }
+            else
+            {
+                ViewBag.NewPassword = newPassword;
+            }
+            if (string.IsNullOrEmpty(reNewPassword))
+            {
+                ModelState.AddModelError("ReNewPassword", "ReNewPassword is required");
+            }
+            else
+            {
+                ViewBag.ReNewPassword = reNewPassword;
+            }
             return View();
         }
         /// <summary>
@@ -45,6 +76,12 @@ namespace LiteCommerce.Admin.Controllers
             Session.Abandon();
             Session.Clear();
             FormsAuthentication.SignOut();
+            foreach (string key in Request.Cookies.AllKeys)
+            {
+                HttpCookie requestCookies = Request.Cookies["userInfo"];
+                requestCookies.Expires = DateTime.Now.AddMonths(-1);
+                Response.AppendCookie(requestCookies);
+            }
             return RedirectToAction("Login", "Account");
         }
         /// <summary>
@@ -109,7 +146,7 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(Employee model)
+        public ActionResult Edit(Employee model, HttpPostedFileBase uploadPhoto)
         {
             if (string.IsNullOrEmpty(model.Email))
             {
@@ -140,6 +177,19 @@ namespace LiteCommerce.Admin.Controllers
             if (!HumanResourceBLL.Employee_CheckEmail(model.EmployeeID, model.Email, "update"))
             {
                 ModelState.AddModelError("Email", "Email ready exist");
+            }
+            //Upload ảnh
+            if (uploadPhoto != null && uploadPhoto.ContentLength > 0)
+            {
+                string filePath = Path.Combine(Server.MapPath("~/Images"), uploadPhoto.FileName);
+                uploadPhoto.SaveAs(filePath);
+                model.PhotoPath = "/Images/" + uploadPhoto.FileName;
+                requestCookies.Values["PhotoPath"] = Convert.ToString(model.PhotoPath);
+                Response.SetCookie(requestCookies);
+            }
+            else if (model.PhotoPath == null)
+            {
+                model.PhotoPath = Convert.ToString(requestCookies["PhotoPath"]);
             }
             //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
             if (!ModelState.IsValid)

@@ -1,6 +1,8 @@
 ﻿@model LiteCommerce.DomainModels.Employee
 @{
-
+    string readOnly = (ViewBag.Method == "update") ?"readonly":"";
+    DateTime hireDate = DateTime.Now;
+    string defaultToday = (ViewBag.Method == "add") ?"(Default Today)":"";
 }
 
 <!-- Input box -->
@@ -19,14 +21,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>First Name:</label>
-                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName">
-                        @Html.ValidationMessage("FirstName", new { @style = "color: red" })
+                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName" @readOnly >
+@Html.ValidationMessage("FirstName", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Last Name:</label>
-                        <input type="text" name="LastName" class="form-control" placeholder="Nguyen Van" value="@Model.LastName">
+                        <input type="text" name="LastName" class="form-control" placeholder="Nguyen Van" value="@Model.LastName" @readOnly>
                         @Html.ValidationMessage("LastName", new { @style = "color: red" })
                     </div>
                 </div>
@@ -35,42 +37,30 @@
 
             <div class="form-group">
                 <label>Title:</label>
-                <input type="text" name="Title" class="form-control" placeholder="Sale" value="@Model.Title">
+                <input type="text" name="Title" class="form-control" placeholder="Sale" value="@Model.Title" @readOnly>
                 @Html.ValidationMessage("Title", new { @style = "color: red" })
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Birthday:</label>
-                        @*<div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control" name="BirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)">
-                        </div>*@
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="datetime" class="form-control" placeholder="Birth Date" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)" name="BirthDate">
+                            <input type="text" name="BirthDate" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)">
                         </div>
+                        @Html.ValidationMessage("BirthDate", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Hireday:</label>
-
-                        @*<div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control" name="BirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)">
-                        </div>*@
+                        <label>Hireday: <span class="text-danger">@defaultToday</span></label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="datetime" class="form-control" placeholder="Hire Date" value="@string.Format("{0:dd/MM/yyyy}", Model.HireDate)" name="HireDate">
+                            <input type="datetime" class="form-control" placeholder="Hire Date" value="@string.Format("{0:dd/MM/yyyy}", hireDate)" name="HireDate" readonly>
                         </div>
                     </div>
                 </div>
@@ -142,10 +132,10 @@
                 <input type="hidden" name="PhotoPath" value="@Model.PhotoPath" />
             </div>
         </div>
-        <div class="text-danger">
+        @*<div class="text-danger">
             @Html.ValidationSummary("");
-        </div>      
-        <!-- /.box-body -->
+        </div>*@
+                <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>
             <a href="~/Employee" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>
