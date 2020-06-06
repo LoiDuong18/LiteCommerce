@@ -1,6 +1,7 @@
 ﻿@model LiteCommerce.DomainModels.Employee
 @{
-    DateTime hireDate = DateTime.Now;
+    DateTime today = DateTime.Now;
+    DateTime hireDate = (ViewBag.Method == "add") ? today : Model.HireDate;
     string defaultToday = (ViewBag.Method == "add") ?"(Default Today)":"";
 }
 

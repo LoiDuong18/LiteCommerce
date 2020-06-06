@@ -48,12 +48,18 @@ namespace LiteCommerce.Admin.Controllers
         [HttpPost]
         public ActionResult ChangePwd(string oldPassword,string newPassword,string reNewPassword)
         {
+            HttpCookie requestCookie = Request.Cookies["userInfo"];
+            int id = Convert.ToInt32(requestCookie["AccountID"]);
             if (string.IsNullOrEmpty(oldPassword))
             {
                 ModelState.AddModelError("OldPassword", "OldPassword is required");
             }
             else
             {
+                if (!AccountBLL.Account_CheckPass(oldPassword,id))
+                {
+                    ModelState.AddModelError("OldPassword", "Old password incorrect");
+                }
                 ViewBag.OldPassword = oldPassword;
             }
             if (string.IsNullOrEmpty(newPassword))
@@ -62,6 +68,10 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
+                if(newPassword.Length < 6)
+                {
+                    ModelState.AddModelError("NewPassword", "Password must over 6 characters");
+                }
                 ViewBag.NewPassword = newPassword;
             }
             if (string.IsNullOrEmpty(reNewPassword))
@@ -70,9 +80,21 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
+                if (!newPassword.Equals(reNewPassword))
+                {
+                    ModelState.AddModelError("ReNewPassword", "The new password does not match the old password");
+                }
                 ViewBag.ReNewPassword = reNewPassword;
             }
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (AccountBLL.Account_ChangePwd(newPassword, id)){
+                return RedirectToAction("SignOut");
+            }
+            ModelState.AddModelError("error", "Cập nhật không thành công");
+            return RedirectToAction("ChangePwd");
         }
         /// <summary>
         /// Đăng xuất
@@ -197,6 +219,11 @@ namespace LiteCommerce.Admin.Controllers
             else if (model.PhotoPath == null)
             {
                 model.PhotoPath = Convert.ToString(requestCookies["PhotoPath"]);
+            }
+            DateTime hireDate = DateTime.Today;
+            if ((hireDate.Year - (model.BirthDate).Year) < 18)
+            {
+                ModelState.AddModelError("BirthDate", "You must be over 18 years old");
             }
             //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
             if (!ModelState.IsValid)

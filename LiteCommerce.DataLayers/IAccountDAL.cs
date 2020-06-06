@@ -23,7 +23,7 @@ namespace LiteCommerce.DataLayers
         /// <param name="newPassword"></param>
         /// <param name="reNewPassword"></param>
         /// <returns></returns>
-        bool ChangePw(string oldPassword, string newPassword, string reNewPassword);
+        bool ChangePw(string newPassword, int id);
         /// <summary>
         /// 
         /// </summary>
@@ -36,5 +36,12 @@ namespace LiteCommerce.DataLayers
         /// <param name="model"></param>
         /// <returns></returns>
         bool Update(Account model);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool CheckPassword(string oldPassword, int id);
     }
 }

@@ -47,5 +47,25 @@ namespace LiteCommerce.BusinessLayers
         {
             return AccountDB.Update(model);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool Account_CheckPass(string oldPassword, int id)
+        {
+            return AccountDB.CheckPassword(oldPassword, id);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newPassword"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool Account_ChangePwd(string newPassword, int id)
+        {
+            return AccountDB.ChangePw(newPassword, id);
+        }
     }
 }

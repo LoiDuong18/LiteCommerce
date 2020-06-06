@@ -32,9 +32,35 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="newPassword"></param>
         /// <param name="reNewPassword"></param>
         /// <returns></returns>
-        public bool ChangePw(string oldPassword, string newPassword, string reNewPassword)
+        public bool ChangePw(string newPassword,int id)
         {
-            return true;
+            int rowsAffected;
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(newPassword);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            string md5Password = sb.ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"UPDATE Employees
+                                    SET                                    
+                                        Password = @Password
+                                    WHERE EmployeeID = @EmployeeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@EmployeeID", id);
+                cmd.Parameters.AddWithValue("@Password", md5Password);
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return rowsAffected>0;
         }
         /// <summary>
         /// 
@@ -124,6 +150,11 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
             return data;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(Account data)
         {
             int rowsAffected = 0;
@@ -159,6 +190,41 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Close();
             }
             return rowsAffected > 0;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CheckPassword(string oldPassword,int id)
+        {
+            int dem;
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(oldPassword);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            string md5Password = sb.ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM Employees WHERE (EmployeeID = @id) AND (Password = @oldPassword)";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@oldPassword", md5Password);
+
+                    dem = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                connection.Close();
+            }
+            return dem > 0;
         }
     }
 }

@@ -156,5 +156,12 @@
             $(this).closest(".increment").remove();
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#selectAll').click(function (e) {
+                $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
+            });
+        });
+    </script>
 </body>
 </html>

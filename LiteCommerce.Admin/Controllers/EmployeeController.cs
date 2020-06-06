@@ -2,6 +2,7 @@
 using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -86,43 +87,10 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
-                //Validate dữ liệu
-                if (string.IsNullOrEmpty(model.FirstName))
-                {
-                    ModelState.AddModelError("FirstName", "FirstName is required");
-                }
-                if (string.IsNullOrEmpty(model.LastName))
-                {
-                    ModelState.AddModelError("LastName", "LastName is required");
-                }
-                if (string.IsNullOrEmpty(model.Title))
-                {
-                    ModelState.AddModelError("Title", "Title is required");
-                }
-                if (string.IsNullOrEmpty(model.HomePhone))
-                {
-                    ModelState.AddModelError("HomePhone", "HomePhone is required");
-                }
-                if (string.IsNullOrEmpty(model.Email))
-                {
-                    ModelState.AddModelError("Email", "Email is required");
-                }
-                if (string.IsNullOrEmpty(model.Address))
-                {
-                    ModelState.AddModelError("Address", "Address is required");
-                }
-                if (string.IsNullOrEmpty(model.Country))
-                {
-                    ModelState.AddModelError("Country", "Country is required");
-                }
-                if (string.IsNullOrEmpty(model.City))
-                {
-                    ModelState.AddModelError("City", "City is required");
-                }
                 if (string.IsNullOrEmpty(model.Notes))
                 {
                     model.Notes = "";
-                }
+                }         
                 //Check email
                 try
                 {
