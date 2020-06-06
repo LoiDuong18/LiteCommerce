@@ -243,7 +243,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Employees
-                                    SET                                    
+                                    SET   
+                                        FirstName = @FirstName,
+                                        LastName = @LastName,
+                                        Title = @Title,
                                         BirthDate = @BirthDate,
                                         Email = @Email,
                                         Address = @Address,
@@ -255,6 +258,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                                     WHERE EmployeeID = @EmployeeID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@FirstName", data.FirstName);
+                cmd.Parameters.AddWithValue("@LastName", data.LastName);
+                cmd.Parameters.AddWithValue("@Title", data.Title);
                 cmd.Parameters.AddWithValue("@EmployeeID", data.EmployeeID);
                 DateTime birthDate = DateTime.Parse(Convert.ToString(data.BirthDate), CultureInfo.CreateSpecificCulture("fr-FR"));
                 cmd.Parameters.AddWithValue("@BirthDate", birthDate);

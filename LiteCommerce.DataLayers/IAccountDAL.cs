@@ -29,6 +29,12 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        Employee Get(string email);
+        Account Get(string email);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool Update(Account model);
     }
 }

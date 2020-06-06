@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -86,9 +87,9 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public Employee Get(string email)
+        public Account Get(string email)
         {
-            Employee data = null;
+            Account data = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -102,7 +103,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 {
                     if (dbReader.Read())
                     {
-                        data = new Employee()
+                        data = new Account()
                         {
                             Title = Convert.ToString(dbReader["Title"]),
                             Email = Convert.ToString(dbReader["Email"]),
@@ -122,6 +123,42 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Close();
             }
             return data;
+        }
+        public bool Update(Account data)
+        {
+            int rowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"UPDATE Employees
+                                    SET                                    
+                                        BirthDate = @BirthDate,
+                                        Email = @Email,
+                                        Address = @Address,
+                                        City = @City,
+                                        Country = @Country,
+                                        HomePhone = @HomePhone,
+                                        PhotoPath = @PhotoPath,
+                                        Notes = @Notes
+                                    WHERE EmployeeID = @EmployeeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@EmployeeID", data.AccountID);
+                DateTime birthDate = DateTime.Parse(Convert.ToString(data.BirthDate), CultureInfo.CreateSpecificCulture("fr-FR"));
+                cmd.Parameters.AddWithValue("@BirthDate", birthDate);
+                cmd.Parameters.AddWithValue("@Email", data.Email);
+                cmd.Parameters.AddWithValue("@Address", data.Address);
+                cmd.Parameters.AddWithValue("@City", data.City);
+                cmd.Parameters.AddWithValue("@Country", data.Country);
+                cmd.Parameters.AddWithValue("@HomePhone", data.HomePhone);
+                cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
+                cmd.Parameters.AddWithValue("@Notes", data.Notes);
+
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return rowsAffected > 0;
         }
     }
 }

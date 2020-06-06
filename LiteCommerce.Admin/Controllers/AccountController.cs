@@ -26,7 +26,7 @@ namespace LiteCommerce.Admin.Controllers
         {
             HttpCookie requestCookies = Request.Cookies["userInfo"];
             string email = Convert.ToString(requestCookies["Email"]);
-            Employee model = AccountBLL.Account_Get(email);
+            Account model = AccountBLL.Account_Get(email);
             return View(model);
         }
         /// <summary>
@@ -38,6 +38,13 @@ namespace LiteCommerce.Admin.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="reNewPassword"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ChangePwd(string oldPassword,string newPassword,string reNewPassword)
         {
@@ -137,7 +144,7 @@ namespace LiteCommerce.Admin.Controllers
         {
             HttpCookie requestCookies = Request.Cookies["userInfo"];
             string email = Convert.ToString(requestCookies["Email"]);
-            Employee model = AccountBLL.Account_Get(email);
+            Account model = AccountBLL.Account_Get(email);
             return View(model);
         }
         /// <summary>
@@ -146,7 +153,7 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(Employee model, HttpPostedFileBase uploadPhoto)
+        public ActionResult Edit(Account model, HttpPostedFileBase uploadPhoto)
         {
             if (string.IsNullOrEmpty(model.Email))
             {
@@ -173,8 +180,8 @@ namespace LiteCommerce.Admin.Controllers
                 model.Notes = "";
             }
             HttpCookie requestCookies = Request.Cookies["userInfo"];
-            model.EmployeeID = Convert.ToInt32(requestCookies["AccountID"]);
-            if (!HumanResourceBLL.Employee_CheckEmail(model.EmployeeID, model.Email, "update"))
+            model.AccountID = Convert.ToInt32(requestCookies["AccountID"]);
+            if (!HumanResourceBLL.Employee_CheckEmail(model.AccountID, model.Email, "update"))
             {
                 ModelState.AddModelError("Email", "Email ready exist");
             }
@@ -199,7 +206,7 @@ namespace LiteCommerce.Admin.Controllers
             
             try
             {
-                bool rs = HumanResourceBLL.Employee_Update(model);
+                bool rs = AccountBLL.Account_Update(model);
                 requestCookies.Values["Email"] = model.Email;
                 Response.SetCookie(requestCookies);
                 return RedirectToAction("Index");                               

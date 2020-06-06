@@ -18,7 +18,7 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
-        public string Email { get; set; }
+        public string LastName { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -26,14 +26,46 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
-        public string LastName { get; set; }
+        public string Title { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Password { get; set; }
+        public DateTime BirthDate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime HireDate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string City { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string HomePhone { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Notes { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public string PhotoPath { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Password { get; set; }
     }
 }

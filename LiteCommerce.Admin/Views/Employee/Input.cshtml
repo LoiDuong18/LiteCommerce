@@ -1,6 +1,5 @@
 ﻿@model LiteCommerce.DomainModels.Employee
 @{
-    string readOnly = (ViewBag.Method == "update") ?"readonly":"";
     DateTime hireDate = DateTime.Now;
     string defaultToday = (ViewBag.Method == "add") ?"(Default Today)":"";
 }
@@ -21,14 +20,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>First Name:</label>
-                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName" @readOnly >
-@Html.ValidationMessage("FirstName", new { @style = "color: red" })
+                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName" >
+                        @Html.ValidationMessage("FirstName", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Last Name:</label>
-                        <input type="text" name="LastName" class="form-control" placeholder="Nguyen Van" value="@Model.LastName" @readOnly>
+                        <input type="text" name="LastName" class="form-control" placeholder="Nguyen Van" value="@Model.LastName">
                         @Html.ValidationMessage("LastName", new { @style = "color: red" })
                     </div>
                 </div>
@@ -37,7 +36,7 @@
 
             <div class="form-group">
                 <label>Title:</label>
-                <input type="text" name="Title" class="form-control" placeholder="Sale" value="@Model.Title" @readOnly>
+                <input type="text" name="Title" class="form-control" placeholder="Sale" value="@Model.Title">
                 @Html.ValidationMessage("Title", new { @style = "color: red" })
             </div>
             <div class="row">
