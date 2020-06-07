@@ -39,25 +39,23 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Shippers
-                                          (
-                                              CompanyName
-                                              Phone
-
-                                          )
-                                          VALUES
-                                          (
-	                                          @CompanyName,
-	                                          @Phone,
-
-                                          );
-                                          SELECT @@IDENTITY;";
+                                    (
+	                                    CompanyName,	                                    
+	                                    Phone
+                                    )
+                                    VALUES
+                                    (
+	                                    @CompanyName,
+	                                    @Phone
+                                    );
+                                    SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
 
-
                 shipperId = Convert.ToInt32(cmd.ExecuteScalar());
+
                 connection.Close();
             }
             return shipperId;
@@ -69,7 +67,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public bool Delete(int[] shipperIDs)
         {
-            bool result = true;
+            int result = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -77,19 +75,19 @@ namespace LiteCommerce.DataLayers.SqlServer
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Shippers
                                             WHERE(ShipperID = @shipperId)
-                                              AND(ShipperID NOT IN(SELECT ShipperID FROM Products))";
+                                              AND(ShipperID NOT IN(SELECT ShipperID FROM Orders))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.Add("@shipperId", SqlDbType.Int);
                 foreach (int shipperId in shipperIDs)
                 {
                     cmd.Parameters["@shipperId"].Value = shipperId;
-                    cmd.ExecuteNonQuery();
+                    result += cmd.ExecuteNonQuery();
                 }
 
                 connection.Close();
             }
-            return result;
+            return result > 0;
         }
         /// <summary>
         /// 
@@ -118,11 +116,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                             ShipperID = Convert.ToInt32(dbReader["ShipperID"]),
                             CompanyName = Convert.ToString(dbReader["CompanyName"]),
                             Phone = Convert.ToString(dbReader["Phone"]),
-                            //TODO: Làm nốt các trường còn lại...
                         };
                     }
                 }
-
                 connection.Close();
             }
             return data;
@@ -134,7 +130,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Shipper> List(int page, int pageSize, string searchValue)
+        public List<Shipper> List(string searchValue)
         {
             List<Shipper> data = new List<Shipper>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -144,17 +140,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = @"SELECT *
-                                        FROM(
-                                            SELECT *, ROW_NUMBER() OVER(ORDER BY ShipperID) AS RowNumber
+                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY ShipperID) AS RowNumber
                                             FROM Shippers
                                             WHERE(@searchValue = N'') OR (CompanyName like @searchValue)
-                                        ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
-                                        ORDER BY t.RowNumber";
+                                            ORDER BY RowNumber";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.AddWithValue("@page", page);
-                    cmd.Parameters.AddWithValue("@pageSize", pageSize);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
                     using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
@@ -165,7 +156,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 ShipperID = Convert.ToInt32(dbReader["ShipperID"]),
                                 CompanyName = Convert.ToString(dbReader["CompanyName"]),
                                 Phone = Convert.ToString(dbReader["Phone"]),
-                                //TODO: Làm các trường còn lại
                             });
                         }
                     }
@@ -188,26 +178,21 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Shippers
-                                       SET CompanyName ='@CompanyName',
-		                                    ContactName ='@ContactName',
-		                                    Phone ='@Phone',
-
-
-                                     WHERE ShipperID = ''";
+                                           SET CompanyName = @CompanyName 
+                                              ,Phone = @Phone
+                                          WHERE ShipperID = @ShipperID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                //TODO: Bổ sung tham số cho lệnh cập nhật
                 cmd.Parameters.AddWithValue("@ShipperID", data.ShipperID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
-
 
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
 
                 connection.Close();
             }
 
-            return rowsAffected > 0; ;
+            return rowsAffected > 0;
         }
         public int Count(string searchValue)
         {
@@ -225,7 +210,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
-
                     dem = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 connection.Close();

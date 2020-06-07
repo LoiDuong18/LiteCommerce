@@ -111,6 +111,7 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        
         public static List<Customer> Customer_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -120,7 +121,7 @@ namespace LiteCommerce.BusinessLayers
             return CustomerDB.List(page, pageSize, searchValue);
         }
         /// <summary>
-        /// 
+        /// Get Customer
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -128,12 +129,17 @@ namespace LiteCommerce.BusinessLayers
         {
             return CustomerDB.Get(customerID);
         }
+        /// <summary>
+        /// Add Customer 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static int Customer_Add(Customer data)
         {
             return CustomerDB.Add(data);
         }
         /// <summary>
-        /// 
+        /// Upfate Customer
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
@@ -141,22 +147,34 @@ namespace LiteCommerce.BusinessLayers
         {
             return CustomerDB.Update(data);
         }
+        /// <summary>
+        /// Delete Customer
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
         public static bool Customer_Delete(string[] customerID)
         {
             return CustomerDB.Delete(customerID);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static int Customer_Count(string searchValue)
         {
             return CustomerDB.Count(searchValue);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static List<Shipper> Shipper_List(int page, int pageSize, string searchValue)
         {
-            if (page < 1)
-                page = 1;
-            if (pageSize < 1)
-                pageSize = 1;
-            return ShipperDB.List(page, pageSize, searchValue);
+            return ShipperDB.List(searchValue);
         }
         /// <summary>
         /// 
@@ -169,10 +187,49 @@ namespace LiteCommerce.BusinessLayers
         {
             return ShipperDB.Get(shipperID);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Shipper_Add(Shipper data)
+        {
+            return ShipperDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Shipper_Update(Shipper data)
+        {
+            return ShipperDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ShipperID"></param>
+        /// <returns></returns>
+        public static bool Shipper_Delete(int[] ShipperID)
+        {
+            return ShipperDB.Delete(ShipperID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static int Shipper_Count(string searchValue)
         {
             return ShipperDB.Count(searchValue);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public static List<Category> Category_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -191,6 +248,18 @@ namespace LiteCommerce.BusinessLayers
         public static Category Category_Get(int categoryID)
         {
             return CategoryDB.Get(categoryID);
+        }
+        public static int Category_Add(Category data)
+        {
+            return CategoryDB.Add(data);
+        }
+        public static bool Category_Update(Category data)
+        {
+            return CategoryDB.Update(data);
+        }
+        public static bool Category_Delete(int[] CategoryID)
+        {
+            return CategoryDB.Delete(CategoryID);
         }
         public static int Category_Count(string searchValue)
         {
