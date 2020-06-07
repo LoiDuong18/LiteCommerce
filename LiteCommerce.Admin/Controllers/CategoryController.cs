@@ -23,7 +23,7 @@ namespace LiteCommerce.Admin.Controllers
             var model = new Models.CategoryPaginationResult()
             { 
                 RowCount = CatalogBLL.Category_Count(searchValue),
-                Data = CatalogBLL.Category_List(page, AppSettings.DefaultPageSize, searchValue),
+                Data = CatalogBLL.Category_List(searchValue),
             };
             //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
             //int rowCount = CatalogBLL.Supplier_Count(searchValue);
@@ -36,6 +36,7 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
             if (string.IsNullOrEmpty(id))
@@ -69,8 +70,70 @@ namespace LiteCommerce.Admin.Controllers
                     Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
+            }   
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Input(Category model)
+        {
+            try
+            {
+                //Validate dữ liệu
+                if (string.IsNullOrEmpty(model.CategoryName))
+                {
+                    ModelState.AddModelError("CategoryName", "CategoryName is required");
+                }
+                if (string.IsNullOrEmpty(model.Description))
+                {
+                    model.Description = "";
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    if (model.CategoryID == 0)
+                    {
+                        ViewBag.Title = "Add New Shipper";
+                        ViewBag.ConfirmButton = "Add";
+                    }
+                    else
+                    {
+                        ViewBag.Title = "Edit New Shipper";
+                        ViewBag.ConfirmButton = "Save";
+                    }
+                    return View(model);
+                }
+                //Đưa dữ liệu vào CSDL
+                if (model.CategoryID == 0)
+                {
+                    int shipperID = CatalogBLL.Category_Add(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    bool rs = CatalogBLL.Category_Update(model);
+                    return RedirectToAction("Index");
+                }
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return View(model);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryIDs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(int[] categoryIDs)
+        {
+            if (categoryIDs != null)
+                CatalogBLL.Category_Delete(categoryIDs);
+            return RedirectToAction("Index");
         }
     }
 }

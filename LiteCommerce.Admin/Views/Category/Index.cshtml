@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Manage Categories";
     int i = 0;
-
+    string paramSearch = "&searchValue=" + Model.SearchValue;
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -19,55 +19,54 @@
         <!-- /.box-body -->
     </form>
 </div>
-<!-- /.box -->
-<div class="row">
-    <div class="col-sm-8">
-        <span>There are <b>@Model.RowCount</b> Categories. Page <b>1</b></span>
-    </div>
-    <div class="col-sm-4">
-        <div class="pull-right">
-            <a href="~/Category/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
-            <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+<form action="~/Category/Delete" method="POST">
+    <!-- /.box -->
+    <div class="row">
+        <div class="col-sm-8">
+            <span>There are <b>@Model.RowCount</b> Categories. Page <b>1</b></span>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <a href="~/Category/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
+                <button type="submit" class="btn btn-sm btn-danger" name="method" value="delete"><i class="fa fa-trash-o"></i> Delete</button>
+            </div>
         </div>
     </div>
-</div>
-<br />
-<!-- Table box -->
-<div class="box box-success">
-    <div class="box-body">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" /></th>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Data)
-                {
+    <br />
+    <!-- Table box -->
+    <div class="box box-success">
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        <td>
-                            <input type="checkbox" />
-                        </td>
-                        <td>@(++i)</td>
-                        <td>
-                            <span class="text-bold text-blue">@item.CategoryName</span>
-                        </td>
-                        <td>
-                            <span style="display:block">@item.Description</span>
-                        </td>
-                        <td><a href="~/Category/Input/@i" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        <th><input type="checkbox" /></th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" />
+                            </td>
+                            <td>@(++i)</td>
+                            <td>
+                                <span class="text-bold text-blue">@item.CategoryName</span>
+                            </td>
+                            <td>
+                                <span style="display:block">@item.Description</span>
+                            </td>
+                            <td><a href="~/Category/Input/@item.CategoryID" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
     </div>
-    <div class="box-footer clearfix">
-        
-    </div>
-    <!-- /.box-body -->
-</div>
-<!-- /.box -->
+    <!-- /.box -->
+</form>

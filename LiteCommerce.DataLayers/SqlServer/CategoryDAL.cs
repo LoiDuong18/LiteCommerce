@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiteCommerce.DomainModels;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace LiteCommerce.DataLayers.SqlServer
 {
@@ -39,23 +39,23 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Categories
-                                          (
-                                              CategoryName
-                                              Description
-
-                                          )
-                                          VALUES
-                                          (
-	                                          @CategoryName,
-	                                          @Description,
-                                          );
-                                          SELECT @@IDENTITY;";
+                                    (
+	                                    CategoryName,
+	                                    Description
+                                    )
+                                    VALUES
+                                    (
+	                                    @CategoryName,
+	                                    @Description
+                                    );
+                                    SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@CategoryName", data.CategoryName);
                 cmd.Parameters.AddWithValue("@Description", data.Description);
 
                 categoryId = Convert.ToInt32(cmd.ExecuteScalar());
+
                 connection.Close();
             }
             return categoryId;
@@ -67,7 +67,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public bool Delete(int[] categoryIDs)
         {
-            bool result = true;
+            int result = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -78,16 +78,16 @@ namespace LiteCommerce.DataLayers.SqlServer
                                               AND(CategoryID NOT IN(SELECT CategoryID FROM Products))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.Add("@categoryId", SqlDbType.Int);
+                cmd.Parameters.Add("@categoryID", SqlDbType.Int);
                 foreach (int categoryId in categoryIDs)
                 {
-                    cmd.Parameters["@categoryId"].Value = categoryId;
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters["@categoryID"].Value = categoryId;
+                    result += cmd.ExecuteNonQuery();
                 }
 
                 connection.Close();
             }
-            return result;
+            return result > 0;
         }
         /// <summary>
         /// 
@@ -102,10 +102,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
 
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"SELECT * FROM Categories WHERE CategoryID = @categoryID";
+                cmd.CommandText = @"SELECT * FROM Categories WHERE categoryID = @categoryID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@categoryId", categoryID);
+                cmd.Parameters.AddWithValue("@categoryID", categoryID);
 
                 using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
@@ -116,11 +116,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                             CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
                             CategoryName = Convert.ToString(dbReader["CategoryName"]),
                             Description = Convert.ToString(dbReader["Description"]),
-                            //TODO: Làm nốt các trường còn lại...
                         };
                     }
                 }
-
                 connection.Close();
             }
             return data;
@@ -132,7 +130,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Category> List(int page, int pageSize, string searchValue)
+        public List<Category> List(string searchValue)
         {
             List<Category> data = new List<Category>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -142,17 +140,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = @"SELECT *
-                                        FROM(
-                                            SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
+                    cmd.CommandText = @"SELECT *, ROW_NUMBER() OVER(ORDER BY CategoryID) AS RowNumber
                                             FROM Categories
                                             WHERE(@searchValue = N'') OR (CategoryName like @searchValue)
-                                        ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
-                                        ORDER BY t.RowNumber";
+                                            ORDER BY RowNumber";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.AddWithValue("@page", page);
-                    cmd.Parameters.AddWithValue("@pageSize", pageSize);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
                     using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
@@ -163,7 +156,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
                                 CategoryName = Convert.ToString(dbReader["CategoryName"]),
                                 Description = Convert.ToString(dbReader["Description"]),
-                                //TODO: Làm các trường còn lại
                             });
                         }
                     }
@@ -186,24 +178,26 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Categories
-                                       SET  CategoryName ='@CategoryName',
-		                                    Description ='@Description',
-
-                                     WHERE CategoryID = ''";
+                                    SET                                    
+                                        CategoryName = @CategoryName,
+                                        Description = @Description
+                                    WHERE CategoryID = @CategoryID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                //TODO: Bổ sung tham số cho lệnh cập nhật
                 cmd.Parameters.AddWithValue("@CategoryID", data.CategoryID);
                 cmd.Parameters.AddWithValue("@CategoryName", data.CategoryName);
                 cmd.Parameters.AddWithValue("@Description", data.Description);
-
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
-
                 connection.Close();
             }
 
-            return rowsAffected > 0; ;
+            return rowsAffected > 0;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public int Count(string searchValue)
         {
             int dem;
@@ -220,7 +214,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
-
                     dem = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 connection.Close();

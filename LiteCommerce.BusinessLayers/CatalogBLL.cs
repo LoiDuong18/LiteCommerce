@@ -230,13 +230,54 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Category> Category_List(int page, int pageSize, string searchValue)
+        public static List<Category> Category_List(string searchValue)
         {
-            if (page < 1)
-                page = 1;
-            if (pageSize < 1)
-                pageSize = 1;
-            return CategoryDB.List(page, pageSize, searchValue);
+            return CategoryDB.List(searchValue);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static Category Category_Get(int categoryID)
+        {
+            return CategoryDB.Get(categoryID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Category_Add(Category data)
+        {
+            return CategoryDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Category_Update(Category data)
+        {
+            return CategoryDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CategoryID"></param>
+        /// <returns></returns>
+        public static bool Category_Delete(int[] CategoryID)
+        {
+            return CategoryDB.Delete(CategoryID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Category_Count(string searchValue)
+        {
+            return CategoryDB.Count(searchValue);
         }
         /// <summary>
         /// 
@@ -245,26 +286,6 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static Category Category_Get(int categoryID)
-        {
-            return CategoryDB.Get(categoryID);
-        }
-        public static int Category_Add(Category data)
-        {
-            return CategoryDB.Add(data);
-        }
-        public static bool Category_Update(Category data)
-        {
-            return CategoryDB.Update(data);
-        }
-        public static bool Category_Delete(int[] CategoryID)
-        {
-            return CategoryDB.Delete(CategoryID);
-        }
-        public static int Category_Count(string searchValue)
-        {
-            return CategoryDB.Count(searchValue);
-        }
         public static List<Product> Product_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
