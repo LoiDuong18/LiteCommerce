@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,13 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
+        [Required]
         public string ProductName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public int SupplierID { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -26,15 +33,22 @@ namespace LiteCommerce.DomainModels
         /// <summary>
         /// 
         /// </summary>
+        [Required]
+        public int CategoryID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string CategoryName { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required]
         public string QuantityPerUnit { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string UnitPrice { get; set; }
+        [Required]
+        public double UnitPrice { get; set; }
         /// <summary>
         /// 
         /// </summary>

@@ -34,5 +34,18 @@ namespace LiteCommerce.Admin
             }
             return listCategory;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<SelectListItem> ListOfSuppliers()
+        {
+            List<SelectListItem> listSupplier = new List<SelectListItem>();
+            foreach(var item in CatalogBLL.Supplier_ListNoPagination())
+            {
+                listSupplier.Add(new SelectListItem() { Value = Convert.ToString(item.SupplierID), Text = item.CompanyName });
+            }
+            return listSupplier;
+        }
     }
 }

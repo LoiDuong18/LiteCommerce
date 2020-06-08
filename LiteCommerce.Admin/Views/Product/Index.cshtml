@@ -46,6 +46,7 @@
     </form>
 </div>
 <!-- /.box -->
+<form action="~/Product/Delete" method="post">
 <div class="row">
     <div class="col-sm-8">
         <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span> 
@@ -53,7 +54,7 @@
     <div class="col-sm-4">
         <div class="pull-right">
             <a href="~/Product/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
-            <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
         </div>
     </div>
 </div>
@@ -79,7 +80,7 @@
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" value="@item.ProductID" />
+                            <input type="checkbox" name="productIDs" value="@item.ProductID" />
                         </td>
                         <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                         <td>
@@ -106,6 +107,7 @@
             </tbody>
         </table>
     </div>
+ </form>
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)

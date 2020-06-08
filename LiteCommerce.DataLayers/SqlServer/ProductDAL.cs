@@ -33,16 +33,77 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Add(Product data)
         {
-            throw new NotImplementedException();
+            int productId = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"INSERT INTO Products
+                                          (
+                                                ProductName,
+                                                SupplierID,
+                                                CategoryID,
+                                                QuantityPerUnit,
+                                                UnitPrice,
+                                                Descriptions,
+                                                PhotoPath
+                                          )
+                                          VALUES
+                                          (
+                                                @ProductName,
+                                                @SupplierID,
+                                                @CategoryID,
+                                                @QuantityPerUnit,
+                                                @UnitPrice,
+                                                @Descriptions,
+                                                @PhotoPath
+                                          );
+                                          SELECT @@IDENTITY;";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@ProductName", data.ProductName);
+                cmd.Parameters.AddWithValue("@SupplierID", data.SupplierID);
+                cmd.Parameters.AddWithValue("@CategoryID", data.CategoryID);
+                cmd.Parameters.AddWithValue("@QuantityPerUnit", data.QuantityPerUnit);
+                cmd.Parameters.AddWithValue("@UnitPrice", data.UnitPrice);
+                cmd.Parameters.AddWithValue("@Descriptions", data.Descriptions);
+                cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
+
+                productId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                connection.Close();
+            }
+
+            return productId;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="productIDs"></param>
         /// <returns></returns>
-        public bool Delete(string[] productIDs)
+        public bool Delete(int[] productIDs)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"DELETE FROM Products
+                                            WHERE(ProductID = @productID)
+                                              AND(ProductID NOT IN(SELECT ProductID FROM OrderDetails))";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.Add("@productID", SqlDbType.Int);
+                foreach (int productId in productIDs)
+                {
+                    cmd.Parameters["@productID"].Value = productId;
+                    result += cmd.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+            return result > 0;
         }
         /// <summary>
         /// 
@@ -51,7 +112,46 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public Product Get(string productID)
         {
-            throw new NotImplementedException();
+                Product data = null;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = @"SELECT	a.ProductID ProductID,a.ProductName ProductName,
+                                            a.QuantityPerUnit QuantityPerUnit,a.UnitPrice UnitPrice,
+                                            a.Descriptions Descriptions,a.PhotoPath PhotoPath,
+		                                    a.SupplierID SupplierID, c.CompanyName CompanyName,
+		                                    a.CategoryID CategoryID, b.CategoryName CategoryName
+                                    FROM dbo.Products AS a
+	                                JOIN dbo.Categories AS b ON a.CategoryID = b.CategoryID
+	                                JOIN dbo.Suppliers AS c ON c.SupplierID = a.SupplierID
+                                    WHERE a.ProductID = @productID";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@productID", productID);
+
+                    using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        if (dbReader.Read())
+                        {
+                            data = new Product()
+                            {
+                                ProductID = Convert.ToInt32(dbReader["ProductID"]),
+                                ProductName = Convert.ToString(dbReader["ProductName"]),
+                                SupplierID = Convert.ToInt32(dbReader["SupplierID"]),
+                                CompanyName = Convert.ToString(dbReader["CompanyName"]),
+                                CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
+                                CategoryName = Convert.ToString(dbReader["CategoryName"]),
+                                QuantityPerUnit = Convert.ToString(dbReader["QuantityPerUnit"]),
+                                UnitPrice = Convert.ToDouble(dbReader["UnitPrice"]),
+                                Descriptions = Convert.ToString(dbReader["Descriptions"])
+                            };
+                        }
+                    }
+                    connection.Close();
+                }
+                return data;
         }
         /// <summary>
         /// 
@@ -72,9 +172,15 @@ namespace LiteCommerce.DataLayers.SqlServer
                 {
                     cmd.CommandText = @"SELECT *
                                         FROM(
-                                            SELECT a.ProductID ProductID,a.ProductName ProductName,a.QuantityPerUnit QuantityPerUnit,a.UnitPrice UnitPrice,a.Descriptions Descriptions,a.PhotoPath PhotoPath,b.CompanyName CompanyName,c.CategoryName CategoryName,ROW_NUMBER() OVER(ORDER BY ProductID) AS RowNumber
-                                            FROM Products AS a JOIN Suppliers AS b ON b.SupplierID = a.SupplierID
-						                                    JOIN Categories AS c ON c.CategoryID = a.CategoryID
+                                            SELECT	a.ProductID ProductID,a.ProductName ProductName,
+                                                    a.QuantityPerUnit QuantityPerUnit,a.UnitPrice UnitPrice,
+                                                    a.Descriptions Descriptions,a.PhotoPath PhotoPath,
+                                                    a.SupplierID SupplierID, c.CompanyName CompanyName,
+                                                    a.CategoryID CategoryID, b.CategoryName CategoryName,
+				                                     ROW_NUMBER() OVER(ORDER BY a.ProductID) AS RowNumber
+                                            FROM dbo.Products AS a
+	                                        JOIN dbo.Categories AS b ON a.CategoryID = b.CategoryID
+	                                        JOIN dbo.Suppliers AS c ON c.SupplierID = a.SupplierID
                                             WHERE ((@categoryId = N'') OR (a.CategoryID=@categoryId)) AND ((@searchValue = N'') OR (ProductName like @searchValue))
                                         ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
                                         ORDER BY t.RowNumber";
@@ -95,7 +201,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 CompanyName = Convert.ToString(dbReader["CompanyName"]),
                                 CategoryName = Convert.ToString(dbReader["CategoryName"]),
                                 QuantityPerUnit = Convert.ToString(dbReader["QuantityPerUnit"]),
-                                UnitPrice = Convert.ToString(dbReader["UnitPrice"]),
+                                UnitPrice = Convert.ToDouble(dbReader["UnitPrice"]),
                                 Descriptions = Convert.ToString(dbReader["Descriptions"]),
                                 PhotoPath = Convert.ToString(dbReader["PhotoPath"]),
                             });
@@ -113,7 +219,36 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public bool Update(Product data)
         {
-            throw new NotImplementedException();
+            int rowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"UPDATE Products
+                                    SET   
+                                        ProductName = @ProductName,
+                                        SupplierID = @SupplierID,
+                                        CategoryID = @CategoryID,
+                                        QuantityPerUnit = @QuantityPerUnit,
+                                        UnitPrice = @UnitPrice,
+                                        Descriptions = @Descriptions,
+                                        PhotoPath = @PhotoPath
+                                    WHERE ProductID = @ProductID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@ProductID", data.ProductID);
+                cmd.Parameters.AddWithValue("@ProductName", data.ProductName);
+                cmd.Parameters.AddWithValue("@SupplierID", data.SupplierID);
+                cmd.Parameters.AddWithValue("@CategoryID", data.CategoryID);
+                cmd.Parameters.AddWithValue("@QuantityPerUnit", data.QuantityPerUnit);
+                cmd.Parameters.AddWithValue("@UnitPrice", data.UnitPrice);
+                cmd.Parameters.AddWithValue("@Descriptions", data.Descriptions);
+                cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
+
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return rowsAffected > 0;
         }
         /// <summary>
         /// Đếm số products

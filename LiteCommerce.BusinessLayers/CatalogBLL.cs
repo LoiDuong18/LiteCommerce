@@ -79,8 +79,14 @@ namespace LiteCommerce.BusinessLayers
         {
             return SupplierDB.Get(supplierID);
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Supplier> Supplier_ListNoPagination()
+        {
+            return SupplierDB.GetAll();
+        }
         /// <summary>
         /// Đếm số Supplier
         /// </summary>
@@ -295,5 +301,41 @@ namespace LiteCommerce.BusinessLayers
         {
             return ProductDB.Count(searchValue, categoryID);
         }       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Product_Add(Product data)
+        {
+            return ProductDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Product_Update(Product data)
+        {
+            return ProductDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Product Product_Get(string id)
+        {
+            return ProductDB.Get(id);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productIDs"></param>
+        /// <returns></returns>
+        public static bool Product_Delete(int[] productIDs)
+        {
+            return ProductDB.Delete(productIDs);
+        }
     }
 }

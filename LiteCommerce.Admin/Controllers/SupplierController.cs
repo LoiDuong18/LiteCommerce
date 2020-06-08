@@ -79,35 +79,7 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
-                //Validation dữ liệu
-                if (string.IsNullOrEmpty(model.CompanyName))
-                {
-                    ModelState.AddModelError("CompanyName", "CompanyName is required");
-                }
-                if (string.IsNullOrEmpty(model.ContactName))
-                {
-                    ModelState.AddModelError("ContactName", "ContactName is required");
-                }
-                if (string.IsNullOrEmpty(model.ContactTitle))
-                {
-                    ModelState.AddModelError("ContactTitle", "ContactTitle is required");
-                }
-                if (string.IsNullOrEmpty(model.Address))
-                {
-                    ModelState.AddModelError("Address", "Address is required");
-                }
-                if (string.IsNullOrEmpty(model.Country))
-                {
-                    ModelState.AddModelError("Country", "Country is required");
-                }
-                if (string.IsNullOrEmpty(model.City))
-                {
-                    ModelState.AddModelError("City", "City is required");
-                }
-                if (string.IsNullOrEmpty(model.Phone))
-                {
-                    ModelState.AddModelError("Phone", "Phone is required");
-                }
+                //Validation dữ liệu                
                 if (string.IsNullOrEmpty(model.Fax))
                 {                    
                     model.Fax = "";
