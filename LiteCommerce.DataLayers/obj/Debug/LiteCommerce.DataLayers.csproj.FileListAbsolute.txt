@@ -17,3 +17,4 @@ E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.Da
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csproj.CopyComplete
 =======
 >>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csprojResolveAssemblyReference.cache

@@ -173,11 +173,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-<<<<<<< HEAD
         public List<Employee> List(int page, int pageSize, string searchValue, int idCookie)
-=======
-        public List<Employee> List(int page, int pageSize, string searchValue,int idCookie)
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             List<Employee> data = new List<Employee>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -202,13 +198,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                                         ORDER BY t.RowNumber";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-<<<<<<< HEAD
 
                     cmd.Parameters.AddWithValue("idCookie", idCookie);
-=======
-                    
-                    cmd.Parameters.AddWithValue("idCookie",idCookie);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     cmd.Parameters.AddWithValue("@page", page);
                     cmd.Parameters.AddWithValue("@pageSize", pageSize);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
@@ -291,11 +282,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-<<<<<<< HEAD
         public int Count(string searchValue, int idCookie)
-=======
-        public int Count(string searchValue,int idCookie)
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             int dem;
             if (!string.IsNullOrEmpty(searchValue))
@@ -335,27 +322,16 @@ namespace LiteCommerce.DataLayers.SqlServer
         public bool CheckEmail(int employeeId, string email, string method)
         {
             int dem;
-<<<<<<< HEAD
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand())
-=======
-            using(SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using(SqlCommand cmd = new SqlCommand())
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 {
                     if (method == "add")
                     {
                         cmd.CommandText = @"SELECT COUNT(*) FROM Employees WHERE (Email = @email)";
                     }
-<<<<<<< HEAD
                     else if (method == "update")
-=======
-                    else if (method=="update")
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     {
                         cmd.CommandText = @"SELECT COUNT(*) FROM Employees WHERE (Email = @email) AND (EmployeeID <> @employeeId)";
                     }
@@ -372,8 +348,4 @@ namespace LiteCommerce.DataLayers.SqlServer
         }
 
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

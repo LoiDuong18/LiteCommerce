@@ -139,12 +139,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoryPaginationResult.cs" />
+    <Compile Include="Models\CategoryResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Models\ProductPaginationResult.cs" />
-    <Compile Include="Models\ShipperPaginationResult.cs" />
+    <Compile Include="Models\ShipperResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,8 +155,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\avt-facebook.jpg" />
     <Content Include="Images\lc.png" />
     <Content Include="Images\my.jpg" />
+    <Content Include="Images\no-image.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -7244,6 +7246,7 @@
     <Content Include="Views\Product\Input.cshtml" />
     <Content Include="Views\Employee\Input.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

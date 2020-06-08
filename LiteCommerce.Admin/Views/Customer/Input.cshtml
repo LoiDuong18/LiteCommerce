@@ -19,22 +19,18 @@
                 @if (@ViewBag.Method == "add")
                 {
                     <label>Customer ID:</label>
-                    <input type="text" name="CustomerID" class="form-control" placeholder="ABC" value="@Model.CustomerID">
+                    <input type="text" name="CustomerID" class="form-control" placeholder="Hue" value="@Model.CustomerID">
                     @Html.ValidationMessage("CustomerID", new { @style = "color: red" })
                 }
                 else
                 {
-                    <input type="hidden" name="CustomerID" class="form-control" placeholder="ABC" value="@Model.CustomerID">
+                    <input type="hidden" name="CustomerID" class="form-control" placeholder="Hue" value="@Model.CustomerID">
                 }
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             </div>
             <div class="form-group">
                 <label>Company Name:</label>
-                <input type="text" name="CompanyName" class="form-control" placeholder="ABC Company" value="@Model.CompanyName">
+                <input type="text" name="CompanyName" class="form-control" placeholder="Hue Town" value="@Model.CompanyName">
                 @Html.ValidationMessage("CompanyName", new { @style = "color: red" })
             </div>
             <div class="row">
@@ -57,7 +53,7 @@
 
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" name="Address" class="form-control" placeholder="123 Pham Van Dong St" value="@Model.Address">
+                <input type="text" name="Address" class="form-control" placeholder="77 Nguyen Hue" value="@Model.Address">
                 @Html.ValidationMessage("Address", new { @style = "color: red" })
             </div>
             <div class="row">
@@ -95,7 +91,7 @@
                         <label>Phone:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" name="Phone" class="form-control" placeholder="(+84) 123 123 123" value="@Model.Phone">
+                            <input type="text" name="Phone" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.Phone">
                         </div>
                         @Html.ValidationMessage("Phone", new { @style = "color: red" })
                     </div>
@@ -105,7 +101,7 @@
                         <label>Fax:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-fax"></i></span>
-                            <input type="text" name="Fax" class="form-control" placeholder="(+84) 456 456 456" value="@Model.Fax">
+                            <input type="text" name="Fax" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.Fax">
                         </div>
                     </div>
                 </div>

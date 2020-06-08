@@ -46,11 +46,7 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-<<<<<<< HEAD
         int Count(string searchValue, int idCookie);
-=======
-        int Count(string searchValue,int idCookie);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <summary>
         /// Check email khi add hoặc update nhân viên
         /// </summary>
@@ -60,8 +56,4 @@ namespace LiteCommerce.DataLayers
         /// <returns></returns>
         bool CheckEmail(int id, string email, string method);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

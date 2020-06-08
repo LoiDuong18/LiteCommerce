@@ -2,21 +2,13 @@
 @{
     DateTime today = DateTime.Now;
     DateTime hireDate = (ViewBag.Method == "add") ? today : Model.HireDate;
-<<<<<<< HEAD
     string defaultToday = (ViewBag.Method == "add") ? "(Default Today)" : "";
-=======
-    string defaultToday = (ViewBag.Method == "add") ?"(Default Today)":"";
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 }
 
 <!-- Input box -->
 <div class="box box-primary">
     <!-- form start -->
-<<<<<<< HEAD
     <form role="form" action="~/Employee/Input" method="post" enctype="multipart/form-data">
-=======
-    <form role="form" action="~/Employee/Input" method="post" enctype = "multipart/form-data">
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         <div class="box-header with-border">
             <div class="box-tools pull-right">
                 <a href="~/Employee" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i> Back</a>
@@ -24,20 +16,12 @@
         </div>
         <div class="box-body">
             <input type="hidden" name="EmployeeID" value="@Model.EmployeeID" />
-<<<<<<< HEAD
             <input type="hidden" name="method" value="@ViewBag.Method" />
-=======
-            <input type="hidden" name="method" value="@ViewBag.Method"/>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>First Name:</label>
-<<<<<<< HEAD
                         <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName">
-=======
-                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName" >
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                         @Html.ValidationMessage("FirstName", new { @style = "color: red" })
                     </div>
                 </div>
@@ -87,7 +71,7 @@
                         <label>Home Phone:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" name="HomePhone" class="form-control" placeholder="(+84) 123 123 123" value="@Model.HomePhone">
+                            <input type="text" name="HomePhone" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.HomePhone">
                         </div>
                         @Html.ValidationMessage("HomePhone", new { @style = "color: red" })
                     </div>
@@ -97,7 +81,7 @@
                         <label>Email:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="text" name="Email" class="form-control" placeholder="cuonghusc@gmail.com" value="@Model.Email">
+                            <input type="text" name="Email" class="form-control" placeholder="abc@gmail.com" value="@Model.Email">
                         </div>
                         @Html.ValidationMessage("Email", new { @style = "color: red" })
                     </div>
@@ -105,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" name="Address" class="form-control" placeholder="Pham Van Dong" value="@Model.Address">
+                <input type="text" name="Address" class="form-control" placeholder="77 Nguyen Hue" value="@Model.Address">
                 @Html.ValidationMessage("Address", new { @style = "color: red" })
             </div>
             <div class="row">
@@ -128,11 +112,7 @@
                         </select>
                         @Html.ValidationMessage("Country", new { @style = "color: red" })
                     </div>
-<<<<<<< HEAD
 
-=======
-                    
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -152,14 +132,10 @@
                 <input type="hidden" name="PhotoPath" value="@Model.PhotoPath" />
             </div>
         </div>
-<<<<<<< HEAD
-        
-=======
         @*<div class="text-danger">
-            @Html.ValidationSummary("");
-        </div>*@
-                <!-- /.box-body -->
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                @Html.ValidationSummary("");
+            </div>*@
+        <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>
             <a href="~/Employee" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>

@@ -28,13 +28,8 @@ namespace LiteCommerce.Admin.Controllers
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
-<<<<<<< HEAD
                 RowCount = HumanResourceBLL.Employee_Count(searchValue, idCookie),
                 Data = HumanResourceBLL.Employee_List(page, AppSettings.DefaultPageSize, searchValue, idCookie),
-=======
-                RowCount = HumanResourceBLL.Employee_Count(searchValue,idCookie),
-                Data = HumanResourceBLL.Employee_List(page, AppSettings.DefaultPageSize, searchValue,idCookie),
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 SearchValue = searchValue,
             };
             return View(model);
@@ -84,30 +79,18 @@ namespace LiteCommerce.Admin.Controllers
                         Console.WriteLine(e.Message);
                         return RedirectToAction("Index");
                     }
-<<<<<<< HEAD
                 }
             }
         }
         [HttpPost]
         public ActionResult Input(Employee model, HttpPostedFileBase uploadPhoto, string method)
-=======
-                }                
-            }
-        }
-        [HttpPost]
-        public ActionResult Input(Employee model,HttpPostedFileBase uploadPhoto,string method)
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             try
             {
                 if (string.IsNullOrEmpty(model.Notes))
                 {
                     model.Notes = "";
-<<<<<<< HEAD
                 }
-=======
-                }         
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 //Check email
                 try
                 {
@@ -151,13 +134,8 @@ namespace LiteCommerce.Admin.Controllers
                         ViewBag.ConfirmButton = "Save";
                         ViewBag.Method = "update";
                         return View(model);
-<<<<<<< HEAD
                     }
                 }
-=======
-                    }                    
-                }                
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 //Đưa dữ liệu vào CSDL
                 if (model.EmployeeID == 0)
                 {

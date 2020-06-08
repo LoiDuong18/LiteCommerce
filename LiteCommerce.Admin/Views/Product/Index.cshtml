@@ -13,11 +13,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Key search:</label>
-<<<<<<< HEAD
-                        <input type="text" name="searchValue" class="form-control" placeholder="Product" value="@Model.SearchValue">
-=======
                         <input type="text" name="searchValue" class="form-control" placeholder="Nước abc" value="@Model.SearchValue">
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -52,15 +48,11 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
-<<<<<<< HEAD
         <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span>
-=======
-        <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span> 
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
-            <a href="~/Product/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+            <a href="~/Product/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
             <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
         </div>
     </div>
@@ -91,13 +83,8 @@
                         </td>
                         <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                         <td>
-<<<<<<< HEAD
                             @{
-                                string urlImage = string.IsNullOrEmpty(item.PhotoPath) ? "/Images/my.jpg" : item.PhotoPath;
-=======
-                            @{ 
                                 string urlImage = string.IsNullOrEmpty(item.PhotoPath) ? "/Images/no-image.png" : item.PhotoPath;
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             }
                             <img src="@urlImage" width="50px" />
                         </td>
@@ -111,8 +98,8 @@
                         <td><span>@item.QuantityPerUnit</span></td>
                         <td><span>@item.UnitPrice</span></td>
                         <td>
-                            <a href="~/Product/Detail/@item.ProductID" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fa fa-eye"></i></a>
-                            <a href="~/Product/Input/@item.ProductID" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fa fa-pencil"></i></a>
+                            <a href="~/Product/Detail/@item.ProductID" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fa fa-eye"></i></a>
+                            <a href="~/Product/Input/@item.ProductID" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>
                         </td>
                     </tr>
                 }
@@ -123,25 +110,6 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)
             {
-<<<<<<< HEAD
-                <li><a href="~/Product?page=1@paramSearch">First</a></li>
-            }
-            @for (int page = 1; page <= Model.PageCount; page++)
-            {
-                if (Model.Page == page)
-                {
-                    <li class="active"><a href="~/Product?page=@page@paramSearch">@page</a></li>
-                }
-                else
-                {
-                    <li><a href="~/Product?page=@page@paramSearch">@page</a></li>
-                }
-
-            }
-            @if (Model.Page != Model.PageCount)
-            {
-                <li><a href="~/Product?page=@Model.PageCount@paramSearch">Last</a></li>
-=======
                 <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">First</a></li>
                 <li>
                     <a href="~/Product?page=@(Model.Page-1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID"><span><i class="fa fa-angle-double-left"></i></span></a>
@@ -149,7 +117,7 @@
             }
             @for (int page = 1; page <= Model.PageCount; page++)
             {
-                if(Model.Page == page)
+                if (Model.Page == page)
                 {
                     <li class="active"><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
                 }
@@ -178,7 +146,6 @@
             @if (Model.Page != Model.PageCount)
             {
                 <li><a href="~/Product?page=@Model.PageCount&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">Last</a></li>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             }
         </ul>
     </div>

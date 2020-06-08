@@ -105,11 +105,7 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 connection.Close();
             }
-<<<<<<< HEAD
             return result > 0;
-=======
-            return result>0;
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -278,8 +274,4 @@ namespace LiteCommerce.DataLayers.SqlServer
             return dem;
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

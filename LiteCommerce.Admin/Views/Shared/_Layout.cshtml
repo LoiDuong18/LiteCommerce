@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>LiteCommerce | @ViewBag.Title </title>
+    <title>LiteCommerce | @ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -32,13 +32,8 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="~/Themes/AdminLTE/dist/css/style.css" />
     <!-- Google Font -->
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="shortcut icon" type="image/png" href="~/Images/lc.png" />
-=======
     @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">*@
-    <link rel="shortcut icon" type="image/png" href="~/Images/favicon.png" />
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+    <link rel="shortcut icon" type="image/png" href="~/Images/lc.png" />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
@@ -108,22 +103,22 @@
         })
     </script>
     <script>
-    $(document).ready(function () {
-        $('.sidebar-menu').tree();
-        // let currentURL = window.location.href;
-        
-        //var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
-        var url = window.location.origin + window.location.pathname;
-        //console.log(url);
-        // for sidebar menu but not for treeview submenu
-        $('ul.sidebar-menu a').filter(function() {
-            return this.href == url;
-        }).parent().siblings().removeClass('active').end().addClass('active');
-        // for treeview which is like a submenu
-        $('ul.treeview-menu a').filter(function() {
-            return this.href == url;
-        }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active menu-open').end().addClass('active menu-open');
-    });
+        $(document).ready(function () {
+            $('.sidebar-menu').tree();
+            // let currentURL = window.location.href;
+
+            //var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            var url = window.location.origin + window.location.pathname;
+            //console.log(url);
+            // for sidebar menu but not for treeview submenu
+            $('ul.sidebar-menu a').filter(function () {
+                return this.href == url;
+            }).parent().siblings().removeClass('active').end().addClass('active');
+            // for treeview which is like a submenu
+            $('ul.treeview-menu a').filter(function () {
+                return this.href == url;
+            }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active menu-open').end().addClass('active menu-open');
+        });
     </script>
     <script>
         $(document).ready(function () {

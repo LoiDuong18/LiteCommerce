@@ -2,11 +2,7 @@
 @{
     ViewBag.Title = "Manage Suppliers";
     int i = 0;
-<<<<<<< HEAD
-    string paramSearch = "&searchValue=" + Model.SearchValue;
-=======
     string paramSearch = "searchValue=" + Model.SearchValue;
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -19,23 +15,10 @@
                     <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
-        </div>        
+        </div>
         <!-- /.box-body -->
     </form>
 </div>
-<<<<<<< HEAD
-<form action="~/Supplier/Delete" method="post">
-
-    <!-- /.box -->
-    <div class="row">
-        <div class="col-sm-8">
-            <span>There are <b>@Model.RowCount</b> Suppliers. Page <b>@Model.Page/@Model.PageSize</b></span>
-        </div>
-        <div class="col-sm-4">
-            <div class="pull-right">
-                <a href="~/Supplier/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
-                <button type="submit" class="btn btn-sm btn-danger" name="method" value="delete"><i class="fa fa-trash-o"></i> Delete</button>
-=======
 <!-- /.box -->
 <form action="~/Supplier/Delete" method="POST">
 
@@ -45,9 +28,8 @@
         </div>
         <div class="col-sm-4">
             <div class="pull-right">
-                <a href="~/Supplier/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+                <a href="~/Supplier/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
                 <button type="submit" name="method" value="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             </div>
         </div>
     </div>
@@ -58,11 +40,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-<<<<<<< HEAD
-                        <th><input type="checkbox" /></th>
-=======
-                        <th><input type="checkbox" id="selectAll"/></th>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                        <th><input type="checkbox" id="selectAll" /></th>
                         <th>#</th>
                         <th>Name</th>
                         <th>Address</th>
@@ -71,21 +49,13 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
                     @foreach (var item in Model.Data)
-=======
-                    @foreach(var item in Model.Data)
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     {
                         <tr>
                             <td>
                                 <input type="checkbox" name="supplierIDs" value="@item.SupplierID" />
                             </td>
-<<<<<<< HEAD
-                            <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
-=======
                             <td>@((Model.Page - 1)*Model.PageSize + (++i))</td>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             <td>
                                 <span class="text-bold text-blue">@item.CompanyName</span>
                                 <br />
@@ -93,15 +63,8 @@
                                 <span>(@item.ContactTitle)</span>
                             </td>
                             <td>
-<<<<<<< HEAD
-                                <span class="text-bold text-blue">@item.Address</span>
-                                <br />
-                                <span class="text-bold text-black">@item.City</span>
-                                <span>(@item.Country)</span>
-=======
                                 <span style="display:block">@item.Address</span>
                                 <span> @item.City -  @item.Country</span>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             </td>
                             <td>
                                 <span style="display:block"><i class="fa fa-phone"></i> @item.Phone</span>
@@ -116,43 +79,29 @@
         </div>
         <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-<<<<<<< HEAD
-                <li><a href="~/Supplier?page=1&searchValue=@Model.SearchValue">«</a></li>
-                @for (int page = 1; page <= Model.PageCount; page++)
-            {
-                    <li><a href="~/Supplier?page=@page&searchValue=@Model.SearchValue">@page</a></li>
-                }
-                <li><a href="~/Supplier?page=@Model.PageCount">»</a></li>
-=======
                 @if (Model.Page != 1)
                 {
                     <li><a href="~/Supplier?page=1&@paramSearch">First</a></li>
                 }
                 @for (int page = 1; page <= Model.PageCount; page++)
                 {
-                if (Model.Page == page)
-                {
+                    if (Model.Page == page)
+                    {
                         <li class="active"><a href="~/Supplier?page=@page&@paramSearch">@page</a></li>
-                }
-                else
-                {
+                    }
+                    else
+                    {
                         <li><a href="~/Supplier?page=@page&@paramSearch">@page</a></li>
-                }
+                    }
 
-            }
+                }
                 @if (Model.Page != Model.PageCount)
-            {
+                {
                     <li><a href="~/Supplier?page=@Model.PageCount&@paramSearch">Last</a></li>
-            }
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                }
             </ul>
         </div>
         <!-- /.box-body -->
     </div>
-<<<<<<< HEAD
-    <!-- /.box -->
-</form>
-=======
 </form>
 <!-- /.box -->
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

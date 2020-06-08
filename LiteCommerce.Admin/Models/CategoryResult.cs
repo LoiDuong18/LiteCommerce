@@ -16,5 +16,9 @@ namespace LiteCommerce.Admin.Models
         /// 
         /// </summary>
         public List<Category> Data;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SearchValue { get; set; }
     }
 }

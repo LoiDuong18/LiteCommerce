@@ -46,7 +46,7 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="reNewPassword"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ChangePwd(string oldPassword,string newPassword,string reNewPassword)
+        public ActionResult ChangePwd(string oldPassword, string newPassword, string reNewPassword)
         {
             HttpCookie requestCookie = Request.Cookies["userInfo"];
             int id = Convert.ToInt32(requestCookie["AccountID"]);
@@ -56,7 +56,7 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
-                if (!AccountBLL.Account_CheckPass(oldPassword,id))
+                if (!AccountBLL.Account_CheckPass(oldPassword, id))
                 {
                     ModelState.AddModelError("OldPassword", "Old password incorrect");
                 }
@@ -68,7 +68,7 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
-                if(newPassword.Length < 6)
+                if (newPassword.Length < 6)
                 {
                     ModelState.AddModelError("NewPassword", "Password must over 6 characters");
                 }
@@ -90,7 +90,8 @@ namespace LiteCommerce.Admin.Controllers
             {
                 return View();
             }
-            if (AccountBLL.Account_ChangePwd(newPassword, id)){
+            if (AccountBLL.Account_ChangePwd(newPassword, id))
+            {
                 return RedirectToAction("SignOut");
             }
             ModelState.AddModelError("error", "Cập nhật không thành công");
@@ -118,27 +119,22 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        public ActionResult Login(string email = "",string password = "")
+        public ActionResult Login(string email = "", string password = "")
         {
-            if(Request.HttpMethod == "GET")
+            if (Request.HttpMethod == "GET")
             {
                 return View();
             }
             else
             {
-<<<<<<< HEAD
-                //TODO : Kiểm tra thông tin đăng nhập thông qua CSDL
-                if(email == "admin@abc.com" && password == "admin")
-=======
                 var newUser = AccountBLL.Account_Login(email, password);
-                if (newUser!=null)
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                if (newUser != null)
                 {
                     Account account = AccountBLL.Account_Login(email, password);
                     FormsAuthentication.SetAuthCookie(account.AccountID.ToString(), false);
                     HttpCookie userInfo = new HttpCookie("userInfo");
                     userInfo["AccountID"] = account.AccountID.ToString();
-                    userInfo["FullName"] = Server.UrlEncode(account.LastName +" "+ account.FirstName);
+                    userInfo["FullName"] = Server.UrlEncode(account.LastName + " " + account.FirstName);
                     userInfo["Email"] = account.Email;
                     userInfo["PhotoPath"] = account.PhotoPath;
                     userInfo.Expires = DateTime.Now.AddDays(1);
@@ -151,7 +147,7 @@ namespace LiteCommerce.Admin.Controllers
                     ViewBag.email = email;
                     return View();
                 }
-            }            
+            }
         }
         /// <summary>
         /// Quên mật khẩu
@@ -235,19 +231,19 @@ namespace LiteCommerce.Admin.Controllers
             {
                 return View(model);
             }
-            
+
             try
             {
                 bool rs = AccountBLL.Account_Update(model);
                 requestCookies.Values["Email"] = model.Email;
                 Response.SetCookie(requestCookies);
-                return RedirectToAction("Index");                               
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
                 return View(model);
-            }            
+            }
         }
     }
 }

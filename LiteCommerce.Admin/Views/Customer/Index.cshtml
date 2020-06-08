@@ -1,58 +1,34 @@
-<<<<<<< HEAD
-﻿@model LiteCommerce.Admin.Models.CustomerPaginationResult﻿
-@{
-    ViewBag.Title = "Manage Customers";
-    int i = 0;
-    string paramSearch = "&searchValue=" + Model.SearchValue;
-=======
 ﻿@model LiteCommerce.Admin.Models.CustomerPaginationResult
 @{
     ViewBag.Title = "Manage Customers";
     int i = 0;
-    string paramSearch = string.IsNullOrEmpty(@Request.Params["searchValue"]) ? "" : "&searchValue="+@Request.Params["searchValue"];
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+    string paramSearch = string.IsNullOrEmpty(@Request.Params["searchValue"]) ? "" : "&searchValue=" + @Request.Params["searchValue"];
 }
 
 <!-- Search box -->
 <div class="box box-primary">
     <!-- form start -->
-    <form role="form" action="~/Customer" method="get">
+    <form role="form">
         <div class="box-body">
             <div class="input-group input-group-sm">
-<<<<<<< HEAD
-                <input type="text" name="searchValue" class="form-control" placeholder="Type anything" value="@Model.SearchValue">
-=======
                 <input type="text" name="searchValue" class="form-control" placeholder="Type anything" value="@Request.Params["searchValue"]">
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
-        </div>     
+        </div>
         <!-- /.box-body -->
     </form>
 </div>
-<<<<<<< HEAD
-<!-- /.box -->
-<form action="~/Customer/Delete" method="POST">
-    <div class="row">
-        <div class="col-sm-8">
-            <span>There are <b>@Model.RowCount</b> Suppliers. Page <b>@Model.Page/@Model.PageSize</b></span>
-        </div>
-        <div class="col-sm-4">
-            <div class="pull-right">
-                <a href="~/Customer/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
-=======
 <form action="~/Customer/Delete" method="post">
     <!-- /.box -->
     <div class="row">
         <div class="col-sm-8">
-            <span>There are <b>@Model.RowCount</b> Customers. Page <b>@Model.Page/@Model.PageCount</b></span> 
+            <span>There are <b>@Model.RowCount</b> Customers. Page <b>@Model.Page/@Model.PageCount</b></span>
         </div>
         <div class="col-sm-4">
             <div class="pull-right">
-                <a href="~/Customer/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                <a href="~/Customer/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
                 <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
             </div>
         </div>
@@ -64,11 +40,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-<<<<<<< HEAD
-                        <th><input type="checkbox" /></th>
-=======
                         <th><input type="checkbox" id="selectAll" /></th>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                         <th>#</th>
                         <th>Name</th>
                         <th>Address</th>
@@ -81,15 +53,9 @@
                     {
                         <tr>
                             <td>
-                                <input type="checkbox" name="customerIDs" value="@item.CustomerID"/>
+                                <input type="checkbox" name="customerIDs" value="@item.CustomerID" />
                             </td>
-<<<<<<< HEAD
-                            <td>
-                                <span>@((Model.Page - 1) * Model.PageSize + (++i))</span>
-                            </td>
-=======
                             <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             <td>
                                 <span class="text-bold text-blue">@item.CompanyName</span>
                                 <br />
@@ -112,18 +78,10 @@
         </div>
         <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-<<<<<<< HEAD
-                <li><a href="~/Customer?page=1">«</a></li>
-                @for (int page = 1; page <= Model.PageCount; page++)
-                {
-                    <li><a href="~/Customer?page=@page">@page</a></li>
-                }
-                <li><a href="~/Customer?page=@Model.PageCount">»</a></li>
-=======
                 @if (Model.Page != 1)
                 {
                     <li><a href="~/Customer?page=1@paramSearch">First</a></li>
-                }                
+                }
                 @for (int page = 1; page <= Model.PageCount; page++)
                 {
                     if (Model.Page == page)
@@ -139,8 +97,7 @@
                 @if (Model.Page != Model.PageCount)
                 {
                     <li><a href="~/Customer?page=@Model.PageCount@paramSearch">Last</a></li>
-                }            
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+                }
             </ul>
         </div>
         <!-- /.box-body -->

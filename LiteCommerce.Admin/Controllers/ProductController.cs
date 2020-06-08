@@ -1,8 +1,5 @@
 ﻿using LiteCommerce.BusinessLayers;
-<<<<<<< HEAD
-=======
 using LiteCommerce.DomainModels;
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +20,6 @@ namespace LiteCommerce.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "", string categoryId = "")
         {
-<<<<<<< HEAD
-=======
             List<Product> data = new List<Product>();
             try
             {
@@ -34,18 +29,12 @@ namespace LiteCommerce.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             var model = new Models.ProductPaginationResult()
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
-<<<<<<< HEAD
                 RowCount = CatalogBLL.Product_Count(searchValue, categoryId),
-                Data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId),
-=======
-                RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
                 Data = data,
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 SearchValue = searchValue,
                 CategoryID = categoryId
             };

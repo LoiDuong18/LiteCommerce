@@ -2,11 +2,7 @@
 @{
     ViewBag.Title = "Manage Employees";
     int i = 0;
-<<<<<<< HEAD
     string paramSearch = string.IsNullOrEmpty(Model.SearchValue) ? "" : "searchValue=" + Model.SearchValue;
-=======
-    string paramSearch = string.IsNullOrEmpty(Model.SearchValue)?"":"searchValue=" + Model.SearchValue;
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -26,15 +22,11 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
-<<<<<<< HEAD
         <span>There are <b>@Model.RowCount</b> Employees. Page <b>@Model.Page/@Model.PageCount</b></span>
-=======
-        <span>There are <b>@Model.RowCount</b> Employees. Page <b>@Model.Page/@Model.PageCount</b></span> 
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
-            <a href="~/Employee/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+            <a href="~/Employee/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
             <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
         </div>
     </div>
@@ -108,41 +100,24 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)
             {
-<<<<<<< HEAD
-                <li><a href="~/Employee?page=1@paramSearch">First</a></li>
-=======
                 <li><a href="~/Employee?@paramSearch&page=1">First</a></li>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             }
             @for (int page = 1; page <= Model.PageCount; page++)
             {
                 if (Model.Page == page)
                 {
-<<<<<<< HEAD
-                    <li class="active"><a href="~/Employee?page=@page@paramSearch">@page</a></li>
-                }
-                else
-                {
-                    <li><a href="~/Employee?page=@page@paramSearch">@page</a></li>
-=======
                     <li class="active"><a href="~/Employee?@paramSearch&page=@page">@page</a></li>
                 }
                 else
                 {
                     <li><a href="~/Employee?@paramSearch&page=@page">@page</a></li>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 }
 
             }
             @if (Model.Page != Model.PageCount)
             {
-<<<<<<< HEAD
-                <li><a href="~/Employee?page=@Model.PageCount@paramSearch">Last</a></li>
-            }
-=======
                 <li><a href="~/Employee?@paramSearch&page=@Model.PageCount">Last</a></li>
-            }     
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
+            }
         </ul>
     </div>
     <!-- /.box-body -->

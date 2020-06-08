@@ -80,11 +80,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 customerId = (queryResult != DBNull.Value) ? Convert.ToInt32(cmd.ExecuteScalar()) : 0;
                 connection.Close();
             }
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             return customerId;
         }
         /// <summary>
@@ -166,13 +162,8 @@ namespace LiteCommerce.DataLayers.SqlServer
         public List<Customer> List(int page, int pageSize, string searchValue)
         {
             List<Customer> data = new List<Customer>();
-<<<<<<< HEAD
             if (!string.IsNullOrEmpty(searchValue))
                 searchValue = "%" + searchValue + "%";
-=======
-            if(!string.IsNullOrEmpty(searchValue))
-                searchValue = "%"+searchValue+"%";
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -190,11 +181,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                     cmd.Parameters.AddWithValue("@page", page);
                     cmd.Parameters.AddWithValue("@pageSize", pageSize);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
-<<<<<<< HEAD
                     using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
-=======
-                    using(SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     {
                         while (dbReader.Read())
                         {
@@ -208,11 +195,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 City = Convert.ToString(dbReader["City"]),
                                 Country = Convert.ToString(dbReader["Country"]),
                                 Phone = Convert.ToString(dbReader["Phone"]),
-<<<<<<< HEAD
                                 Fax = Convert.ToString(dbReader["Fax"]),
-=======
-                                Fax = Convert.ToString(dbReader["Fax"]),                         
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             });
                         }
                     }
@@ -290,8 +273,4 @@ namespace LiteCommerce.DataLayers.SqlServer
             return dem;
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

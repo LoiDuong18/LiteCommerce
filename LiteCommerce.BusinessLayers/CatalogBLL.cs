@@ -60,20 +60,6 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static Supplier Supplier_Get(int supplierID)
-        {
-            return SupplierDB.Get(supplierID);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-=======
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="data"></param>
         /// <returns></returns>
         public static int Supplier_Add(Supplier data)
@@ -83,28 +69,12 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static bool Supplier_Update(Supplier data)
-        {
-            return SupplierDB.Update(data);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-=======
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="supplierIDs"></param>
         /// <returns></returns>
         public static bool Supplier_Delete(int[] supplierIDs)
         {
             return SupplierDB.Delete(supplierIDs);
         }
-<<<<<<< HEAD
-        /// <summary>
-        /// 
-=======
         public static Supplier Supplier_Get(int supplierID)
         {
             return SupplierDB.Get(supplierID);
@@ -113,7 +83,6 @@ namespace LiteCommerce.BusinessLayers
 
         /// <summary>
         /// Đếm số Supplier
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
@@ -124,8 +93,6 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-=======
         /// <param name="data"></param>
         /// <returns></returns>
         public static bool Supplier_Update(Supplier data)
@@ -135,15 +102,10 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-<<<<<<< HEAD
-        
-=======
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         public static List<Customer> Customer_List(int page, int pageSize, string searchValue)
         {
             if (page < 1)
@@ -153,20 +115,7 @@ namespace LiteCommerce.BusinessLayers
             return CustomerDB.List(page, pageSize, searchValue);
         }
         /// <summary>
-<<<<<<< HEAD
-        /// Get Customer
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static Customer Customer_Get(string customerID)
-        {
-            return CustomerDB.Get(customerID);
-        }
-        /// <summary>
-        /// Add Customer 
-=======
         /// 
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -175,24 +124,6 @@ namespace LiteCommerce.BusinessLayers
             return CustomerDB.Add(data);
         }
         /// <summary>
-<<<<<<< HEAD
-        /// Upfate Customer
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <returns></returns>
-        public static bool Customer_Update(Customer data)
-        {
-            return CustomerDB.Update(data);
-        }
-        /// <summary>
-        /// Delete Customer
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <returns></returns>
-        public static bool Customer_Delete(string[] customerID)
-        {
-            return CustomerDB.Delete(customerID);
-=======
         /// 
         /// </summary>
         /// <param name="customerID"></param>
@@ -209,7 +140,6 @@ namespace LiteCommerce.BusinessLayers
         public static Customer Customer_Get(string customerID)
         {
             return CustomerDB.Get(customerID);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -223,21 +153,11 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static List<Shipper> Shipper_List(int page, int pageSize, string searchValue)
-        {
-            return ShipperDB.List(searchValue);
-=======
         /// <param name="data"></param>
         /// <returns></returns>
         public static bool Customer_Update(Customer data)
         {
             return CustomerDB.Update(data);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -246,15 +166,9 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-<<<<<<< HEAD
-        public static Shipper Shipper_Get(int shipperID)
-        {
-            return ShipperDB.Get(shipperID);
-=======
         public static List<Shipper> Shipper_List(string searchValue)
         {
             return ShipperDB.List(searchValue);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -268,36 +182,20 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static bool Shipper_Update(Shipper data)
-        {
-            return ShipperDB.Update(data);
-=======
         /// <param name="shipperID"></param>
         /// <returns></returns>
         public static bool Shipper_Delete(int[] shipperID)
         {
             return ShipperDB.Delete(shipperID);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="ShipperID"></param>
-        /// <returns></returns>
-        public static bool Shipper_Delete(int[] ShipperID)
-        {
-            return ShipperDB.Delete(ShipperID);
-=======
         /// <param name="shipperID"></param>
         /// <returns></returns>
         public static Shipper Shipper_Get(int shipperID)
         {
             return ShipperDB.Get(shipperID);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -311,40 +209,22 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static List<Category> Category_List(string searchValue)
-        {
-            return CategoryDB.List(searchValue);
-=======
         /// <param name="data"></param>
         /// <returns></returns>
         public static bool Shipper_Update(Shipper data)
         {
             return ShipperDB.Update(data);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        public static Category Category_Get(int categoryID)
-        {
-            return CategoryDB.Get(categoryID);
-=======
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
         public static List<Category> Category_List(string searchValue)
-        {            
+        {
             return CategoryDB.List(searchValue);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -358,36 +238,20 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static bool Category_Update(Category data)
-        {
-            return CategoryDB.Update(data);
-=======
         /// <param name="categoryID"></param>
         /// <returns></returns>
         public static bool Category_Delete(int[] categoryID)
         {
             return CategoryDB.Delete(categoryID);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="CategoryID"></param>
-        /// <returns></returns>
-        public static bool Category_Delete(int[] CategoryID)
-        {
-            return CategoryDB.Delete(CategoryID);
-=======
         /// <param name="categoryID"></param>
         /// <returns></returns>
         public static Category Category_Get(int categoryID)
         {
             return CategoryDB.Get(categoryID);
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -401,8 +265,6 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
-<<<<<<< HEAD
-=======
         /// <param name="data"></param>
         /// <returns></returns>
         public static bool Category_Update(Category data)
@@ -412,7 +274,6 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
@@ -424,28 +285,15 @@ namespace LiteCommerce.BusinessLayers
             if (pageSize < 1)
                 pageSize = 1;
             return ProductDB.List(page, pageSize, searchValue, categoryId);
-<<<<<<< HEAD
         }
-=======
-        }        
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <summary>
         /// Đếm số products
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-<<<<<<< HEAD
         public static int Product_Count(string searchValue, string categoryID)
         {
             return ProductDB.Count(searchValue, categoryID);
         }
     }
 }
-=======
-        public static int Product_Count(string searchValue,string categoryID)
-        {
-            return ProductDB.Count(searchValue, categoryID);
-        }       
-    }
-}
->>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
