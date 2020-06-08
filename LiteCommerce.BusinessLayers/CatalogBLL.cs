@@ -337,5 +337,14 @@ namespace LiteCommerce.BusinessLayers
         {
             return ProductDB.Delete(productIDs);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public static List<ProductAttributes> Product_GetAttribute(string productID)
+        {
+            return ProductDB.GetAttribute(productID);
+        }
     }
 }

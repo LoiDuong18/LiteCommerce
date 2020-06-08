@@ -145,7 +145,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 CategoryName = Convert.ToString(dbReader["CategoryName"]),
                                 QuantityPerUnit = Convert.ToString(dbReader["QuantityPerUnit"]),
                                 UnitPrice = Convert.ToDouble(dbReader["UnitPrice"]),
-                                Descriptions = Convert.ToString(dbReader["Descriptions"])
+                                Descriptions = Convert.ToString(dbReader["Descriptions"]),
+                                PhotoPath = Convert.ToString(dbReader["PhotoPath"])
                             };
                         }
                     }
@@ -277,6 +278,41 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Close();
             }
             return dem;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public List<ProductAttributes> GetAttribute(string productID){
+            List<ProductAttributes> data = new List<ProductAttributes>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM ProductAttributes WHERE ProductID = @productID";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@productID", productID);
+                    using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (dbReader.Read())
+                        {
+                            data.Add(new ProductAttributes()
+                            {
+                                ProductID = Convert.ToInt32(dbReader["ProductID"]),
+                                AttributeID = Convert.ToInt32(dbReader["AttributeID"]),
+                                AttributeName = Convert.ToString(dbReader["AttributeName"]),
+                                AttributeValues = Convert.ToString(dbReader["AttributeValues"]),
+                                DisplayOrder = Convert.ToInt32(dbReader["DisplayOrder"]),
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return data;
         }
     }
 }

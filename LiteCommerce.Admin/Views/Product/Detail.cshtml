@@ -3,14 +3,13 @@
     ViewBag.Title = "Detail Product";
     string photoPath = string.IsNullOrEmpty(Model.PhotoPath) ? "/Images/no-image.png" : Model.PhotoPath;
 }
-
 <div class="row">
     <div class="col-sm-8">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Product Information</h3>
-
                 <div class="box-tools pull-right">
+                    <a href="~/Product" class="btn btn-sm btn-default"><i class="fa fa-long-arrow-left"></i> Back</a>
                     <a href="~/Product/Input/@Model.ProductID" class="btn btn-sm btn-primary" data-toggle="tooltip" data-original-title="Edit Product Info"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
@@ -60,7 +59,7 @@
                 <h3 class="box-title">Product Attribute</h3>
 
                 <div class="box-tools pull-right">
-                    <a href="~/Product/Attribute/id" class="btn btn-sm btn-primary"  data-toggle="tooltip" data-original-title="Edit Attribute"><i class="fa fa-pencil"></i></a>
+                    <a href="~/Product/Attribute/@Model.ProductID" class="btn btn-sm btn-primary"  data-toggle="tooltip" data-original-title="Edit Attribute"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
             <div class="box-body">

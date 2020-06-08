@@ -156,5 +156,35 @@ namespace LiteCommerce.Admin.Controllers
                 CatalogBLL.Product_Delete(productIDs);
             return RedirectToAction("Index");
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Attribute(string id = "")
+        {
+            try
+            {
+                Product checkProduct = CatalogBLL.Product_Get(id);
+
+                List<ProductAttributes> data = new List<ProductAttributes>();
+                data = CatalogBLL.Product_GetAttribute(id);
+                if(data == null)
+                {
+                    ProductAttributes newAttribute = new ProductAttributes();
+                    return View(newAttribute);
+                }
+                var model = new Models.AttributeResult()
+                {
+                    Data = data,
+                };
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

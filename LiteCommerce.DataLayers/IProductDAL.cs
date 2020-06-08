@@ -47,5 +47,11 @@ namespace LiteCommerce.DataLayers
         /// <param name="searchValue"></param>
         /// <returns></returns>
         int Count(string searchValue,string categoryID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        List<ProductAttributes> GetAttribute(string productID);
     }
 }
