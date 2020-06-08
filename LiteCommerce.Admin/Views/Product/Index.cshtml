@@ -21,9 +21,17 @@
                         <label>Category:</label>
                         <select class="form-control" name="categoryId">
                             <option value="">--Select Category--</option>
-                            @foreach(var item in SelectListHelper.ListOfCategories())
+                            @foreach (var item in SelectListHelper.ListOfCategories())
                             {
-                                <option value="@item.Value">@item.Text</option>
+                                if (item.Value == Model.CategoryID)
+                                {
+                                    <option value="@item.Value" selected>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
                             }
                         </select>
                     </div>

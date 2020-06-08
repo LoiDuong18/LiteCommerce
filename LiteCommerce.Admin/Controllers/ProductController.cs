@@ -26,6 +26,7 @@ namespace LiteCommerce.Admin.Controllers
                 RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
                 Data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId),
                 SearchValue = searchValue,
+                CategoryID = categoryId
             };
             return View(model);
         }
