@@ -74,4 +74,8 @@ namespace LiteCommerce.DomainModels
         /// </summary>
         public int DisplayOrder { get; set; }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

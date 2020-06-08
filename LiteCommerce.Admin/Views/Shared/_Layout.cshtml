@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LiteCommerce | @ViewBag.Title </title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -32,8 +32,13 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="~/Themes/AdminLTE/dist/css/style.css" />
     <!-- Google Font -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="shortcut icon" type="image/png" href="~/Images/lc.png" />
+=======
+    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">*@
+    <link rel="shortcut icon" type="image/png" href="~/Images/favicon.png" />
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
@@ -106,8 +111,10 @@
     $(document).ready(function () {
         $('.sidebar-menu').tree();
         // let currentURL = window.location.href;
-
-        var url = window.location;
+        
+        //var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+        var url = window.location.origin + window.location.pathname;
+        //console.log(url);
         // for sidebar menu but not for treeview submenu
         $('ul.sidebar-menu a').filter(function() {
             return this.href == url;
@@ -120,78 +127,15 @@
     </script>
     <script>
         $(document).ready(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Datemask dd/mm/yyyy
             $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-            //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-            //Money Euro
             $('[data-mask]').inputmask()
-
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
-            //Date range as a button
-            $('#daterange-btn').daterangepicker(
-              {
-                ranges   : {
-                  'Today'       : [moment(), moment()],
-                  'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                  'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                  'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                  'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate  : moment()
-              },
-              function (start, end) {
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-              }
-            )
-
-            //Date picker
-            $('#datepicker_birthday').datepicker({
-              autoclose: true
-            })
-
-            $('#datepicker_hireday').datepicker({
-                autoclose: true
-            })
-
-          })
+        })
     </script>
     <script>
-        let count = 1;
-        //multi_upload(count);
-        function multi_upload(x) {
-            html = `<div class="input-group control-group increment" >
-                            <label>Key</label>
-                                <div class ="input-group">
-                                    <input type="text" name="key[]" id="key" class ="form-control" required>
-                                </div>
-                            <label>Value</label>
-                                <div class ="input-group">
-                                    <input type="text" name="value[]" id="value" class ="form-control" required>
-                                </div>`;
-            if (x > 1) {
-                html += `<button type="button" id="remove_field" class="btn btn-danger btn-sm">Xóa</button></div>`;
-                $('#input_fields').append(html);
-            } else {
-                html += `<button type="button" name="add" id="add_field" class="btn btn-success btn-sm">Thêm</button></div>`;
-                $('#input_fields').html(html);
-            }
-        }
-        $(document).on('click', '#add_field', function () {
-            count++;
-            multi_upload(count);
-        });
-        $(document).on('click', '#remove_field', function () {
-            count--;
-            $(this).closest(".increment").remove();
+        $(document).ready(function () {
+            $('#selectAll').click(function (e) {
+                $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
+            });
         });
     </script>
 </body>

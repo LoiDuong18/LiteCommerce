@@ -30,9 +30,15 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public static int Employee_Count(string searchValue, int idCookie)
         {
             return EmployeeDB.Count(searchValue, idCookie);
+=======
+        public static int Employee_Count(string searchValue,int idCookie)
+        {
+            return EmployeeDB.Count(searchValue,idCookie);
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
 
         /// <summary>
@@ -42,8 +48,13 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public static List<Employee> Employee_List(int page, int pageSize, string searchValue, int idCookie)
         {
+=======
+        public static List<Employee> Employee_List(int page, int pageSize, string searchValue,int idCookie)
+        {            
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             if (page < 1)
                 page = 1;
             if (pageSize < 1)
@@ -84,9 +95,17 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="email"></param>
         /// <param name="method"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public static bool Employee_CheckEmail(int employeeId, string email, string method)
+=======
+        public static bool Employee_CheckEmail(int employeeId,string email,string method)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             return EmployeeDB.CheckEmail(employeeId, email, method);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

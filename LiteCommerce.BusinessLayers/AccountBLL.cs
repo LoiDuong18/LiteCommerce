@@ -40,8 +40,12 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public static Account Account_Get(string email)
         {
+=======
+        public static Account Account_Get(string email) {
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             return AccountDB.Get(email);
         }
         public static bool Account_Update(Account model)

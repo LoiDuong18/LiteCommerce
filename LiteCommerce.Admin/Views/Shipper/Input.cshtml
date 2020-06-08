@@ -16,17 +16,28 @@
             <input type="hidden" name="ShipperID" value="@Model.ShipperID" />
             <div class="form-group">
                 <label>Company Name:</label>
+<<<<<<< HEAD
                 <input type="text" name="CompanyName" class="form-control" placeholder="Hue Town" value="@Model.CompanyName">
+=======
+                <input type="text" name="CompanyName" class="form-control" placeholder="ABC Company" value="@Model.CompanyName">
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 @Html.ValidationMessage("CompanyName", new { @style = "color: red" })
             </div>
             <div class="form-group">
                 <label>Phone:</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+<<<<<<< HEAD
                     <input type="text" name="Phone" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.Phone">
                     @Html.ValidationMessage("Phone", new { @style = "color: red" })
                 </div>
             </div>
+=======
+                    <input type="text" name="Phone" class="form-control" placeholder="(+84) 123 123 123" value="@Model.Phone">
+                </div>
+                @Html.ValidationMessage("Phone", new { @style = "color: red" })
+            </div>          
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

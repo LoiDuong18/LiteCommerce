@@ -1,5 +1,10 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,15 +24,77 @@ namespace LiteCommerce.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            HttpCookie requestCookies = Request.Cookies["userInfo"];
+            string email = Convert.ToString(requestCookies["Email"]);
+            Account model = AccountBLL.Account_Get(email);
+            return View(model);
         }
         /// <summary>
         /// Thay đổi mật khẩu
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ChangePwd()
         {
             return View();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="reNewPassword"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ChangePwd(string oldPassword,string newPassword,string reNewPassword)
+        {
+            HttpCookie requestCookie = Request.Cookies["userInfo"];
+            int id = Convert.ToInt32(requestCookie["AccountID"]);
+            if (string.IsNullOrEmpty(oldPassword))
+            {
+                ModelState.AddModelError("OldPassword", "OldPassword is required");
+            }
+            else
+            {
+                if (!AccountBLL.Account_CheckPass(oldPassword,id))
+                {
+                    ModelState.AddModelError("OldPassword", "Old password incorrect");
+                }
+                ViewBag.OldPassword = oldPassword;
+            }
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                ModelState.AddModelError("NewPassword", "NewPassword is required");
+            }
+            else
+            {
+                if(newPassword.Length < 6)
+                {
+                    ModelState.AddModelError("NewPassword", "Password must over 6 characters");
+                }
+                ViewBag.NewPassword = newPassword;
+            }
+            if (string.IsNullOrEmpty(reNewPassword))
+            {
+                ModelState.AddModelError("ReNewPassword", "ReNewPassword is required");
+            }
+            else
+            {
+                if (!newPassword.Equals(reNewPassword))
+                {
+                    ModelState.AddModelError("ReNewPassword", "The new password does not match the old password");
+                }
+                ViewBag.ReNewPassword = reNewPassword;
+            }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (AccountBLL.Account_ChangePwd(newPassword, id)){
+                return RedirectToAction("SignOut");
+            }
+            ModelState.AddModelError("error", "Cập nhật không thành công");
+            return RedirectToAction("ChangePwd");
         }
         /// <summary>
         /// Đăng xuất
@@ -38,6 +105,12 @@ namespace LiteCommerce.Admin.Controllers
             Session.Abandon();
             Session.Clear();
             FormsAuthentication.SignOut();
+            foreach (string key in Request.Cookies.AllKeys)
+            {
+                HttpCookie requestCookies = Request.Cookies["userInfo"];
+                requestCookies.Expires = DateTime.Now.AddMonths(-1);
+                Response.AppendCookie(requestCookies);
+            }
             return RedirectToAction("Login", "Account");
         }
         /// <summary>
@@ -53,10 +126,23 @@ namespace LiteCommerce.Admin.Controllers
             }
             else
             {
+<<<<<<< HEAD
                 //TODO : Kiểm tra thông tin đăng nhập thông qua CSDL
                 if(email == "admin@abc.com" && password == "admin")
+=======
+                var newUser = AccountBLL.Account_Login(email, password);
+                if (newUser!=null)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 {
-                    FormsAuthentication.SetAuthCookie(email,false);
+                    Account account = AccountBLL.Account_Login(email, password);
+                    FormsAuthentication.SetAuthCookie(account.AccountID.ToString(), false);
+                    HttpCookie userInfo = new HttpCookie("userInfo");
+                    userInfo["AccountID"] = account.AccountID.ToString();
+                    userInfo["FullName"] = Server.UrlEncode(account.LastName +" "+ account.FirstName);
+                    userInfo["Email"] = account.Email;
+                    userInfo["PhotoPath"] = account.PhotoPath;
+                    userInfo.Expires = DateTime.Now.AddDays(1);
+                    Response.Cookies.Add(userInfo);
                     return RedirectToAction("Index", "Dashboard");
                 }
                 else
@@ -80,9 +166,88 @@ namespace LiteCommerce.Admin.Controllers
         /// Hiển thị form chỉnh sửa thông tin người dùng
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Edit()
         {
-            return View();
+            HttpCookie requestCookies = Request.Cookies["userInfo"];
+            string email = Convert.ToString(requestCookies["Email"]);
+            Account model = AccountBLL.Account_Get(email);
+            return View(model);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(Account model, HttpPostedFileBase uploadPhoto)
+        {
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                ModelState.AddModelError("Email", "Email is required");
+            }
+            if (string.IsNullOrEmpty(model.HomePhone))
+            {
+                ModelState.AddModelError("HomePhone", "Phone is required");
+            }
+            if (string.IsNullOrEmpty(model.Address))
+            {
+                ModelState.AddModelError("Address", "Address is required");
+            }
+            if (string.IsNullOrEmpty(model.Country))
+            {
+                ModelState.AddModelError("Country", "Country is required");
+            }
+            if (string.IsNullOrEmpty(model.City))
+            {
+                ModelState.AddModelError("City", "City is required");
+            }
+            if (string.IsNullOrEmpty(model.Notes))
+            {
+                model.Notes = "";
+            }
+            HttpCookie requestCookies = Request.Cookies["userInfo"];
+            model.AccountID = Convert.ToInt32(requestCookies["AccountID"]);
+            if (!HumanResourceBLL.Employee_CheckEmail(model.AccountID, model.Email, "update"))
+            {
+                ModelState.AddModelError("Email", "Email ready exist");
+            }
+            //Upload ảnh
+            if (uploadPhoto != null && uploadPhoto.ContentLength > 0)
+            {
+                string filePath = Path.Combine(Server.MapPath("~/Images"), uploadPhoto.FileName);
+                uploadPhoto.SaveAs(filePath);
+                model.PhotoPath = "/Images/" + uploadPhoto.FileName;
+                requestCookies.Values["PhotoPath"] = Convert.ToString(model.PhotoPath);
+                Response.SetCookie(requestCookies);
+            }
+            else if (model.PhotoPath == null)
+            {
+                model.PhotoPath = Convert.ToString(requestCookies["PhotoPath"]);
+            }
+            DateTime hireDate = DateTime.Today;
+            if ((hireDate.Year - (model.BirthDate).Year) < 18)
+            {
+                ModelState.AddModelError("BirthDate", "You must be over 18 years old");
+            }
+            //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            try
+            {
+                bool rs = AccountBLL.Account_Update(model);
+                requestCookies.Values["Email"] = model.Email;
+                Response.SetCookie(requestCookies);
+                return RedirectToAction("Index");                               
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
+                return View(model);
+            }            
         }
     }
 }

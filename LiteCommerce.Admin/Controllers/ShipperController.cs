@@ -18,6 +18,7 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+<<<<<<< HEAD
         public ActionResult Index(int page = 1, string searchValue = "")
         {
            var model = new Models.ShipperPaginationResult()
@@ -25,11 +26,22 @@ namespace LiteCommerce.Admin.Controllers
                 
                 RowCount = CatalogBLL.Shipper_Count(searchValue),
                 Data = CatalogBLL.Shipper_List(page, AppSettings.DefaultPageSize, searchValue),
+=======
+        public ActionResult Index(string searchValue = "")
+        {
+            var model = new Models.ShipperResult
+            {
+                RowCount = CatalogBLL.Shipper_Count(searchValue),
+                Data = CatalogBLL.Shipper_List(searchValue),
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             };
             //var listOfSuppliers = CatalogBLL.Supplier_List(page, 10, searchValue);
             //int rowCount = CatalogBLL.Supplier_Count(searchValue);
             //ViewBag.rc = rowCount;
+<<<<<<< HEAD
             //ViewBag.searchValue = searchValue;
+=======
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             return View(model);
         }
         /// <summary>
@@ -67,12 +79,19 @@ namespace LiteCommerce.Admin.Controllers
                     Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
+<<<<<<< HEAD
             }         
+=======
+            }
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
         /// </summary>
+<<<<<<< HEAD
         /// <param name="method"></param>
+=======
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
@@ -80,6 +99,7 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
+<<<<<<< HEAD
                 //Validation dữ liệu
                 if (string.IsNullOrEmpty(model.CompanyName))
                 {
@@ -93,13 +113,23 @@ namespace LiteCommerce.Admin.Controllers
                 if (!ModelState.IsValid)
                 {
                     if (model.ShipperID == 0)
+=======
+
+                if (!ModelState.IsValid)
+                {
+                    if(model.ShipperID == 0)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     {
                         ViewBag.Title = "Add New Shipper";
                         ViewBag.ConfirmButton = "Add";
                     }
                     else
                     {
+<<<<<<< HEAD
                         ViewBag.Title = "Edit New Shipper";
+=======
+                        ViewBag.Title = "Edit Shipper";
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                         ViewBag.ConfirmButton = "Save";
                     }
                     return View(model);
@@ -107,7 +137,11 @@ namespace LiteCommerce.Admin.Controllers
                 //Đưa dữ liệu vào CSDL
                 if (model.ShipperID == 0)
                 {
+<<<<<<< HEAD
                     int ShipperID = CatalogBLL.Shipper_Add(model);
+=======
+                    int shipperID = CatalogBLL.Shipper_Add(model);
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     return RedirectToAction("Index");
                 }
                 else
@@ -116,16 +150,24 @@ namespace LiteCommerce.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
+<<<<<<< HEAD
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+=======
+            catch (Exception e)
+            {
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 return View(model);
             }
         }
         /// <summary>
         /// 
         /// </summary>
+<<<<<<< HEAD
         /// <param name="method"></param>
+=======
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         /// <param name="shipperIDs"></param>
         /// <returns></returns>
         [HttpPost]

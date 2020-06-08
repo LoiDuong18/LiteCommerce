@@ -19,7 +19,11 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "")
+<<<<<<< HEAD
         {
+=======
+        {          
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             var model = new Models.SupplierPaginationResult()
             {
                 Page = page,
@@ -109,11 +113,19 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("Phone", "Phone is required");
                 }
                 if (string.IsNullOrEmpty(model.Fax))
+<<<<<<< HEAD
                 {
                     model.Fax = "";
                 }
                 if (string.IsNullOrEmpty(model.HomePage))
                 {
+=======
+                {                    
+                    model.Fax = "";
+                }
+                if (string.IsNullOrEmpty(model.HomePage))
+                {                    
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     model.HomePage = "";
                 }
                 //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
@@ -122,7 +134,11 @@ namespace LiteCommerce.Admin.Controllers
                     if (model.SupplierID == 0)
                     {
                         ViewBag.Title = "Add New Supplier";
+<<<<<<< HEAD
                         ViewBag.ConfirmButton = "Add";
+=======
+                        ViewBag.ConfirmButton = "Add";                        
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     }
                     else
                     {
@@ -143,9 +159,15 @@ namespace LiteCommerce.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
+<<<<<<< HEAD
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+=======
+            catch(Exception e)
+            {
+                //ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 return View(model);
             }
         }
@@ -158,7 +180,11 @@ namespace LiteCommerce.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(string method = "", int[] supplierIDs = null)
         {
+<<<<<<< HEAD
             if (supplierIDs != null)
+=======
+            if (supplierIDs!=null)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             {
                 CatalogBLL.Supplier_Delete(supplierIDs);
             }

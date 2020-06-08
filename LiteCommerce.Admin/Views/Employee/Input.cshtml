@@ -2,13 +2,21 @@
 @{
     DateTime today = DateTime.Now;
     DateTime hireDate = (ViewBag.Method == "add") ? today : Model.HireDate;
+<<<<<<< HEAD
     string defaultToday = (ViewBag.Method == "add") ? "(Default Today)" : "";
+=======
+    string defaultToday = (ViewBag.Method == "add") ?"(Default Today)":"";
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 }
 
 <!-- Input box -->
 <div class="box box-primary">
     <!-- form start -->
+<<<<<<< HEAD
     <form role="form" action="~/Employee/Input" method="post" enctype="multipart/form-data">
+=======
+    <form role="form" action="~/Employee/Input" method="post" enctype = "multipart/form-data">
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         <div class="box-header with-border">
             <div class="box-tools pull-right">
                 <a href="~/Employee" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i> Back</a>
@@ -16,12 +24,20 @@
         </div>
         <div class="box-body">
             <input type="hidden" name="EmployeeID" value="@Model.EmployeeID" />
+<<<<<<< HEAD
             <input type="hidden" name="method" value="@ViewBag.Method" />
+=======
+            <input type="hidden" name="method" value="@ViewBag.Method"/>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>First Name:</label>
+<<<<<<< HEAD
                         <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName">
+=======
+                        <input type="text" name="FirstName" class="form-control" placeholder="A" value="@Model.FirstName" >
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                         @Html.ValidationMessage("FirstName", new { @style = "color: red" })
                     </div>
                 </div>
@@ -112,7 +128,11 @@
                         </select>
                         @Html.ValidationMessage("Country", new { @style = "color: red" })
                     </div>
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -132,7 +152,14 @@
                 <input type="hidden" name="PhotoPath" value="@Model.PhotoPath" />
             </div>
         </div>
+<<<<<<< HEAD
         
+=======
+        @*<div class="text-danger">
+            @Html.ValidationSummary("");
+        </div>*@
+                <!-- /.box-body -->
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>
             <a href="~/Employee" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>

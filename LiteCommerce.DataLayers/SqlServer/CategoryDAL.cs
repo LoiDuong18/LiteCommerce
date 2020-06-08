@@ -155,7 +155,11 @@ namespace LiteCommerce.DataLayers.SqlServer
                             {
                                 CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
                                 CategoryName = Convert.ToString(dbReader["CategoryName"]),
+<<<<<<< HEAD
                                 Description = Convert.ToString(dbReader["Description"]),
+=======
+                                Description = Convert.ToString(dbReader["Description"]),                                
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             });
                         }
                     }

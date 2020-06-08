@@ -1,4 +1,8 @@
 ﻿using LiteCommerce.BusinessLayers;
+<<<<<<< HEAD
+=======
+using LiteCommerce.DomainModels;
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +23,29 @@ namespace LiteCommerce.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index(int page = 1, string searchValue = "", string categoryId = "")
         {
+<<<<<<< HEAD
+=======
+            List<Product> data = new List<Product>();
+            try
+            {
+                data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             var model = new Models.ProductPaginationResult()
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
+<<<<<<< HEAD
                 RowCount = CatalogBLL.Product_Count(searchValue, categoryId),
                 Data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId),
+=======
+                RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
+                Data = data,
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                 SearchValue = searchValue,
                 CategoryID = categoryId
             };
@@ -47,6 +68,15 @@ namespace LiteCommerce.Admin.Controllers
                 ViewBag.Title = "Edit Product";
                 ViewBag.ConfirmButton = "Save";
             }
+            return View();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Detail(string id = "")
+        {
             return View();
         }
     }

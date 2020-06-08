@@ -3,9 +3,12 @@ F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\bin\Debu
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csprojResolveAssemblyReference.cache
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.dll
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.pdb
+<<<<<<< HEAD
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\bin\Debug\LiteCommerce.DomainModels.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\bin\Debug\LiteCommerce.DomainModels.pdb
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.pdb
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csprojAssemblyReference.cache
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csproj.CoreCompileInputs.cache
+=======
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

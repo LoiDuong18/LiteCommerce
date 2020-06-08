@@ -32,7 +32,11 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="newPassword"></param>
         /// <param name="reNewPassword"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public bool ChangePw(string newPassword, int id)
+=======
+        public bool ChangePw(string newPassword,int id)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             int rowsAffected;
             MD5 md5 = MD5.Create();
@@ -60,7 +64,11 @@ namespace LiteCommerce.DataLayers.SqlServer
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
                 connection.Close();
             }
+<<<<<<< HEAD
             return rowsAffected > 0;
+=======
+            return rowsAffected>0;
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         }
         /// <summary>
         /// 
@@ -197,7 +205,11 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="oldPassword"></param>
         /// <param name="id"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public bool CheckPassword(string oldPassword, int id)
+=======
+        public bool CheckPassword(string oldPassword,int id)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             int dem;
             MD5 md5 = MD5.Create();

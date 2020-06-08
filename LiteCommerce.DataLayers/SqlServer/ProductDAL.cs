@@ -60,7 +60,11 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public List<Product> List(int page, int pageSize, string searchValue, string categoryID)
+=======
+        public List<Product> List(int page, int pageSize, string searchValue,string categoryID)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             List<Product> data = new List<Product>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -120,7 +124,11 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         public int Count(string searchValue, string categoryID)
+=======
+        public int Count(string searchValue,string categoryID)
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         {
             int dem;
             if (!string.IsNullOrEmpty(searchValue))

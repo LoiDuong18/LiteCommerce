@@ -13,8 +13,12 @@ namespace LiteCommerce.Admin
         /// 
         /// </summary>
         /// <returns></returns>
+<<<<<<< HEAD
         public static List<SelectListItem> ListOfCountries()
         {
+=======
+        public static List<SelectListItem> ListOfCountries() {
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             List<SelectListItem> listCountries = new List<SelectListItem>();
             listCountries.Add(new SelectListItem() { Value = "USA", Text = "United State" });
             listCountries.Add(new SelectListItem() { Value = "UK", Text = "England" });
@@ -29,9 +33,15 @@ namespace LiteCommerce.Admin
         public static List<SelectListItem> ListOfCategories()
         {
             List<SelectListItem> listCategory = new List<SelectListItem>();
+<<<<<<< HEAD
             foreach (var item in CatalogBLL.Category_List(""))
             {
                 listCategory.Add(new SelectListItem() { Value = Convert.ToString(item.CategoryID), Text = item.CategoryName });
+=======
+            foreach(var item in CatalogBLL.Category_List(""))
+            {
+                listCategory.Add(new SelectListItem() { Value = Convert.ToString(item.CategoryID), Text = item.CategoryName});
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             }
             return listCategory;
         }

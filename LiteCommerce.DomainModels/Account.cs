@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace LiteCommerce.DomainModels
 {
+<<<<<<< HEAD
+=======
+    /// <summary>
+    /// 
+    /// </summary>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
     public class Account
     {
         /// <summary>
@@ -45,7 +51,11 @@ namespace LiteCommerce.DomainModels
         /// 
         /// </summary>
         [Required]
+<<<<<<< HEAD
         [EmailAddress(ErrorMessage = "Email is valid")]
+=======
+        [EmailAddress(ErrorMessage ="Email is valid")]
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
         public string Email { get; set; }
         /// <summary>
         /// 

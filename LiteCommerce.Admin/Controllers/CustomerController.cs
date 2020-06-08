@@ -74,9 +74,15 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+<<<<<<< HEAD
         public ActionResult Input(Customer model, string method, string tempID)
         {
 
+=======
+        public ActionResult Input(Customer model,string method,string tempID)
+        {
+            
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             if (string.IsNullOrEmpty(method))
             {
                 return RedirectToAction("Index");

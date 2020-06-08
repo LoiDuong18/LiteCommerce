@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 ﻿@model LiteCommerce.Admin.Models.CategoryPaginationResult
 @{
     ViewBag.Title = "Manage Categories";
     int i = 0;
     string paramSearch = "&searchValue=" + Model.SearchValue;
+=======
+﻿@model LiteCommerce.Admin.Models.CategoryResult
+@{
+    ViewBag.Title = "Manage Categories";
+    int i = 0;
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
 }
 <!-- Search box -->
 <div class="box box-primary">
@@ -23,12 +30,21 @@
     <!-- /.box -->
     <div class="row">
         <div class="col-sm-8">
+<<<<<<< HEAD
             <span>There are <b>@Model.RowCount</b> Categories. Page <b>1</b></span>
         </div>
         <div class="col-sm-4">
             <div class="pull-right">
                 <a href="~/Category/Input" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
                 <button type="submit" class="btn btn-sm btn-danger" name="method" value="delete"><i class="fa fa-trash-o"></i> Delete</button>
+=======
+            <span>There are <b>@Model.RowCount</b> Categories</span>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <a href="~/Category/Input" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</a>
+                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             </div>
         </div>
     </div>
@@ -39,7 +55,11 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+<<<<<<< HEAD
                         <th><input type="checkbox" /></th>
+=======
+                        <th><input type="checkbox" id="selectAll"/></th>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                         <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -51,7 +71,11 @@
                     {
                         <tr>
                             <td>
+<<<<<<< HEAD
                                 <input type="checkbox" />
+=======
+                                <input type="checkbox" name="categoryIDs" value="@item.CategoryID" />
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             </td>
                             <td>@(++i)</td>
                             <td>
@@ -69,4 +93,8 @@
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
+<<<<<<< HEAD
 </form>
+=======
+</form>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d

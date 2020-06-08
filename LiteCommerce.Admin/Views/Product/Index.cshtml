@@ -13,7 +13,11 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Key search:</label>
+<<<<<<< HEAD
                         <input type="text" name="searchValue" class="form-control" placeholder="Product" value="@Model.SearchValue">
+=======
+                        <input type="text" name="searchValue" class="form-control" placeholder="Nước abc" value="@Model.SearchValue">
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -48,7 +52,11 @@
 <!-- /.box -->
 <div class="row">
     <div class="col-sm-8">
+<<<<<<< HEAD
         <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span>
+=======
+        <span>There are <b>@Model.RowCount</b> Products. Page <b>@Model.Page/@Model.PageCount</b></span> 
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
     </div>
     <div class="col-sm-4">
         <div class="pull-right">
@@ -83,8 +91,13 @@
                         </td>
                         <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                         <td>
+<<<<<<< HEAD
                             @{
                                 string urlImage = string.IsNullOrEmpty(item.PhotoPath) ? "/Images/my.jpg" : item.PhotoPath;
+=======
+                            @{ 
+                                string urlImage = string.IsNullOrEmpty(item.PhotoPath) ? "/Images/no-image.png" : item.PhotoPath;
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
                             }
                             <img src="@urlImage" width="50px" />
                         </td>
@@ -110,6 +123,7 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)
             {
+<<<<<<< HEAD
                 <li><a href="~/Product?page=1@paramSearch">First</a></li>
             }
             @for (int page = 1; page <= Model.PageCount; page++)
@@ -127,6 +141,44 @@
             @if (Model.Page != Model.PageCount)
             {
                 <li><a href="~/Product?page=@Model.PageCount@paramSearch">Last</a></li>
+=======
+                <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">First</a></li>
+                <li>
+                    <a href="~/Product?page=@(Model.Page-1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID"><span><i class="fa fa-angle-double-left"></i></span></a>
+                </li>
+            }
+            @for (int page = 1; page <= Model.PageCount; page++)
+            {
+                if(Model.Page == page)
+                {
+                    <li class="active"><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                }
+                else if (page == (Model.Page + 1) || page == (Model.Page + 2) || page == Model.PageCount)
+                {
+                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                }
+                else if (page == (Model.Page - 1) || page == (Model.Page - 2))
+                {
+                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                }
+                else if (page == (Model.PageCount - 1))
+                {
+                    <li class="disabled"><span><i class="fa fa-ellipsis-h"></i></span></li>
+                }
+            }
+            @if (Model.Page < Model.PageCount)
+            {
+                <li>
+                    <a href="~/Product?page=@(Model.Page+1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">
+                        <span><i class="fa fa-angle-double-right"></i></span>
+                    </a>
+                </li>
+            }
+
+            @if (Model.Page != Model.PageCount)
+            {
+                <li><a href="~/Product?page=@Model.PageCount&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">Last</a></li>
+>>>>>>> 35b67c81760d8837aeec833336546907ae9df09d
             }
         </ul>
     </div>
