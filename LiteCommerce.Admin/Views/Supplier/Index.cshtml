@@ -80,11 +80,11 @@
         <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
                 @if (Model.Page != 1)
-            {
+                {
                     <li><a href="~/Supplier?page=1&@paramSearch">First</a></li>
-            }
+                }
                 @for (int page = 1; page <= Model.PageCount; page++)
-            {
+                {
                 if (Model.Page == page)
                 {
                         <li class="active"><a href="~/Supplier?page=@page&@paramSearch">@page</a></li>

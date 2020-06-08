@@ -40,7 +40,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" /></th>
+                        <th><input type="checkbox" id="selectAll" /></th>
                         <th>#</th>
                         <th>Name</th>
                         <th>Address</th>
@@ -53,7 +53,7 @@
                     {
                         <tr>
                             <td>
-                                <input type="checkbox" name="customerIDs" value="@item.CustomerID" />
+                                <input type="checkbox" name="customerIDs" value="@item.CustomerID"/>
                             </td>
                             <td>@((Model.Page - 1) * Model.PageSize + (++i))</td>
                             <td>

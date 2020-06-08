@@ -79,11 +79,6 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
-                //Validate dữ liệu
-                if (string.IsNullOrEmpty(model.CategoryName))
-                {
-                    ModelState.AddModelError("CategoryName", "CategoryName is required");
-                }
                 if (string.IsNullOrEmpty(model.Description))
                 {
                     model.Description = "";

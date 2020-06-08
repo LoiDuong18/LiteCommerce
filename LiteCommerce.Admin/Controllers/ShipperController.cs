@@ -77,15 +77,6 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
-                //Validate dữ liệu
-                if (string.IsNullOrEmpty(model.CompanyName))
-                {
-                    ModelState.AddModelError("CompanyName", "CompanyName is required");
-                }
-                if (string.IsNullOrEmpty(model.Phone))
-                {
-                    ModelState.AddModelError("Phone", "Phone is required");
-                }
 
                 if (!ModelState.IsValid)
                 {
@@ -96,7 +87,7 @@ namespace LiteCommerce.Admin.Controllers
                     }
                     else
                     {
-                        ViewBag.Title = "Edit New Shipper";
+                        ViewBag.Title = "Edit Shipper";
                         ViewBag.ConfirmButton = "Save";
                     }
                     return View(model);

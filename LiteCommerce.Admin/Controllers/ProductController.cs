@@ -17,14 +17,15 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(int page = 1, string searchValue = "")
+        public ActionResult Index(int page = 1, string searchValue = "", string categoryId = "")
         {
             var model = new Models.ProductPaginationResult()
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
-                RowCount = CatalogBLL.Product_Count(searchValue),
-                Data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue),
+                RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
+                Data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId),
+                SearchValue = searchValue,
             };
             return View(model);
         }

@@ -33,37 +33,36 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Add(Customer data)
         {
-            int customerId = 0;
+            int customerId;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
-
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Customers
-									  (
-                                          CustomerID,
-										  CompanyName,
-										  ContactName,
-										  ContactTitle,
-										  Address,
-										  City,
-										  Country,
-										  Phone,
-										  Fax
-									  )
-									  VALUES
-									  (
-                                          @CustomerID,
-										  @CompanyName,
-										  @ContactName,
-										  @ContactTitle,
-										  @Address,
-										  @City,
-										  @Country,
-										  @Phone,
-										  @Fax
-									  );
-									  SELECT @@IDENTITY;";
+                                    (
+                                        CustomerID,
+	                                    CompanyName,
+	                                    ContactName,
+	                                    ContactTitle,
+	                                    Address,
+	                                    City,
+	                                    Country,
+	                                    Phone,
+	                                    Fax
+                                    )
+                                    VALUES
+                                    (
+                                        @CustomerID,
+	                                    @CompanyName,
+	                                    @ContactName,
+	                                    @ContactTitle,
+	                                    @Address,
+	                                    @City,
+	                                    @Country,
+	                                    @Phone,
+	                                    @Fax
+                                    );
+                                    SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@CustomerID", data.CustomerID);
@@ -76,10 +75,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
                 cmd.Parameters.AddWithValue("@Fax", data.Fax);
 
-                customerId = Convert.ToInt32(cmd.ExecuteScalar());
-
+                //customerId = Convert.ToInt32(cmd.ExecuteScalar());
+                var queryResult = cmd.ExecuteScalar();
+                customerId = (queryResult != DBNull.Value) ? Convert.ToInt32(cmd.ExecuteScalar()) : 0;
                 connection.Close();
             }
+            
             return customerId;
         }
         /// <summary>

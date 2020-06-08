@@ -344,11 +344,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 }
                 connection.Close();
             }
-            if (dem > 0)
-            {
-                return false;
-            }
-            return true;
+            return dem > 0;
         }
 
     }

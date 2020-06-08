@@ -14,6 +14,7 @@
         </div>
         <div class="box-body">
             <input type="hidden" name="method" value="@ViewBag.Method" />
+            <input type="hidden" name="tempID" value="@Model.CustomerID" />
             <div class="form-group">
                 @if (@ViewBag.Method == "add")
                 {

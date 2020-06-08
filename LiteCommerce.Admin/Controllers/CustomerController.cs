@@ -74,90 +74,71 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Input(Customer model,string method)
+        public ActionResult Input(Customer model,string method,string tempID)
         {
-            try
+            
+            if (string.IsNullOrEmpty(method))
             {
-                //Nếu không có trường method thì chuyển hướng về Index
-                if (string.IsNullOrEmpty(method))
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (method == "add")
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    //Validation dữ liệu
-                    if (string.IsNullOrEmpty(model.CustomerID))
+                    if (!string.IsNullOrEmpty(model.CustomerID))
                     {
-                        ModelState.AddModelError("CustomerID", "CustomerID is required");
-                    }
-                    if (string.IsNullOrEmpty(model.CompanyName))
-                    {
-                        ModelState.AddModelError("CompanyName", "CompanyName is required");
-                    }
-                    if (string.IsNullOrEmpty(model.ContactName))
-                    {
-                        ModelState.AddModelError("ContactName", "ContactName is required");
-                    }
-                    if (string.IsNullOrEmpty(model.ContactTitle))
-                    {
-                        ModelState.AddModelError("ContactTitle", "ContactTitle is required");
-                    }
-                    if (string.IsNullOrEmpty(model.Address))
-                    {
-                        ModelState.AddModelError("Address", "Address is required");
-                    }
-                    if (string.IsNullOrEmpty(model.Country))
-                    {
-                        ModelState.AddModelError("Country", "Country is required");
-                    }
-                    if (string.IsNullOrEmpty(model.City))
-                    {
-                        ModelState.AddModelError("City", "City is required");
-                    }
-                    if (string.IsNullOrEmpty(model.Phone))
-                    {
-                        ModelState.AddModelError("Phone", "Phone is required");
-                    }
-                    if (string.IsNullOrEmpty(model.Fax))
-                    {
-                        model.Fax = "";
-                    }
-
-                    //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
-                    if (!ModelState.IsValid)
-                    {
-                        if (method=="add")
+                        if (CatalogBLL.Customer_Get(model.CustomerID) != null)
                         {
-                            ViewBag.Title = "Add New Supplier";
-                            ViewBag.ConfirmButton = "Add";
-                            ViewBag.Method = "add";
-                            return View(model);
+                            ModelState.AddModelError("CustomerID", "Customer ID ready exist");
                         }
-                        else
-                        {
-                            ViewBag.Title = "Edit New Supplier";
-                            ViewBag.ConfirmButton = "Save";
-                            ViewBag.Method = "update";
-                            return View(model);
-                        }
-                        
                     }
-                    //Đưa dữ liệu vào CSDL
-                    if (method== "add")
-                    {
-                        int customerID = CatalogBLL.Customer_Add(model);                        
-                    }
-                    else if(method == "update")
-                    {
-                        bool rs = CatalogBLL.Customer_Update(model);
-                    }
-                    return RedirectToAction("Index");
                 }
             }
-            catch (Exception e)
+            if (string.IsNullOrEmpty(model.Fax))
             {
-                ModelState.AddModelError("", e.Message + ":" + e.StackTrace);
-                return View(model);
+                model.Fax = "";
+            }
+            //Nếu không có trường method thì chuyển hướng về Index
+            if (string.IsNullOrEmpty(method))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(model.Fax))
+                {
+                    model.Fax = "";
+                }
+
+                //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
+                if (!ModelState.IsValid)
+                {
+                    if (method == "add")
+                    {
+                        ViewBag.Title = "Add New Customer";
+                        ViewBag.ConfirmButton = "Add";
+                        ViewBag.Method = "add";
+                        return View(model);
+                    }
+                    else
+                    {
+                        ViewBag.Title = "Edit Customer";
+                        ViewBag.ConfirmButton = "Save";
+                        ViewBag.Method = "update";
+                        return View(model);
+                    }
+
+                }
+                //Đưa dữ liệu vào CSDL
+                if (method == "add")
+                {
+                    int customerID = CatalogBLL.Customer_Add(model);
+                }
+                else if (method == "update")
+                {
+                    bool rs = CatalogBLL.Customer_Update(model);
+                }
+                return RedirectToAction("Index");
             }
         }
         /// <summary>
