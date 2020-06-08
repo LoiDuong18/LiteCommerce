@@ -5,6 +5,7 @@ F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\obj\Debu
 F:\Web thầy Phong\LiteCommerce\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.pdb
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\bin\Debug\LiteCommerce.DomainModels.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\bin\Debug\LiteCommerce.DomainModels.pdb
-E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csprojResolveAssemblyReference.cache
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.pdb
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csprojAssemblyReference.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DomainModels\obj\Debug\LiteCommerce.DomainModels.csproj.CoreCompileInputs.cache

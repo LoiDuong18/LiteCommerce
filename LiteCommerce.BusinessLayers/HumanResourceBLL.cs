@@ -11,7 +11,7 @@ namespace LiteCommerce.BusinessLayers
     /// <summary>
     /// 
     /// </summary>
-    public class HumanResourceBLL
+    public static class HumanResourceBLL
     {
         /// <summary>
         /// 
@@ -21,14 +21,6 @@ namespace LiteCommerce.BusinessLayers
         /// Hàm này phải được gọi để khởi tạo các chức năng tác nghiệp
         /// </summary>
         /// <param name="connectionString"></param>
-        public static int Employee_Count(string searchValue)
-        {
-            return EmployeeDB.Count(searchValue);
-        }
-        public static Employee Employee_Get(int employeeID)
-        {
-            return EmployeeDB.Get(employeeID);
-        }
         public static void Initialize(string connectionString)
         {
             EmployeeDB = new DataLayers.SqlServer.EmployeeDAL(connectionString);
@@ -36,17 +28,65 @@ namespace LiteCommerce.BusinessLayers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static int Employee_Count(string searchValue, int idCookie)
+        {
+            return EmployeeDB.Count(searchValue, idCookie);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Employee> Employee_List(int page, int pageSize, string searchValue)
+        public static List<Employee> Employee_List(int page, int pageSize, string searchValue, int idCookie)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 1)
                 pageSize = 1;
-            return EmployeeDB.List(page, pageSize, searchValue);
+            return EmployeeDB.List(page, pageSize, searchValue, idCookie);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Employee_Add(Employee data)
+        {
+            return EmployeeDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
+        public static Employee Employee_Get(int employeeID)
+        {
+            return EmployeeDB.Get(employeeID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Employee_Update(Employee data)
+        {
+            return EmployeeDB.Update(data);
+        }
+        /// <summary>
+        /// Check email khi add hoặc update
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="email"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public static bool Employee_CheckEmail(int employeeId, string email, string method)
+        {
+            return EmployeeDB.CheckEmail(employeeId, email, method);
         }
     }
 }

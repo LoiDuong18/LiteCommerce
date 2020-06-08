@@ -89,4 +89,6 @@ E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\bin\Antlr3.Runtime.pdb
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\bin\Newtonsoft.Json.xml
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.pdb
-E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.csprojResolveAssemblyReference.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.csprojAssemblyReference.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.csproj.CoreCompileInputs.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.Admin\obj\Debug\LiteCommerce.Admin.csproj.CopyComplete

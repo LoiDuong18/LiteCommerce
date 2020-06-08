@@ -27,10 +27,6 @@ namespace LiteCommerce.Admin.Controllers
                 RowCount = CatalogBLL.Customer_Count(searchValue),
                 Data = CatalogBLL.Customer_List(page, AppSettings.DefaultPageSize, searchValue),
             };
-            //var listOfCustomers = CatalogBLL.Customer_List(page, 10, searchValue);
-            //int rowCount = CatalogBLL.Customer_Count(searchValue);
-            //ViewBag.rc = rowCount;
-            //ViewBag.searchValue = searchValue;
             return View(model);
         }
         /// <summary>
@@ -38,12 +34,14 @@ namespace LiteCommerce.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Add New Customer";
                 ViewBag.ConfirmButton = "Add";
+                ViewBag.Method = "add";
 
                 Customer newCustomer = new Customer();
                 newCustomer.CustomerID = "";
@@ -53,28 +51,107 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ViewBag.Title = "Edit Customer";
                 ViewBag.ConfirmButton = "Save";
+                ViewBag.Method = "update";
                 try
                 {
-                    Customer editCustomer = CatalogBLL.Customer_Get(Convert.ToInt32(id));
+                    Customer editCustomer = CatalogBLL.Customer_Get(id);
                     if (editCustomer == null)
                     {
                         return RedirectToAction("Index");
                     }
-                    else
-                    {
-                        return View(editCustomer);
-                    }
-                    
+                    return View(editCustomer);
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                     return RedirectToAction("Index");
                 }
-               
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Input(Customer model, string method, string tempID)
+        {
 
-        
+            if (string.IsNullOrEmpty(method))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (method == "add")
+                {
+                    if (!string.IsNullOrEmpty(model.CustomerID))
+                    {
+                        if (CatalogBLL.Customer_Get(model.CustomerID) != null)
+                        {
+                            ModelState.AddModelError("CustomerID", "Customer ID ready exist");
+                        }
+                    }
+                }
+            }
+            if (string.IsNullOrEmpty(model.Fax))
+            {
+                model.Fax = "";
+            }
+            //Nếu không có trường method thì chuyển hướng về Index
+            if (string.IsNullOrEmpty(method))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(model.Fax))
+                {
+                    model.Fax = "";
+                }
+
+                //Kiểm tra có tồn tại bất kỳ lỗi nào hay không
+                if (!ModelState.IsValid)
+                {
+                    if (method == "add")
+                    {
+                        ViewBag.Title = "Add New Customer";
+                        ViewBag.ConfirmButton = "Add";
+                        ViewBag.Method = "add";
+                        return View(model);
+                    }
+                    else
+                    {
+                        ViewBag.Title = "Edit Customer";
+                        ViewBag.ConfirmButton = "Save";
+                        ViewBag.Method = "update";
+                        return View(model);
+                    }
+
+                }
+                //Đưa dữ liệu vào CSDL
+                if (method == "add")
+                {
+                    int customerID = CatalogBLL.Customer_Add(model);
+                }
+                else if (method == "update")
+                {
+                    bool rs = CatalogBLL.Customer_Update(model);
+                }
+                return RedirectToAction("Index");
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerIDs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(string[] customerIDs)
+        {
+            if (customerIDs != null)
+                CatalogBLL.Customer_Delete(customerIDs);
+            return RedirectToAction("Index");
+        }
     }
 }

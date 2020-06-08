@@ -9,6 +9,8 @@ E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.Da
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DataLayers.pdb
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DomainModels.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DomainModels.pdb
-E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csprojResolveAssemblyReference.cache
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.dll
 E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.pdb
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csprojAssemblyReference.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csproj.CoreCompileInputs.cache
+E:\TAI LIEU NAM 3\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csproj.CopyComplete

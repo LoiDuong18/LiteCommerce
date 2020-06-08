@@ -6,29 +6,46 @@
 <!-- Input box -->
 <div class="box box-primary">
     <!-- form start -->
-    <form role="form">
+    <form role="form" action="~/Customer/Input" method="POST">
         <div class="box-header with-border">
             <div class="box-tools pull-right">
                 <a href="~/Customer" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i> Back</a>
             </div>
         </div>
         <div class="box-body">
-            <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
+            <input type="hidden" name="method" value="@ViewBag.Method" />
+            <input type="hidden" name="tempID" value="@Model.CustomerID" />
+            <div class="form-group">
+                @if (@ViewBag.Method == "add")
+                {
+                    <label>Customer ID:</label>
+                    <input type="text" name="CustomerID" class="form-control" placeholder="ABC" value="@Model.CustomerID">
+                    @Html.ValidationMessage("CustomerID", new { @style = "color: red" })
+                }
+                else
+                {
+                    <input type="hidden" name="CustomerID" class="form-control" placeholder="ABC" value="@Model.CustomerID">
+                }
+
+            </div>
             <div class="form-group">
                 <label>Company Name:</label>
-                <input type="text" class="form-control" placeholder="Hue Town" value="@Model.CompanyName">
+                <input type="text" name="CompanyName" class="form-control" placeholder="ABC Company" value="@Model.CompanyName">
+                @Html.ValidationMessage("CompanyName", new { @style = "color: red" })
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Contact Name:</label>
-                        <input type="text" class="form-control" placeholder="Nguyen Van A" value="@Model.ContactName">
+                        <input type="text" name="ContactName" class="form-control" placeholder="Nguyen Van A" value="@Model.ContactName">
+                        @Html.ValidationMessage("ContactName", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Contact Title:</label>
-                        <input type="text" class="form-control" placeholder="Sale Manager" value="@Model.ContactTitle">
+                        <input type="text" name="ContactTitle" class="form-control" placeholder="Sale Manager" value="@Model.ContactTitle">
+                        @Html.ValidationMessage("ContactTitle", new { @style = "color: red" })
                     </div>
                 </div>
             </div>
@@ -36,18 +53,20 @@
 
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" name="Address" class="form-control" placeholder="77 Nguyễn Huệ" value="@Model.Address">
+                <input type="text" name="Address" class="form-control" placeholder="123 Pham Van Dong St" value="@Model.Address">
+                @Html.ValidationMessage("Address", new { @style = "color: red" })
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Country:</label>
-                        <select class="form-control">
+                        <select class="form-control" name="Country">
+                            <option value="">--Select Country--</option>
                             @foreach (var item in SelectListHelper.ListOfCountries())
                             {
                                 if (item.Value == Model.Country)
                                 {
-                                    <option value="@item.Value" checked>@item.Text</option>
+                                    <option value="@item.Value" selected>@item.Text</option>
                                 }
                                 else
                                 {
@@ -55,12 +74,14 @@
                                 }
                             }
                         </select>
+                        @Html.ValidationMessage("Country", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>City:</label>
                         <input type="text" name="City" class="form-control" placeholder="Hue" value="@Model.City">
+                        @Html.ValidationMessage("City", new { @style = "color: red" })
                     </div>
                 </div>
             </div>
@@ -70,8 +91,9 @@
                         <label>Phone:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" name="Phone" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.Phone">
+                            <input type="text" name="Phone" class="form-control" placeholder="(+84) 123 123 123" value="@Model.Phone">
                         </div>
+                        @Html.ValidationMessage("Phone", new { @style = "color: red" })
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -79,7 +101,7 @@
                         <label>Fax:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-fax"></i></span>
-                            <input type="text" name="Fax" class="form-control" placeholder="(+84) 5555 55 55" value="@Model.Fax">
+                            <input type="text" name="Fax" class="form-control" placeholder="(+84) 456 456 456" value="@Model.Fax">
                         </div>
                     </div>
                 </div>
@@ -88,7 +110,7 @@
         <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" id="ButtonSubmit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> @ViewBag.ConfirmButton</button>
-            <a href="~/Supplier" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>
+            <a href="~/Customer" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Cancel</a>
         </div>
     </form>
 </div>

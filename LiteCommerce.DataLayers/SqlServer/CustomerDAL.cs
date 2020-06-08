@@ -33,38 +33,39 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Add(Customer data)
         {
-            int customerId = 0;
+            int customerId;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
-
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"INSERT INTO Customers
-                                          (
-                                                CompanyName
-                                                ContactName
-                                                ContactTitle
-                                                Address
-                                                City
-                                                Country
-                                                Phone
-                                                Fax
-
-                                          )
-                                          VALUES
-                                          (
-	                                            @CompanyName
-                                                @ContactName
-                                                @ContactTitle
-                                                @Address
-                                                @City
-                                                @Country
-                                                @Phone
-                                                @Fax
-                                          );
-                                          SELECT @@IDENTITY;";
+                                    (
+                                        CustomerID,
+	                                    CompanyName,
+	                                    ContactName,
+	                                    ContactTitle,
+	                                    Address,
+	                                    City,
+	                                    Country,
+	                                    Phone,
+	                                    Fax
+                                    )
+                                    VALUES
+                                    (
+                                        @CustomerID,
+	                                    @CompanyName,
+	                                    @ContactName,
+	                                    @ContactTitle,
+	                                    @Address,
+	                                    @City,
+	                                    @Country,
+	                                    @Phone,
+	                                    @Fax
+                                    );
+                                    SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@CustomerID", data.CustomerID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@ContactName", data.ContactName);
                 cmd.Parameters.AddWithValue("@ContactTitle", data.ContactTitle);
@@ -74,9 +75,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
                 cmd.Parameters.AddWithValue("@Fax", data.Fax);
 
-
-                customerId = Convert.ToInt32(cmd.ExecuteScalar());
-
+                //customerId = Convert.ToInt32(cmd.ExecuteScalar());
+                var queryResult = cmd.ExecuteScalar();
+                customerId = (queryResult != DBNull.Value) ? Convert.ToInt32(cmd.ExecuteScalar()) : 0;
                 connection.Close();
             }
 
@@ -85,11 +86,11 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="customerIDs"></param>
+        /// <param name="sustomerIDs"></param>
         /// <returns></returns>
-        public bool Delete(int[] customerIDs)
+        public bool Delete(string[] customerIDs)
         {
-            bool result = true;
+            int result = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -97,27 +98,26 @@ namespace LiteCommerce.DataLayers.SqlServer
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Customers
                                             WHERE(CustomerID = @customerId)
-                                              AND(CustomerrID NOT IN(SELECT CustomerID FROM Orders))";
+                                              AND(CustomerID NOT IN(SELECT CustomerID FROM Orders))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.Add("@customerId", SqlDbType.Int);
-                foreach (int customerId in customerIDs)
+                cmd.Parameters.AddWithValue("@customerId", SqlDbType.Int);
+                foreach (string customerID in customerIDs)
                 {
-                    cmd.Parameters["@customerId"].Value = customerId;
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters["@customerId"].Value = customerID;
+                    result += cmd.ExecuteNonQuery();
                 }
 
                 connection.Close();
             }
-            return result;
-           
+            return result > 0;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
-        public Customer Get(int customerID)
+        public Customer Get(string customerID)
         {
             Customer data = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -145,11 +145,9 @@ namespace LiteCommerce.DataLayers.SqlServer
                             Country = Convert.ToString(dbReader["Country"]),
                             Phone = Convert.ToString(dbReader["Phone"]),
                             Fax = Convert.ToString(dbReader["Fax"]),
-                            //TODO: Làm nốt các trường còn lại...
                         };
                     }
                 }
-
                 connection.Close();
             }
             return data;
@@ -198,7 +196,6 @@ namespace LiteCommerce.DataLayers.SqlServer
                                 Country = Convert.ToString(dbReader["Country"]),
                                 Phone = Convert.ToString(dbReader["Phone"]),
                                 Fax = Convert.ToString(dbReader["Fax"]),
-                                //TODO: Làm các trường còn lại
                             });
                         }
                     }
@@ -218,22 +215,20 @@ namespace LiteCommerce.DataLayers.SqlServer
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
-
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"UPDATE Customers
-                                       SET CompanyName ='@CompanyName',
-		                                    ContactName ='@ContactName',
-		                                    ContactTitle ='@ContactTitle',
-		                                    Address ='@Address',
-		                                    City ='@City',
-		                                    Country ='@Country',
-		                                    Phone ='@Phone',
-		                                    Fax ='@Fax',
-
-                                     WHERE CustomerID = ''";
+                                    SET                                    
+                                        CompanyName = @CompanyName,
+                                        ContactName = @ContactName,
+                                        ContactTitle = @ContactTitle,
+                                        Address = @Address,
+                                        City = @City,
+                                        Country = @Country,
+                                        Phone = @Phone,
+                                        Fax = @Fax
+                                    WHERE CustomerID = @CustomerID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                //TODO: Bổ sung tham số cho lệnh cập nhật
                 cmd.Parameters.AddWithValue("@CustomerID", data.CustomerID);
                 cmd.Parameters.AddWithValue("@CompanyName", data.CompanyName);
                 cmd.Parameters.AddWithValue("@ContactName", data.ContactName);
@@ -244,14 +239,16 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
                 cmd.Parameters.AddWithValue("@Fax", data.Fax);
 
-
                 rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
-
                 connection.Close();
             }
-
-            return rowsAffected > 0; ;
+            return rowsAffected > 0;
         }
+        /// <summary>
+        /// Đếm số Customer
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public int Count(string searchValue)
         {
             int dem;

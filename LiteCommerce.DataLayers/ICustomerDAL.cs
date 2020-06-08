@@ -26,13 +26,13 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="CustomerIDs"></param>
         /// <returns></returns>
-        bool Delete(int[] customerIDs);
+        bool Delete(string[] customerIDs);
         /// <summary>
         /// Lấy thông tin của một Customer
         /// </summary>
         /// <param name="CustomerID"></param>
         /// <returns></returns>
-        Customer Get(int customerID);
+        Customer Get(string customerID);
         /// <summary>
         /// Danh sách kết quả tìm kiếm có phân trang
         /// </summary>
