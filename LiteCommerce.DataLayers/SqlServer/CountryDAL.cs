@@ -28,7 +28,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = @"SELECT * FROM Countries ORDER BY Country DESC";
+                    cmd.CommandText = @"SELECT * FROM Countries ORDER BY Country ASC";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))

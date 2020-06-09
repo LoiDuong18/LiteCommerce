@@ -203,7 +203,8 @@ namespace LiteCommerce.Admin.Controllers
             }
             HttpCookie requestCookies = Request.Cookies["userInfo"];
             model.AccountID = Convert.ToInt32(requestCookies["AccountID"]);
-            if (!HumanResourceBLL.Employee_CheckEmail(model.AccountID, model.Email, "update"))
+            string emailCookie = Convert.ToString(requestCookies["Email"]);
+            if (!HumanResourceBLL.Employee_CheckEmail(model.AccountID, model.Email, "update") && (model.Email != emailCookie))
             {
                 ModelState.AddModelError("Email", "Email ready exist");
             }
