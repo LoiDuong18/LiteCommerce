@@ -257,7 +257,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public int Count(string searchValue,string categoryID)
+        public int Count(string searchValue,string categoryID,string supplierID)
         {
             int dem;
             if (!string.IsNullOrEmpty(searchValue))
@@ -269,9 +269,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                 {
                     cmd.CommandText = @"SELECT count(*)
                                         FROM Products
-                                        WHERE ((@categoryId = N'') OR (CategoryID=@categoryId)) AND ((@searchValue = N'') OR (ProductName like @searchValue))";
+                                        WHERE ((@supplierID = N'') OR (SupplierID = @supplierID)) AND ((@categoryId = N'') OR (CategoryID=@categoryId)) AND ((@searchValue = N'') OR (ProductName like @searchValue))";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@supplierID", supplierID);
                     cmd.Parameters.AddWithValue("@categoryId", categoryID);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
                     dem = Convert.ToInt32(cmd.ExecuteScalar());

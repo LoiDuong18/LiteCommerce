@@ -297,9 +297,9 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static int Product_Count(string searchValue,string categoryID)
+        public static int Product_Count(string searchValue,string categoryID,string supplierID)
         {
-            return ProductDB.Count(searchValue, categoryID);
+            return ProductDB.Count(searchValue, categoryID, supplierID);
         }       
         /// <summary>
         /// 

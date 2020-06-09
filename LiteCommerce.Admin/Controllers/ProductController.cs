@@ -34,7 +34,7 @@ namespace LiteCommerce.Admin.Controllers
             {
                 Page = page,
                 PageSize = AppSettings.DefaultPageSize,
-                RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
+                RowCount = CatalogBLL.Product_Count(searchValue,categoryId,supplierId),
                 Data = data,
                 SearchValue = searchValue,
                 CategoryID = categoryId,
