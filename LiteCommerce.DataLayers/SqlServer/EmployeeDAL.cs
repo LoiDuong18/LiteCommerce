@@ -34,6 +34,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Add(Employee data)
         {
+            string passwordDefault = "e10adc3949ba59abbe56e057f20f883e";
             int employeeId = 0;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
@@ -53,7 +54,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          Country,
 	                                          HomePhone,
                                               Notes,
-                                              PhotoPath
+                                              PhotoPath,
+                                              Password
                                           )
                                           VALUES
                                           (
@@ -68,7 +70,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          @Country,
 	                                          @HomePhone,
                                               @Notes,
-                                              @PhotoPath
+                                              @PhotoPath,
+                                              @Password
                                           );
                                           SELECT @@IDENTITY;";
                 cmd.CommandType = CommandType.Text;
@@ -85,7 +88,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@HomePhone", data.HomePhone);
                 cmd.Parameters.AddWithValue("@Notes", data.Notes);
                 cmd.Parameters.AddWithValue("@PhotoPath", data.PhotoPath);
-
+                cmd.Parameters.AddWithValue("@Password", passwordDefault);
                 employeeId = Convert.ToInt32(cmd.ExecuteScalar());
 
                 connection.Close();
@@ -344,7 +347,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 }
                 connection.Close();
             }
-            return dem > 0;
+            return (dem == 0);
         }
 
     }
