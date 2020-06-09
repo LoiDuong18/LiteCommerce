@@ -9,18 +9,11 @@
     <!-- form start -->
     <form action="~/Product" method="get" role="form">
         <div class="box-body">
-            <div class="row">
+            <div class="row">                
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label>Key search:</label>
-                        <input type="text" name="searchValue" class="form-control" placeholder="Nước abc" value="@Model.SearchValue">
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Category:</label>
-                        <select class="form-control" name="categoryId">
-                            <option value="">--Select Category--</option>
+                        <select class="form-control" name="categoryId" id="selectCategory">
+                            <option value="">-- All Category ---</option>
                             @foreach (var item in SelectListHelper.ListOfCategories())
                             {
                                 if (item.Value == Model.CategoryID)
@@ -38,9 +31,8 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label>Supplier:</label>
-                        <select class="form-control" name="supplierId">
-                            <option value="">--Select Supplier--</option>
+                        <select class="form-control" name="supplierId" id="selectSupplier">
+                            <option value="">-- All Supplier ---</option>
                             @foreach (var item in SelectListHelper.ListOfSuppliers())
                             {
                                 if (item.Value == Model.SupplierID)
@@ -56,9 +48,13 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <label>Press to search</label>
-                    <button class="btn btn-primary btn-block">Search</button>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Input search value" name="searchValue" value="@Model.SearchValue">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
                 </div>               
             </div>
         </div>
@@ -132,24 +128,24 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page != 1)
             {
-                <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">First</a></li>
+                <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID">First</a></li>
                 <li>
-                    <a href="~/Product?page=@(Model.Page-1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID"><span><i class="fa fa-angle-double-left"></i></span></a>
+                    <a href="~/Product?page=@(Model.Page-1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID"><span><i class="fa fa-angle-double-left"></i></span></a>
                 </li>
             }
             @for (int page = 1; page <= Model.PageCount; page++)
             {
                 if(Model.Page == page)
                 {
-                    <li class="active"><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                    <li class="active"><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID">@page</a></li>
                 }
                 else if (page == (Model.Page + 1) || page == (Model.Page + 2) || page == Model.PageCount)
                 {
-                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID">@page</a></li>
                 }
                 else if (page == (Model.Page - 1) || page == (Model.Page - 2))
                 {
-                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">@page</a></li>
+                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID">@page</a></li>
                 }
                 else if (page == (Model.PageCount - 1))
                 {
@@ -159,7 +155,7 @@
             @if (Model.Page < Model.PageCount)
             {
                 <li>
-                    <a href="~/Product?page=@(Model.Page+1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID">
+                    <a href="~/Product?page=@(Model.Page+1)&searchValue=@Model.SearchValue&categoryId=@Model.CategoryID&supplierId=@Model.SupplierID">
                         <span><i class="fa fa-angle-double-right"></i></span>
                     </a>
                 </li>
