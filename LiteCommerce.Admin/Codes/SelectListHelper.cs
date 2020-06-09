@@ -17,7 +17,7 @@ namespace LiteCommerce.Admin
             List<SelectListItem> listCountries = new List<SelectListItem>();
             foreach (var item in CatalogBLL.Country_List())
             {
-                listCountries.Add(new SelectListItem() { Value = Convert.ToString(item.CountryID),Text= item.CountryName });
+                listCountries.Add(new SelectListItem() { Value = item.Country,Text= item.Country });
             }
             return listCountries;
         }

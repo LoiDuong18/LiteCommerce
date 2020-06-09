@@ -355,7 +355,7 @@ namespace LiteCommerce.BusinessLayers
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<Country> Country_List()
+        public static List<Countries> Country_List()
         {
             return CountryDB.List();
         }
