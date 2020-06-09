@@ -31,6 +31,10 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         private static IProductDAL ProductDB { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        private static ICountryDAL CountryDB { get; set; }
+        /// <summary>
         /// Hàm này phải được gọi để khởi tạo các chức năng tác nghiệp
         /// </summary>
         /// <param name="connectionString"></param>
@@ -41,6 +45,7 @@ namespace LiteCommerce.BusinessLayers
             ShipperDB = new DataLayers.SqlServer.ShipperDAL(connectionString);
             CategoryDB = new DataLayers.SqlServer.CategoryDAL(connectionString);
             ProductDB = new DataLayers.SqlServer.ProductDAL(connectionString);
+            CountryDB = new DataLayers.SqlServer.CountryDAL(connectionString);
         }
         /// <summary>
         /// 
@@ -345,6 +350,14 @@ namespace LiteCommerce.BusinessLayers
         public static List<ProductAttributes> Product_GetAttribute(string productID)
         {
             return ProductDB.GetAttribute(productID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Country> Country_List()
+        {
+            return CountryDB.List();
         }
     }
 }

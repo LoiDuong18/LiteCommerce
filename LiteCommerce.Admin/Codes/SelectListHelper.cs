@@ -15,10 +15,10 @@ namespace LiteCommerce.Admin
         /// <returns></returns>
         public static List<SelectListItem> ListOfCountries() {
             List<SelectListItem> listCountries = new List<SelectListItem>();
-            listCountries.Add(new SelectListItem() { Value = "USA", Text = "United State" });
-            listCountries.Add(new SelectListItem() { Value = "UK", Text = "England" });
-            listCountries.Add(new SelectListItem() { Value = "CN", Text = "China" });
-            listCountries.Add(new SelectListItem() { Value = "VN", Text = "Vietnam" });
+            foreach (var item in CatalogBLL.Country_List())
+            {
+                listCountries.Add(new SelectListItem() { Value = Convert.ToString(item.CountryID),Text= item.CountryName });
+            }
             return listCountries;
         }
         /// <summary>
