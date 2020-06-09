@@ -284,13 +284,13 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Product> Product_List(int page, int pageSize, string searchValue, string categoryId)
+        public static List<Product> Product_List(int page, int pageSize, string searchValue, string categoryId,string supplierID)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 1)
                 pageSize = 1;
-            return ProductDB.List(page, pageSize, searchValue, categoryId);
+            return ProductDB.List(page, pageSize, searchValue, categoryId, supplierID);
         }        
         /// <summary>
         /// Đếm số products

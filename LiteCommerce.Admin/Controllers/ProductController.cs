@@ -19,12 +19,12 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(int page = 1, string searchValue = "", string categoryId = "")
+        public ActionResult Index(int page = 1, string searchValue = "", string categoryId = "",string supplierId = "")
         {
             List<Product> data = new List<Product>();
             try
             {
-                data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId);
+                data = CatalogBLL.Product_List(page, AppSettings.DefaultPageSize, searchValue, categoryId, supplierId);
             }
             catch (Exception e)
             {
@@ -37,7 +37,8 @@ namespace LiteCommerce.Admin.Controllers
                 RowCount = CatalogBLL.Product_Count(searchValue,categoryId),
                 Data = data,
                 SearchValue = searchValue,
-                CategoryID = categoryId
+                CategoryID = categoryId,
+                SupplierID = supplierId
             };
             return View(model);
         }

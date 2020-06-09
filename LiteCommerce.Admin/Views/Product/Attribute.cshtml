@@ -13,7 +13,6 @@
     <div class="box-body">
         <form action="~/Product/Attribute" method="post">
             <input type="hidden" name="ProductID" value="id" />
-            <div class="container">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -31,14 +30,12 @@
                                     <input type="text" name="AttributeValues" class="form-control" />
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Add</button>
+                                    <button class="btn btn-sm btn-success" id="btnAdd"><i class="fa fa-plus-circle"></i> Add</button>
                                 </td>
                             </tr>                        
                     </tbody>
                 </table> 
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</button>
-            </div>
-            
         </form>
     </div>
     <!-- /.box-body -->

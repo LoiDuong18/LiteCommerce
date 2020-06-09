@@ -161,7 +161,7 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Product> List(int page, int pageSize, string searchValue,string categoryID)
+        public List<Product> List(int page, int pageSize, string searchValue,string categoryID,string supplierID)
         {
             List<Product> data = new List<Product>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -182,11 +182,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                                             FROM dbo.Products AS a
 	                                        JOIN dbo.Categories AS b ON a.CategoryID = b.CategoryID
 	                                        JOIN dbo.Suppliers AS c ON c.SupplierID = a.SupplierID
-                                            WHERE ((@categoryId = N'') OR (a.CategoryID=@categoryId)) AND ((@searchValue = N'') OR (ProductName like @searchValue))
+                                            WHERE ((@supplierID = N'') OR (a.SupplierID = @supplierID)) AND ((@categoryId = N'') OR (a.CategoryID=@categoryId)) AND ((@searchValue = N'') OR (ProductName like @searchValue))
                                         ) AS t WHERE t.RowNumber BETWEEN (@page - 1) * @pageSize + 1 AND @page * @pageSize
                                         ORDER BY t.RowNumber";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@supplierID", supplierID);
                     cmd.Parameters.AddWithValue("@categoryId", categoryID);
                     cmd.Parameters.AddWithValue("@page", page);
                     cmd.Parameters.AddWithValue("@pageSize", pageSize);

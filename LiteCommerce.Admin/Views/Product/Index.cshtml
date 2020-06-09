@@ -10,13 +10,13 @@
     <form action="~/Product" method="get" role="form">
         <div class="box-body">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <label>Key search:</label>
                         <input type="text" name="searchValue" class="form-control" placeholder="Nước abc" value="@Model.SearchValue">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <label>Category:</label>
                         <select class="form-control" name="categoryId">
@@ -36,7 +36,27 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Supplier:</label>
+                        <select class="form-control" name="supplierId">
+                            <option value="">--Select Supplier--</option>
+                            @foreach (var item in SelectListHelper.ListOfSuppliers())
+                            {
+                                if (item.Value == Model.SupplierID)
+                                {
+                                    <option value="@item.Value" selected>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
                     <label>Press to search</label>
                     <button class="btn btn-primary btn-block">Search</button>
                 </div>               
