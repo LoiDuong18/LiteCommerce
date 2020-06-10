@@ -31,6 +31,10 @@ namespace LiteCommerce.BusinessLayers
         /// </summary>
         private static IProductDAL ProductDB { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        private static ICountryDAL CountryDB { get; set; }
+        /// <summary>
         /// Hàm này phải được gọi để khởi tạo các chức năng tác nghiệp
         /// </summary>
         /// <param name="connectionString"></param>
@@ -41,6 +45,7 @@ namespace LiteCommerce.BusinessLayers
             ShipperDB = new DataLayers.SqlServer.ShipperDAL(connectionString);
             CategoryDB = new DataLayers.SqlServer.CategoryDAL(connectionString);
             ProductDB = new DataLayers.SqlServer.ProductDAL(connectionString);
+            CountryDB = new DataLayers.SqlServer.CountryDAL(connectionString);
         }
         /// <summary>
         /// 
@@ -79,8 +84,14 @@ namespace LiteCommerce.BusinessLayers
         {
             return SupplierDB.Get(supplierID);
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Supplier> Supplier_ListNoPagination()
+        {
+            return SupplierDB.GetAll();
+        }
         /// <summary>
         /// Đếm số Supplier
         /// </summary>
@@ -278,22 +289,75 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static List<Product> Product_List(int page, int pageSize, string searchValue, string categoryId)
+        public static List<Product> Product_List(int page, int pageSize, string searchValue, string categoryId, string supplierID)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 1)
                 pageSize = 1;
-            return ProductDB.List(page, pageSize, searchValue, categoryId);
+            return ProductDB.List(page, pageSize, searchValue, categoryId, supplierID);
         }
         /// <summary>
         /// Đếm số products
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public static int Product_Count(string searchValue, string categoryID)
+        public static int Product_Count(string searchValue, string categoryID, string supplierID)
         {
-            return ProductDB.Count(searchValue, categoryID);
+            return ProductDB.Count(searchValue, categoryID, supplierID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Product_Add(Product data)
+        {
+            return ProductDB.Add(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool Product_Update(Product data)
+        {
+            return ProductDB.Update(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Product Product_Get(string id)
+        {
+            return ProductDB.Get(id);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productIDs"></param>
+        /// <returns></returns>
+        public static bool Product_Delete(int[] productIDs)
+        {
+            return ProductDB.Delete(productIDs);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public static List<ProductAttributes> Product_GetAttribute(string productID)
+        {
+            return ProductDB.GetAttribute(productID);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Countries> Country_List()
+        {
+            return CountryDB.List();
         }
     }
 }

@@ -16,10 +16,10 @@ namespace LiteCommerce.Admin
         public static List<SelectListItem> ListOfCountries()
         {
             List<SelectListItem> listCountries = new List<SelectListItem>();
-            listCountries.Add(new SelectListItem() { Value = "USA", Text = "United State" });
-            listCountries.Add(new SelectListItem() { Value = "UK", Text = "England" });
-            listCountries.Add(new SelectListItem() { Value = "CN", Text = "China" });
-            listCountries.Add(new SelectListItem() { Value = "VN", Text = "Vietnam" });
+            foreach (var item in CatalogBLL.Country_List())
+            {
+                listCountries.Add(new SelectListItem() { Value = item.Country,Text= item.Country });
+            }
             return listCountries;
         }
         /// <summary>
@@ -34,6 +34,19 @@ namespace LiteCommerce.Admin
                 listCategory.Add(new SelectListItem() { Value = Convert.ToString(item.CategoryID), Text = item.CategoryName });
             }
             return listCategory;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<SelectListItem> ListOfSuppliers()
+        {
+            List<SelectListItem> listSupplier = new List<SelectListItem>();
+            foreach(var item in CatalogBLL.Supplier_ListNoPagination())
+            {
+                listSupplier.Add(new SelectListItem() { Value = Convert.ToString(item.SupplierID), Text = item.CompanyName });
+            }
+            return listSupplier;
         }
     }
 }

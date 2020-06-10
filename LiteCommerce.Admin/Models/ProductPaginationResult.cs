@@ -17,5 +17,9 @@ namespace LiteCommerce.Admin.Models
         /// 
         /// </summary>
         public string CategoryID;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SupplierID;
     }
 }

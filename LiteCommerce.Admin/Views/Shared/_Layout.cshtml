@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="~/Themes/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="~/Themes/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE/bower_components/select2/dist/css/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Themes/AdminLTE/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -98,9 +100,18 @@
     <!-- bootstrap datepicker -->
     <script src="~/Themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script>
+    $(document).ready(function () {
+        $('.sidebar-menu').tree();
+    })
+    </script>
+    <script>
         $(document).ready(function () {
-            $('.sidebar-menu').tree()
-        })
+            $("#select2").select2();
+            $("#select22").select2();
+            $("#selectSupplier").select2();
+            $("#selectCategory").select2();
+            $("#selectCountry").select2();
+        });
     </script>
     <script>
         $(document).ready(function () {
@@ -131,6 +142,12 @@
             $('#selectAll').click(function (e) {
                 $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
             });
+        });
+    </script>
+    <script>
+        $(document).on("click", "#btnAdd", function (e) {
+            e.preventDefault();
+            alert("ok");
         });
     </script>
 </body>

@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Edit Attribute";
+}
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Product Attributes</h3>
+
+        <div class="box-tools pull-right">
+            <a href="~/Product/Detail/id" class="btn btn-sm btn-primary">Back</a>
+        </div>
+    </div>
+    <div class="box-body">
+        <form action="~/Product/Attribute" method="post">
+            <input type="hidden" name="ProductID" value="id" />
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" name="AttributeName" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" name="AttributeValues" class="form-control" />
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" id="btnAdd"><i class="fa fa-plus-circle"></i> Add</button>
+                                </td>
+                            </tr>                        
+                    </tbody>
+                </table> 
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</button>
+        </form>
+    </div>
+    <!-- /.box-body -->
+</div>

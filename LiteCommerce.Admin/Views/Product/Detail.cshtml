@@ -1,7 +1,95 @@
-﻿
+﻿@model LiteCommerce.DomainModels.Product
 @{
-    ViewBag.Title = "Detail";
-}
 
-<h2>Detail</h2>
+    ViewBag.Title = "Detail Product";
+    string photoPath = string.IsNullOrEmpty(Model.PhotoPath) ? "/Images/no-image.png" : Model.PhotoPath;
+
+}
+<div class="row">
+    <div class="col-sm-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Product Information</h3>
+                <div class="box-tools pull-right">
+                    <a href="~/Product" class="btn btn-sm btn-default"><i class="fa fa-long-arrow-left"></i> Back</a>
+                    <a href="~/Product/Input/@Model.ProductID" class="btn btn-sm btn-primary" data-toggle="tooltip" data-original-title="Edit Product Info"><i class="fa fa-pencil"></i></a>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="@photoPath" width="100%" />
+                    </div>
+                    <div class="col-sm-8">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-bold" width="150px">Product Name</td>
+                                    <td>@Model.ProductName</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold">Supplier</td>
+                                    <td>@Model.CompanyName</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold">Category</td>
+                                    <td>@Model.CategoryName</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold">Quantity</td>
+                                    <td>@Model.QuantityPerUnit</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold">Price</td>
+                                    <td>@Model.UnitPrice</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold">Description</td>
+                                    <td>@Model.Descriptions</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Product Attribute</h3>
+
+                <div class="box-tools pull-right">
+                    <a href="~/Product/Attribute/@Model.ProductID" class="btn btn-sm btn-primary"  data-toggle="tooltip" data-original-title="Edit Attribute"><i class="fa fa-pencil"></i></a>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                            <td>Cân nặng</td>
+                            <td>500gr</td>
+                        </tr>
+                        <tr>
+                            <td>Cân nặng</td>
+                            <td>500gr</td>
+                        </tr>
+                        <tr>
+                            <td>Cân nặng</td>
+                            <td>500gr</td>
+                        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
 

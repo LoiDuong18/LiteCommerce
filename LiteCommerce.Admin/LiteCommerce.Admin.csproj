@@ -139,6 +139,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttributeResult.cs" />
     <Compile Include="Models\CategoryResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\ProductPaginationResult.cs" />
     <Compile Include="Models\ShipperResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
+    <Compile Include="Models\SupplierResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7247,6 +7249,7 @@
     <Content Include="Views\Employee\Input.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\Attribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

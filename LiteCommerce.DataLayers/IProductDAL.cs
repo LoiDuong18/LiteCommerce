@@ -26,7 +26,7 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <param name="ProductIDs"></param>
         /// <returns></returns>
-        bool Delete(string[] productIDs);
+        bool Delete(int[] productIDs);
         /// <summary>
         /// Lấy thông tin của một Product
         /// </summary>
@@ -40,12 +40,20 @@ namespace LiteCommerce.DataLayers
         /// <param name="pageSize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        List<Product> List(int page, int pageSize, string searchValue, string categoryId);
+        List<Product> List(int page, int pageSize, string searchValue, string categoryId,string supplierId);
         /// <summary>
         /// Đếm số dòng dữ liệu
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        int Count(string searchValue, string categoryID);
+
+        int Count(string searchValue,string categoryID,string supplierID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        List<ProductAttributes> GetAttribute(string productID);
+
     }
 }
